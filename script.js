@@ -2,40 +2,6 @@
     "use strict";
 
     const translations = {
-        en: {
-            heroTitle: 'About Me:',
-            heroSub: 'Tamsirat Al-Ez for Men’s Essentials is a prestigious name in the men’s retail industry. Founded in 1986 by Khamis Al-Shidi, the business began with a humble vision: to provide a comprehensive range of high-quality products for the local community.Over the decades, the establishment has undergone significant evolution. In 2016, the brand identity was renewed as "Tamsirat Al-Ez," successfully blending traditional Omani authenticity with a modern touch. Most recently, in 2025, the brand was further refined with a sophisticated and high-end identity that reflects excellence and distinction. Today, Tamsirat Al-Ez continues its journey with confidence, honoring its deep-rooted heritage while meeting the evolving aspirations of its customers in the Wilayat.',
-            explore: 'Explore Collection',
-            shopByCat: 'Shop by Category',
-            back: 'Back',
-            sort: 'Sort',
-            category: 'Category:',
-            desc: 'Description:',
-            material: 'Material:',
-            status: 'Status:',
-            inStock: 'In Stock',
-            outOfStock: 'Out of Stock',
-            limited: 'Limited',
-            orderWhatsApp: 'Order via WhatsApp',
-            quickView: 'Quick View',
-            badgeNew: 'New',
-            badgeBestseller: 'Bestseller',
-            noProducts: 'No products found',
-            copyright: '©2017 · Tamsirat Aleiz - Official website ·  All rights reserved.',
-            products: 'Products',
-            allCat: 'All',
-            sortDefault: 'Default',
-            sortPriceAsc: 'Price: Low to High',
-            sortPriceDesc: 'Price: High to Low',
-            sortNameAsc: 'Name (A-Z)',
-            cartTitle: 'Shopping Cart',
-            cartTotal: 'Total',
-            checkoutWhatsApp: 'Send Order via WhatsApp',
-            emptyCart: 'Your cart is empty',
-            addToCart: 'Add to Cart',
-            addedToast: 'Added to cart',
-            remove: 'Remove'
-        },
         ar: {
             heroTitle: 'أنبذة تعريفية',
             heroSub: "محل تمصيرة العز للمستلزمات الرجالية هو أحد الأسماء العريقة في مجال بيع المستلزمات الرجالية، حيث تأسس عام 1986 على يد الوالد خميس الشيدي، واضعًا حجر الأساس لمشروع انطلق ببداية متواضعة، شملت توفير مختلف احتياجات الرجل من منتجات متنوعة، ليكون وجهة متكاملة تخدم المجتمع المحلي. ومع مرور السنوات، شهد المحل تطورًا ملحوظًا، حيث تم في عام 2016 تجديد الهوية التجارية والانطلاق باسم “تمصيرة العز”، ليعكس روح الأصالة مع لمسة من الحداثة، مما ساهم في تعزيز حضوره وانتشاره. وفي عام 2025، تمت إعادة صياغة الهوية مرة أخرى بحلة جديدة وراقية ومميزة، تعكس مستوى أعلى من الجودة والتميز، ليواصل “تمصيرة العز” مسيرته بثقة، محافظًا على إرثه العريق ومواكبًا لتطلعات العملاء في الولاية",
@@ -71,6 +37,40 @@
             remove: 'إزالة'
         }
     };
+        en: {
+            heroTitle: 'About Me:',
+            heroSub: 'Tamsirat Al-Ez for Men’s Essentials is a prestigious name in the men’s retail industry. Founded in 1986 by Khamis Al-Shidi, the business began with a humble vision: to provide a comprehensive range of high-quality products for the local community.Over the decades, the establishment has undergone significant evolution. In 2016, the brand identity was renewed as "Tamsirat Al-Ez," successfully blending traditional Omani authenticity with a modern touch. Most recently, in 2025, the brand was further refined with a sophisticated and high-end identity that reflects excellence and distinction. Today, Tamsirat Al-Ez continues its journey with confidence, honoring its deep-rooted heritage while meeting the evolving aspirations of its customers in the Wilayat.',
+            explore: 'Explore Collection',
+            shopByCat: 'Shop by Category',
+            back: 'Back',
+            sort: 'Sort',
+            category: 'Category:',
+            desc: 'Description:',
+            material: 'Material:',
+            status: 'Status:',
+            inStock: 'In Stock',
+            outOfStock: 'Out of Stock',
+            limited: 'Limited',
+            orderWhatsApp: 'Order via WhatsApp',
+            quickView: 'Quick View',
+            badgeNew: 'New',
+            badgeBestseller: 'Bestseller',
+            noProducts: 'No products found',
+            copyright: '©2017 · Tamsirat Aleiz - Official website ·  All rights reserved.',
+            products: 'Products',
+            allCat: 'All',
+            sortDefault: 'Default',
+            sortPriceAsc: 'Price: Low to High',
+            sortPriceDesc: 'Price: High to Low',
+            sortNameAsc: 'Name (A-Z)',
+            cartTitle: 'Shopping Cart',
+            cartTotal: 'Total',
+            checkoutWhatsApp: 'Send Order via WhatsApp',
+            emptyCart: 'Your cart is empty',
+            addToCart: 'Add to Cart',
+            addedToast: 'Added to cart',
+            remove: 'Remove'
+        },
 
     let currentLang = 'ar';
     let masterData = [];
