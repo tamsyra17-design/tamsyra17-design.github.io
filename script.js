@@ -3,7 +3,7 @@
 
     const translations = {
         ar: {
-            heroTitle: 'أنبذة تعريفية',
+            heroTitle: 'نبذة تعريفية',
             heroSub: "محل تمصيرة العز للمستلزمات الرجالية هو أحد الأسماء العريقة في مجال بيع المستلزمات الرجالية، حيث تأسس عام 1986 على يد الوالد خميس الشيدي، واضعًا حجر الأساس لمشروع انطلق ببداية متواضعة، شملت توفير مختلف احتياجات الرجل من منتجات متنوعة، ليكون وجهة متكاملة تخدم المجتمع المحلي. ومع مرور السنوات، شهد المحل تطورًا ملحوظًا، حيث تم في عام 2016 تجديد الهوية التجارية والانطلاق باسم “تمصيرة العز”، ليعكس روح الأصالة مع لمسة من الحداثة، مما ساهم في تعزيز حضوره وانتشاره. وفي عام 2025، تمت إعادة صياغة الهوية مرة أخرى بحلة جديدة وراقية ومميزة، تعكس مستوى أعلى من الجودة والتميز، ليواصل “تمصيرة العز” مسيرته بثقة، محافظًا على إرثه العريق ومواكبًا لتطلعات العملاء في الولاية",
             explore: 'استكشف المجموعة',
             shopByCat: 'تسوق حسب الفئة',
@@ -35,11 +35,10 @@
             addToCart: 'أضف للسلة',
             addedToast: 'تمت الإضافة للسلة',
             remove: 'إزالة'
-        }
-    };
+        },
         en: {
-            heroTitle: 'About Me:',
-            heroSub: 'Tamsirat Al-Ez for Men’s Essentials is a prestigious name in the men’s retail industry. Founded in 1986 by Khamis Al-Shidi, the business began with a humble vision: to provide a comprehensive range of high-quality products for the local community.Over the decades, the establishment has undergone significant evolution. In 2016, the brand identity was renewed as "Tamsirat Al-Ez," successfully blending traditional Omani authenticity with a modern touch. Most recently, in 2025, the brand was further refined with a sophisticated and high-end identity that reflects excellence and distinction. Today, Tamsirat Al-Ez continues its journey with confidence, honoring its deep-rooted heritage while meeting the evolving aspirations of its customers in the Wilayat.',
+            heroTitle: 'About Us',
+            heroSub: 'Tamsirat Al-Ez for Men’s Essentials is a prestigious name in the men’s retail industry. Founded in 1986 by Khamis Al-Shidi, the business began with a humble vision: to provide a comprehensive range of high-quality products for the local community. Over the decades, the establishment has undergone significant evolution. In 2016, the brand identity was renewed as "Tamsirat Al-Ez," successfully blending traditional Omani authenticity with a modern touch. Most recently, in 2025, the brand was further refined with a sophisticated and high-end identity that reflects excellence and distinction. Today, Tamsirat Al-Ez continues its journey with confidence, honoring its deep-rooted heritage while meeting the evolving aspirations of its customers in the Wilayat.',
             explore: 'Explore Collection',
             shopByCat: 'Shop by Category',
             back: 'Back',
@@ -56,7 +55,7 @@
             badgeNew: 'New',
             badgeBestseller: 'Bestseller',
             noProducts: 'No products found',
-            copyright: '©2017 · Tamsirat Aleiz - Official website ·  All rights reserved.',
+            copyright: '© 2017 Tamsirat Al-Ez. All rights reserved.',
             products: 'Products',
             allCat: 'All',
             sortDefault: 'Default',
@@ -70,7 +69,8 @@
             addToCart: 'Add to Cart',
             addedToast: 'Added to cart',
             remove: 'Remove'
-        },
+        }
+    };
 
     let currentLang = 'ar';
     let masterData = [];
@@ -78,26 +78,17 @@
     let currentSearchTerm = '';
     let cartItems = []; 
 
-    const DEMO_DATA = [
-        { id: "1", name: "المسار العماني الملكي", category: "المسار", price: 45.500, image: "https://images.pexels.com/photos/1485657/pexels-photo-1485657.jpeg?auto=compress&cs=tinysrgb&w=600", status: "متوفر", description: "مسار فاخر من الحرير الكشميري بتطريز ذهبي.", material: "حرير وزاري", badge: "جديد" },
-        { id: "2", name: "الكمّة العمانية (زرقاء)", category: "الكمّة", price: 32.000, image: "https://images.pexels.com/photos/1453008/pexels-photo-1453008.jpeg?auto=compress&cs=tinysrgb&w=600", status: "متوفر", description: "كمّة عمانية مصنوعة يدوياً من القطن الناعم.", material: "قطن 100%", badge: "الأكثر مبيعاً" },
-        { id: "3", name: "خنجر عماني فضي", category: "الخنجر", price: 185.000, image: "https://images.pexels.com/photos/1211905/pexels-photo-1211905.jpeg?auto=compress&cs=tinysrgb&w=600", status: "محدود", description: "خنجر فضي أصيل من صنع حرفيين عمانيين.", material: "فضة وخشب", badge: "محدود" },
-        { id: "4", name: "مسار كشميري بالزري", category: "المسار", price: 65.000, image: "https://images.pexels.com/photos/994517/pexels-photo-994517.jpeg?auto=compress&cs=tinysrgb&w=600", status: "متوفر", description: "مسار أنيق بتطريز الزري الدقيق.", material: "باشمينا", badge: "" },
-        { id: "5", name: "كمّة بيضاء تقليدية", category: "الكمّة", price: 28.500, image: "https://images.pexels.com/photos/264636/pexels-photo-264636.jpeg?auto=compress&cs=tinysrgb&w=600", status: "متوفر", description: "كمّة مريحة للاستخدام اليومي.", material: "قطن", badge: "" },
-        { id: "6", name: "خنجر المرسال", category: "الخنجر", price: 220.000, image: "https://images.pexels.com/photos/1128780/pexels-photo-1128780.jpeg?auto=compress&cs=tinysrgb&w=600", status: "نفذ من المخزون", description: "تصميم نادر للخنجر مناسب للاقتناء.", material: "فضة وأحجار كريمة", badge: "القطعة الأخيرة" },
-        { id: "7", name: "وشاح عماني فاخر", category: "المسار", price: 55.000, image: "https://images.pexels.com/photos/322207/pexels-photo-322207.jpeg?auto=compress&cs=tinysrgb&w=600", status: "متوفر", description: "قماش خفيف وناعم.", material: "فسكوز", badge: "" },
-        { id: "8", name: "كمّة للأطفال", category: "الكمّة", price: 18.000, image: "https://images.pexels.com/photos/1620760/pexels-photo-1620760.jpeg?auto=compress&cs=tinysrgb&w=600", status: "متوفر", description: "تصميم مريح للأطفال.", material: "قطن", badge: "جديد" },
-    ];
-
+    // --- Core Logic Functions ---
     function saveCart() { localStorage.setItem('tamsirat_cart', JSON.stringify(cartItems)); updateCartBadge(); renderCartDrawer(); }
     function loadCart() { const saved = localStorage.getItem('tamsirat_cart'); cartItems = saved ? JSON.parse(saved) : []; updateCartBadge(); renderCartDrawer(); }
-    function updateCartBadge() { document.getElementById('cartCountBadge').innerText = cartItems.reduce((sum,i)=> sum + i.quantity,0); }
-    function showToast(msg, duration=1800) { const toast = document.getElementById('toastMsg'); toast.innerText = msg; toast.style.opacity = '1'; setTimeout(()=> toast.style.opacity = '0', duration); }
+    function updateCartBadge() { const badge = document.getElementById('cartCountBadge'); if(badge) badge.innerText = cartItems.reduce((sum,i)=> sum + i.quantity,0); }
+    function showToast(msg, duration=1800) { const toast = document.getElementById('toastMsg'); if(toast) { toast.innerText = msg; toast.style.opacity = '1'; setTimeout(()=> toast.style.opacity = '0', duration); } }
 
     function addToCart(productId, qty=1) {
         const product = masterData.find(p=> p.id === productId);
         if(!product) return;
-        if(product.status && (product.status.toLowerCase().includes('نفذ') || product.status === 'Out of Stock')) {
+        const isOutOfStock = product.status && (product.status.toLowerCase().includes('نفذ') || product.status === 'Out of Stock');
+        if(isOutOfStock) {
             showToast(translations[currentLang].outOfStock, 1500); return;
         }
         const existing = cartItems.find(i=> i.id === productId);
@@ -108,6 +99,7 @@
     }
 
     function removeCartItem(id) { cartItems = cartItems.filter(i=> i.id !== id); saveCart(); renderCartDrawer(); }
+    
     function updateQuantity(id, delta) {
         const idx = cartItems.findIndex(i=> i.id === id);
         if(idx === -1) return;
@@ -118,6 +110,7 @@
 
     function renderCartDrawer() {
         const container = document.getElementById('cartItemsContainer');
+        if(!container) return;
         const t = translations[currentLang];
         if(!cartItems.length) {
             container.innerHTML = `<div class="empty-cart-msg">${t.emptyCart}</div>`;
@@ -136,8 +129,8 @@
         container.querySelectorAll('.remove-item').forEach(btn => btn.addEventListener('click', (e) => { e.stopPropagation(); removeCartItem(btn.dataset.id); }));
     }
 
-    function openCartDrawer() { document.getElementById('cartOverlay').classList.add('open'); document.getElementById('cartDrawer').classList.add('open'); }
-    function closeCartDrawer() { document.getElementById('cartOverlay').classList.remove('open'); document.getElementById('cartDrawer').classList.remove('open'); }
+    function openCartDrawer() { document.getElementById('cartOverlay')?.classList.add('open'); document.getElementById('cartDrawer')?.classList.add('open'); }
+    function closeCartDrawer() { document.getElementById('cartOverlay')?.classList.remove('open'); document.getElementById('cartDrawer')?.classList.remove('open'); }
 
     function sendCartWhatsApp() {
         if(!cartItems.length) { showToast(translations[currentLang].emptyCart, 1500); return; }
@@ -147,13 +140,13 @@
         window.open(`https://api.whatsapp.com/send/?phone=96895149291&text=${encodeURIComponent(msg)}`, '_blank');
     }
 
+    // --- Helper UI Functions ---
     window.addToCartById = (id) => addToCart(id, 1);
 
     function setHtmlDirection() {
         const dir = currentLang === 'ar' ? 'rtl' : 'ltr';
-        const lang = currentLang;
         document.documentElement.setAttribute('dir', dir);
-        document.documentElement.setAttribute('lang', lang);
+        document.documentElement.setAttribute('lang', currentLang);
         document.body.classList.toggle('rtl', currentLang === 'ar');
     }
 
@@ -173,6 +166,7 @@
     window.closeModalSaaf = function() { document.getElementById('productModalSaaf').style.display = 'none'; };
     window.openZoomSaaf = function() { document.getElementById('zoomedImageSaaf').src = document.getElementById('modalProductImgSaaf').src; document.getElementById('zoomLightboxSaaf').style.display = 'flex'; };
     window.closeZoomSaaf = function(event) { if(event) event.stopPropagation(); document.getElementById('zoomLightboxSaaf').style.display = 'none'; };
+    
     window.orderWhatsApp = function(name, price) {
         const phone = "96895149291";
         const msg = currentLang === 'ar' ? `السلام عليكم، أرغب في شراء:\nالمنتج: ${name}\nالسعر: ${price} ريال عماني` : `Hello, I'm interested in purchasing:\nItem: ${name}\nPrice: OMR ${price}`;
@@ -220,6 +214,7 @@
     function buildNavLinks() {
         const categories = [...new Set(masterData.map(i => i.category))];
         const nav = document.getElementById('dynamicNavLinks');
+        if(!nav) return;
         const t = translations[currentLang];
         let html = `<a href="#" class="${currentCategory === 'all' ? 'active' : ''}" data-cat="all">${t.allCat}</a>`;
         categories.forEach(cat => { html += `<a href="#" class="${currentCategory === cat ? 'active' : ''}" data-cat="${cat}">${cat}</a>`; });
@@ -227,8 +222,6 @@
         nav.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', (e) => {
                 e.preventDefault();
-                nav.querySelectorAll('a').forEach(a => a.classList.remove('active'));
-                link.classList.add('active');
                 const cat = link.dataset.cat;
                 if (cat === 'all') showHomeView();
                 else window.openCategoryView(cat);
@@ -248,6 +241,7 @@
         const t = translations[currentLang];
         const cats = [...new Set(masterData.map(i => i.category))];
         const grid = document.getElementById('categoryGridContainer');
+        if(!grid) return;
         let html = '';
         cats.forEach(cat => {
             const cover = masterData.find(p => p.category === cat);
@@ -266,7 +260,7 @@
     }
 
     function filterAndRenderProducts() {
-        let filtered = masterData;
+        let filtered = [...masterData];
         if (currentCategory && currentCategory !== 'all') { filtered = filtered.filter(p => p.category === currentCategory); }
         if (currentSearchTerm) { filtered = filtered.filter(p => p.name.toLowerCase().includes(currentSearchTerm) || p.category.toLowerCase().includes(currentSearchTerm)); }
         
@@ -285,8 +279,7 @@
         let html = '';
         filtered.forEach(item => {
             const out = item.status?.toLowerCase().includes('نفذ') || item.status === 'Out of Stock';
-            const priceNum = parseFloat(item.price);
-            const priceFormatted = isNaN(priceNum) ? '0.000' : priceNum.toFixed(3);
+            const priceFormatted = parseFloat(item.price).toFixed(3);
             let badge = item.badge;
             
             if (currentLang === 'ar' && badge) {
@@ -307,7 +300,6 @@
                 <div class="product-info-saaf">
                     <div class="product-name-saaf">${item.name}</div>
                     <div class="product-price-saaf">OMR ${priceFormatted}</div>
-                    
                     <div class="product-actions-wrap">
                         <button class="btn-cart" onclick="event.stopPropagation(); window.addToCartById('${item.id}')">
                             <i class="fas fa-cart-plus"></i> ${t.addToCart}
@@ -333,7 +325,8 @@
     window.toggleLanguage = function() {
         currentLang = currentLang === 'en' ? 'ar' : 'en';
         setHtmlDirection();
-        document.getElementById('langText').textContent = currentLang === 'en' ? 'العربية' : 'English';
+        const langBtnText = document.getElementById('langText');
+        if(langBtnText) langBtnText.textContent = currentLang === 'en' ? 'العربية' : 'English';
         updateLanguageUI();
         updateSortOptions();
         buildNavLinks();
@@ -352,10 +345,17 @@
             const key = el.dataset.lang;
             if (t[key]) el.textContent = t[key];
         });
-        document.getElementById('globalSearchInput').placeholder = currentLang === 'ar' ? 'ابحث عن مصار، كمه، خنجر...' : 'Search for mussar, kumma, khanjar...';
-        document.getElementById('cartTitle').innerText = t.cartTitle;
-        document.querySelector('#cartCheckoutBtn span').innerText = t.checkoutWhatsApp;
-        document.querySelector('.cart-total span:first-child').innerText = t.cartTotal;
+        const searchInput = document.getElementById('globalSearchInput');
+        if(searchInput) searchInput.placeholder = currentLang === 'ar' ? 'ابحث عن مصار، كمه، خنجر...' : 'Search for mussar, kumma, khanjar...';
+        
+        const cartTitle = document.getElementById('cartTitle');
+        if(cartTitle) cartTitle.innerText = t.cartTitle;
+
+        const checkoutBtnText = document.querySelector('#cartCheckoutBtn span');
+        if(checkoutBtnText) checkoutBtnText.innerText = t.checkoutWhatsApp;
+
+        const totalLabel = document.querySelector('.cart-total span:first-child');
+        if(totalLabel) totalLabel.innerText = t.cartTotal;
         
         const modalBtn = document.querySelector('#modalOrderBtnSaaf');
         if (modalBtn) modalBtn.innerHTML = `<i class="fab fa-whatsapp"></i> ${t.orderWhatsApp}`;
@@ -367,7 +367,6 @@
         document.getElementById('sortSelectSaaf').addEventListener('change', filterAndRenderProducts);
         document.getElementById('globalSearchInput').addEventListener('input', debounce(handleGlobalSearch, 300));
         
-        // Cart Drawer Events
         document.getElementById('cartIconBtn').addEventListener('click', openCartDrawer);
         document.getElementById('closeCartBtn').addEventListener('click', closeCartDrawer);
         document.getElementById('cartOverlay').addEventListener('click', closeCartDrawer);
@@ -383,7 +382,7 @@
         const tableName = "Untitled spreadsheet";
         const baseUrl = "https://www.appsheet.com/image/getimageurl";
 
-        masterData = Array.isArray(data) && data.length ? data : DEMO_DATA;
+        masterData = Array.isArray(data) && data.length ? data : [];
         masterData = masterData.map((item, idx) => {
             let imgUrl = item.image ? String(item.image) : "";
             let finalImageUrl = imgUrl;
@@ -424,8 +423,9 @@
             const data = await response.json();
             initializeStore(data);
         } catch (error) {
-            console.warn("استخدام البيانات التجريبية بدلاً من Google Sheets", error);
-            initializeStore(DEMO_DATA);
+            console.warn("استخدام البيانات التجريبية بسبب خطأ في اتصال Google Sheets", error);
+            // এখানে আপনি চাইলে আপনার DEMO_DATA ব্যবহার করতে পারেন
+            initializeStore([]); 
         }
     }
 
