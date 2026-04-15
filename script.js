@@ -3,8 +3,10 @@
 
     const translations = {
         ar: {
-            heroTitle: '',
-            heroSub: '',
+            brandName: 'تمصيرة <span> العز</span>',
+            heroTitle: 'نبذة تعريفية',
+            heroSub: 'محل تمصيرة العز للمستلزمات الرجالية هو أحد الأسماء العريقة في مجال بيع المستلزمات الرجالية، حيث تأسس عام 1986 على يد الوالد خميس الشيدي، واضعًا حجر الأساس لمشروع انطلق ببداية متواضعة، شملت توفير مختلف احتياجات الرجل من منتجات متنوعة، ليكون وجهة متكاملة تخدم المجتمع المحلي. ومع مرور السنوات، شهد المحل تطورًا ملحوظًا، حيث تم في عام 2016 تجديد الهوية التجارية والانطلاق باسم “تمصيرة العز”، ليعكس روح الأصالة مع لمسة من الحداثة، مما ساهم في تعزيز حضوره وانتشاره. وفي عام 2025، تمت إعادة صياغة الهوية مرة أخرى بحلة جديدة وراقية ومميزة، تعكس مستوى أعلى من الجودة والتميز، ليواصل “تمصيرة العز” مسيرته بثقة، محافظًا على إرثه العريق ومواكبًا لتطلعات العملاء في الولاية.',
+            searchPlaceholder: 'ابحث عن مصار، كمه، خنجر...',
             explore: 'استكشف المجموعة',
             shopByCat: 'تسوق حسب الفئة',
             back: 'رجوع',
@@ -37,8 +39,10 @@
             remove: 'إزالة'
         },
         en: {
+            brandName: 'Tamsirat <span> Al-Ez</span>',
             heroTitle: 'About Us',
             heroSub: 'Tamsirat Al-Ez for Men’s Essentials is a prestigious name in the men’s retail industry. Founded in 1986 by Khamis Al-Shidi, the business began with a humble vision: to provide a comprehensive range of high-quality products for the local community. Over the decades, the establishment has undergone significant evolution. In 2016, the brand identity was renewed as "Tamsirat Al-Ez," successfully blending traditional Omani authenticity with a modern touch. Most recently, in 2025, the brand was further refined with a sophisticated and high-end identity that reflects excellence and distinction. Today, Tamsirat Al-Ez continues its journey with confidence, honoring its deep-rooted heritage while meeting the evolving aspirations of its customers in the Wilayat.',
+            searchPlaceholder: 'Search for mussar, kumma, khanjar...',
             explore: 'Explore Collection',
             shopByCat: 'Shop by Category',
             back: 'Back',
@@ -343,10 +347,11 @@
         const t = translations[currentLang];
         document.querySelectorAll('[data-lang]').forEach(el => {
             const key = el.dataset.lang;
-            if (t[key]) el.textContent = t[key];
+            // .innerHTML ব্যবহার করা হয়েছে যাতে হেডারের লোগোর ভেতরের <span> ট্যাগ ঠিক থাকে
+            if (t[key]) el.innerHTML = t[key]; 
         });
         const searchInput = document.getElementById('globalSearchInput');
-        if(searchInput) searchInput.placeholder = currentLang === 'ar' ? 'ابحث عن مصار، كمه، خنجر...' : 'Search for mussar, kumma, khanjar...';
+        if(searchInput) searchInput.placeholder = t.searchPlaceholder;
         
         const cartTitle = document.getElementById('cartTitle');
         if(cartTitle) cartTitle.innerText = t.cartTitle;
@@ -424,7 +429,6 @@
             initializeStore(data);
         } catch (error) {
             console.warn("استخدام البيانات التجريبية بسبب خطأ في اتصال Google Sheets", error);
-            // এখানে আপনি চাইলে আপনার DEMO_DATA ব্যবহার করতে পারেন
             initializeStore([]); 
         }
     }
