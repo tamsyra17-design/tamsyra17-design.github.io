@@ -39,9 +39,9 @@
             remove: 'إزالة'
         },
         en: {
-            brandName: 'Tamsirat <span> Al-Ez</span>',
+            brandName: 'Tamsirat <span> Aleiz</span>',
             heroTitle: 'About Us',
-            heroSub: 'Tamsirat Al-Ez for Men’s Essentials is a prestigious name in the men’s retail industry. Founded in 1986 by Khamis Al-Shidi, the business began with a humble vision: to provide a comprehensive range of high-quality products for the local community. Over the decades, the establishment has undergone significant evolution. In 2016, the brand identity was renewed as "Tamsirat Al-Ez," successfully blending traditional Omani authenticity with a modern touch. Most recently, in 2025, the brand was further refined with a sophisticated and high-end identity that reflects excellence and distinction. Today, Tamsirat Al-Ez continues its journey with confidence, honoring its deep-rooted heritage while meeting the evolving aspirations of its customers in the Wilayat.',
+            heroSub: 'Tamsirat Aleiz for Men’s Essentials is a prestigious name in the men’s retail industry. Founded in 1986 by Khamis Al-Shidi, the business began with a humble vision: to provide a comprehensive range of high-quality products for the local community. Over the decades, the establishment has undergone significant evolution. In 2016, the brand identity was renewed as "Tamsirat Al-Ez," successfully blending traditional Omani authenticity with a modern touch. Most recently, in 2025, the brand was further refined with a sophisticated and high-end identity that reflects excellence and distinction. Today, Tamsirat Al-Ez continues its journey with confidence, honoring its deep-rooted heritage while meeting the evolving aspirations of its customers in the Wilayat.',
             searchPlaceholder: 'Search for mussar, kumma, khanjar...',
             explore: 'Explore Collection',
             shopByCat: 'Shop by Category',
