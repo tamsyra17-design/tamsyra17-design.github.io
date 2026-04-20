@@ -11,6 +11,9 @@
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    
     <style>
         /* ========== CSS রিসেট ও ভেরিয়েবল ========== */
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -275,18 +278,48 @@
             color: var(--saaf-gold); 
         }
 
-        /* ========== হিরো সেকশন ========== */
-        .hero-saaf { 
-            background: linear-gradient(135deg, #eaf3f5 0%, #d1e6ec 100%); 
-            padding: 4rem 5%; 
-            display: flex; 
-            align-items: center;
-            justify-content: space-between; 
-            flex-wrap: wrap; 
-            margin-bottom: 3rem; 
+        /* ========== হিরো সেকশন (Swiper স্লাইডার) ========== */
+        .hero-saaf {
+            background: linear-gradient(135deg, #eaf3f5 0%, #d1e6ec 100%);
+            padding: 4rem 5%;
+            margin-bottom: 3rem;
+            position: relative;
+            overflow: hidden;
         }
         
-        .hero-content { max-width: 600px; }
+        .swiper-slide {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+        
+        .hero-content {
+            flex: 1;
+            max-width: 550px;
+            text-align: center;
+        }
+        
+        .hero-image {
+            flex: 1;
+            max-width: 400px;
+            text-align: center;
+        }
+        
+        .hero-image img {
+            width: 100%;
+            max-width: 350px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            transition: var(--transition);
+            animation: floatImage 3s ease-in-out infinite;
+        }
+        
+        @keyframes floatImage {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
         
         .hero-content h2 { 
             font-family: 'Cormorant Garamond', serif; 
@@ -300,9 +333,8 @@
             color: var(--saaf-black);
             font-size: clamp(0.9rem, 1.2vw, 1.2rem);
             line-height: 1.8;
-            max-width: 750px;
             margin: 0 auto 1.8rem;
-            text-align: justify;
+            text-align: center;
         }
         
         .hero-btn { 
@@ -324,6 +356,66 @@
             background: var(--saaf-gold); 
             transform: translateY(-3px); 
             box-shadow: 0 10px 20px rgba(192, 152, 88, 0.3); 
+        }
+        
+        /* Swiper নেভিগেশন বাটন */
+        .swiper-button-next,
+        .swiper-button-prev {
+            color: var(--saaf-gold);
+            background: rgba(255,255,255,0.9);
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .swiper-button-next:after,
+        .swiper-button-prev:after {
+            font-size: 20px;
+            font-weight: bold;
+        }
+        
+        .swiper-button-next:hover,
+        .swiper-button-prev:hover {
+            background: var(--saaf-gold);
+            color: white;
+        }
+        
+        /* পেজিনেশন ডটস */
+        .swiper-pagination-bullet {
+            background: var(--saaf-muted);
+            opacity: 0.5;
+            width: 10px;
+            height: 10px;
+        }
+        
+        .swiper-pagination-bullet-active {
+            background: var(--saaf-gold);
+            opacity: 1;
+            width: 25px;
+            border-radius: 10px;
+        }
+        
+        /* স্লাইড অ্যানিমেশন */
+        .swiper-slide .hero-content,
+        .swiper-slide .hero-image {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+        
+        .swiper-slide-active .hero-content,
+        .swiper-slide-active .hero-image {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .swiper-slide-active .hero-content {
+            transition-delay: 0.2s;
+        }
+        
+        .swiper-slide-active .hero-image {
+            transition-delay: 0.4s;
         }
 
         /* ========== ক্যাটাগরি ও প্রোডাক্ট গ্রিড ========== */
@@ -607,8 +699,14 @@
             .saaf-header { padding: 15px; }
             .brand-name { font-size: 2rem; }
             .search-wrapper { order: 3; max-width: 100%; margin-top: 15px; }
-            .hero-saaf { padding: 3rem 5%; text-align: center; }
-            .hero-content { margin: 0 auto; }
+            .hero-saaf { padding: 3rem 5%; }
+            .swiper-slide { flex-direction: column; text-align: center; }
+            .hero-content, .hero-image { max-width: 100%; }
+            .hero-image img { max-width: 250px; }
+            .swiper-button-next,
+            .swiper-button-prev {
+                display: none;
+            }
         }
     </style>
 </head>
@@ -648,15 +746,59 @@
         <div class="side-nav-links" id="dynamicNavLinks"></div>
     </div>
 
-    <section class="hero-saaf" id="heroSection">
-        <div class="hero-content">
-            <h2 data-lang="heroTitle">أنبذة تعريفية</h2>
-            <p data-lang="heroSub">محل تمصيرة العز للمستلزمات الرجالية هو أحد الأسماء العريقة في هذا المجال...</p>
-            <button class="hero-btn" onclick="window.scrollToCategories()">
-                <span data-lang="explore">استكشف المجموعة</span> <i class="fas fa-arrow-left"></i>
-            </button>
+    <!-- ========== হিরো সেকশন (Swiper স্লাইডার) ========== -->
+    <div class="hero-saaf swiper-container">
+        <div class="swiper-wrapper">
+            <!-- স্লাইড ১ - পরিচিতি -->
+            <div class="swiper-slide">
+                <div class="hero-content">
+                    <h2 id="heroTitle1" data-lang-ar="أنبذة تعريفية" data-lang-en="About Us">أنبذة تعريفية</h2>
+                    <p id="heroSub1" data-lang-ar="محل تمصيرة العز للمستلزمات الرجالية هو أحد الأسماء العريقة في هذا المجال، تأسس عام 1986 على يد الوالد خميس الشيدي، وبدأ بمشروع متواضع لتوفير احتياجات الرجل. ومع مرور الوقت، شهد المحل تطورًا ملحوظًا، حيث تم تجديد هويته عام 2016 تحت اسم &quot;تمصيرة العز&quot; بما يجمع بين الأصالة والحداثة. وفي عام 2025، أُعيدت صياغة الهوية بحلة أكثر رقيًا وتميزًا، ليواصل المحل مسيرته بثقة، محافظًا على إرثه ومواكبًا لتطلعات العملاء." data-lang-en="Tamsirat Aleiz for Men's Essentials is one of the long-standing names in this field. Founded in 1986 by Khamis Al-Sheidi, it began as a modest project to provide for men's needs. Over time, the store witnessed remarkable development, and its identity was renewed in 2016 under the name Tamsirat Aleiz to blend tradition with modernity. In 2025, the brand identity was revamped with a more elegant and distinguished look, allowing the store to confidently continue its journey—preserving its legacy while keeping pace with the aspirations of its customers.">محل تمصيرة العز للمستلزمات الرجالية هو أحد الأسماء العريقة في هذا المجال، تأسس عام 1986 على يد الوالد خميس الشيدي، وبدأ بمشروع متواضع لتوفير احتياجات الرجل. ومع مرور الوقت، شهد المحل تطورًا ملحوظًا، حيث تم تجديد هويته عام 2016 تحت اسم "تمصيرة العز" بما يجمع بين الأصالة والحداثة. وفي عام 2025، أُعيدت صياغة الهوية بحلة أكثر رقيًا وتميزًا، ليواصل المحل مسيرته بثقة، محافظًا على إرثه ومواكبًا لتطلعات العملاء.</p>
+                    <button class="hero-btn" onclick="window.scrollToCategories()">
+                        <span id="exploreBtn" data-lang-ar="استكشف المجموعة" data-lang-en="Explore Collection">استكشف المجموعة</span> <i class="fas fa-arrow-left"></i>
+                    </button>
+                </div>
+                <div class="hero-image">
+                    <img src="https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Traditional Omani" id="heroImg1">
+                </div>
+            </div>
+            
+            <!-- স্লাইড ২ - গুণগত মান -->
+            <div class="swiper-slide">
+                <div class="hero-image">
+                    <img src="https://images.pexels.com/photos/1485657/pexels-photo-1485657.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Quality Products" id="heroImg2">
+                </div>
+                <div class="hero-content">
+                    <h2 id="heroTitle2" data-lang-ar="جودة عالية" data-lang-en="Premium Quality">جودة عالية</h2>
+                    <p id="heroSub2" data-lang-ar="نقدم لكم أفضل المنتجات العمانية الأصيلة بجودة مضمونة وأسعار تنافسية. تشكيلتنا تضم البشمينا، الكمات، الخناجر العمانية، والعطور الفاخرة. جميع منتجاتنا مختارة بعناية لضمان رضا عملائنا." data-lang-en="We offer you the finest authentic Omani products with guaranteed quality and competitive prices. Our collection includes Pasmina, Kumma, Omani Khanjar, and luxury perfumes. All our products are carefully selected to ensure our customers' satisfaction.">نقدم لكم أفضل المنتجات العمانية الأصيلة بجودة مضمونة وأسعار تنافسية. تشكيلتنا تضم البشمينا، الكمات، الخناجر العمانية، والعطور الفاخرة. جميع منتجاتنا مختارة بعناية لضمان رضا عملائنا.</p>
+                    <button class="hero-btn" onclick="window.scrollToCategories()">
+                        <span id="shopBtn" data-lang-ar="تسوق الآن" data-lang-en="Shop Now">تسوق الآن</span> <i class="fas fa-arrow-left"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- স্লাইড ৩ - শিপিং -->
+            <div class="swiper-slide">
+                <div class="hero-content">
+                    <h2 id="heroTitle3" data-lang-ar="شحن سريع وآمن" data-lang-en="Fast & Secure Shipping">شحن سريع وآمن</h2>
+                    <p id="heroSub3" data-lang-ar="خدمة توصيل سريعة وآمنة لجميع أنحاء السلطنة. نضمن وصول طلبك في أفضل حالة وبأسرع وقت ممكن. نوفر خدمة التتبع والتواصل المستمر مع العملاء." data-lang-en="Fast and secure delivery service across the entire Sultanate. We guarantee your order arrives in the best condition and as quickly as possible. We provide tracking service and continuous communication with customers.">خدمة توصيل سريعة وآمنة لجميع أنحاء السلطنة. نضمن وصول طلبك في أفضل حالة وبأسرع وقت ممكن. نوفر خدمة التتبع والتواصل المستمر مع العملاء.</p>
+                    <button class="hero-btn" onclick="window.scrollToCategories()">
+                        <span id="orderBtn" data-lang-ar="اطلب الآن" data-lang-en="Order Now">اطلب الآن</span> <i class="fas fa-arrow-left"></i>
+                    </button>
+                </div>
+                <div class="hero-image">
+                    <img src="https://images.pexels.com/photos/4391470/pexels-photo-4391470.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Fast Delivery" id="heroImg3">
+                </div>
+            </div>
         </div>
-    </section>
+        
+        <!-- নেভিগেশন বাটন -->
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+        
+        <!-- পেজিনেশন ডটস -->
+        <div class="swiper-pagination"></div>
+    </div>
 
     <div id="categoryHomeView">
         <h2 class="section-title" data-lang="shopByCat" style="margin: 2.5rem 5% 1.5rem; font-size: 2rem;">تسوق حسب الفئة</h2>
@@ -735,6 +877,9 @@
         </div>
     </div>
 
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
     <script>
         // সাইড প্যানেল টগল ফাংশন
         function toggleNavPanel() {
@@ -781,7 +926,13 @@
                     emptyCart: 'Your cart is empty',
                     addToCart: 'Add to Cart',
                     addedToast: 'Added to cart',
-                    remove: 'Remove'
+                    remove: 'Remove',
+                    slide2Title: 'Premium Quality',
+                    slide2Sub: "We offer you the finest authentic Omani products with guaranteed quality and competitive prices. Our collection includes Pasmina, Kumma, Omani Khanjar, and luxury perfumes. All our products are carefully selected to ensure our customers' satisfaction.",
+                    slide2Btn: 'Shop Now',
+                    slide3Title: 'Fast & Secure Shipping',
+                    slide3Sub: "Fast and secure delivery service across the entire Sultanate. We guarantee your order arrives in the best condition and as quickly as possible. We provide tracking service and continuous communication with customers.",
+                    slide3Btn: 'Order Now'
                 },
                 ar: {
                     heroTitle: 'أنبذة تعريفية',
@@ -815,7 +966,13 @@
                     emptyCart: 'السلة فارغة',
                     addToCart: 'أضف للسلة',
                     addedToast: 'تمت الإضافة للسلة',
-                    remove: 'إزالة'
+                    remove: 'إزالة',
+                    slide2Title: 'جودة عالية',
+                    slide2Sub: "نقدم لكم أفضل المنتجات العمانية الأصيلة بجودة مضمونة وأسعار تنافسية. تشكيلتنا تضم البشمينا، الكمات، الخناجر العمانية، والعطور الفاخرة. جميع منتجاتنا مختارة بعناية لضمان رضا عملائنا.",
+                    slide2Btn: 'تسوق الآن',
+                    slide3Title: 'شحن سريع وآمن',
+                    slide3Sub: "خدمة توصيل سريعة وآمنة لجميع أنحاء السلطنة. نضمن وصول طلبك في أفضل حالة وبأسرع وقت ممكن. نوفر خدمة التتبع والتواصل المستمر مع العملاء.",
+                    slide3Btn: 'اطلب الآن'
                 }
             };
 
@@ -824,6 +981,62 @@
             let currentCategory = 'all';
             let currentSearchTerm = '';
             let cartItems = [];
+            let heroSwiper = null;
+
+            // ========== হিরো স্লাইডার ল্যাঙ্গুয়েজ আপডেট ফাংশন ==========
+            function updateHeroLanguage() {
+                const t = translations[currentLang];
+                
+                // স্লাইড ১
+                const title1 = document.getElementById('heroTitle1');
+                const sub1 = document.getElementById('heroSub1');
+                const exploreBtn = document.getElementById('exploreBtn');
+                if(title1) title1.textContent = t.heroTitle;
+                if(sub1) sub1.textContent = t.heroSub;
+                if(exploreBtn) exploreBtn.textContent = t.explore;
+                
+                // স্লাইড ২
+                const title2 = document.getElementById('heroTitle2');
+                const sub2 = document.getElementById('heroSub2');
+                const shopBtn = document.getElementById('shopBtn');
+                if(title2) title2.textContent = t.slide2Title;
+                if(sub2) sub2.textContent = t.slide2Sub;
+                if(shopBtn) shopBtn.textContent = t.slide2Btn;
+                
+                // স্লাইড ৩
+                const title3 = document.getElementById('heroTitle3');
+                const sub3 = document.getElementById('heroSub3');
+                const orderBtn = document.getElementById('orderBtn');
+                if(title3) title3.textContent = t.slide3Title;
+                if(sub3) sub3.textContent = t.slide3Sub;
+                if(orderBtn) orderBtn.textContent = t.slide3Btn;
+            }
+
+            // ========== হিরো স্লাইডার ইনিশিয়ালাইজ ==========
+            function initHeroSlider() {
+                if (document.querySelector('.hero-saaf.swiper-container') && typeof Swiper !== 'undefined') {
+                    heroSwiper = new Swiper('.hero-saaf.swiper-container', {
+                        loop: true,
+                        autoplay: {
+                            delay: 4000,
+                            disableOnInteraction: false,
+                        },
+                        effect: 'slide',
+                        speed: 800,
+                        navigation: {
+                            nextEl: '.swiper-button-next',
+                            prevEl: '.swiper-button-prev',
+                        },
+                        pagination: {
+                            el: '.swiper-pagination',
+                            clickable: true,
+                            dynamicBullets: true,
+                        },
+                        grabCursor: true,
+                        touchRatio: 1,
+                    });
+                }
+            }
 
             // ========== কার্ট ফাংশন ==========
             function saveCart() { 
@@ -1246,6 +1459,7 @@
                 updateLanguageUI();
                 updateSortOptions();
                 buildNavLinks();
+                updateHeroLanguage(); // হিরো স্লাইডার ল্যাঙ্গুয়েজ আপডেট
                 
                 if (document.getElementById('productSectionView').style.display === 'block') {
                     const displayTitle = currentCategory === 'all' 
@@ -1394,10 +1608,16 @@
                 setHtmlDirection();
                 updateSortOptions();
                 updateLanguageUI();
+                updateHeroLanguage(); // হিরো স্লাইডার ল্যাঙ্গুয়েজ সেট
                 buildNavLinks();
                 showHomeView();
                 loadCart();
                 attachEvents();
+                
+                // হিরো স্লাইডার ইনিশিয়ালাইজ
+                setTimeout(() => {
+                    initHeroSlider();
+                }, 100);
             }
 
             async function loadDataFromGoogle() {
