@@ -43,6 +43,7 @@
         }
         
         body.rtl { direction: rtl; }
+        body.ltr { direction: ltr; }
         
         /* ========== হেডার ========== */
         .saaf-header { 
@@ -379,6 +380,27 @@
         .swiper-button-prev:hover {
             background: var(--saaf-gold);
             color: white;
+        }
+        
+        /* LTR মোডে বাটন পজিশন ঠিক করা */
+        body.ltr .swiper-button-next {
+            right: 10px;
+            left: auto;
+        }
+        
+        body.ltr .swiper-button-prev {
+            left: 10px;
+            right: auto;
+        }
+        
+        body.rtl .swiper-button-next {
+            left: 10px;
+            right: auto;
+        }
+        
+        body.rtl .swiper-button-prev {
+            right: 10px;
+            left: auto;
         }
         
         /* পেজিনেশন ডটস */
@@ -747,7 +769,7 @@
     </div>
 
     <!-- ========== হিরো সেকশন (Swiper স্লাইডার) ========== -->
-    <div class="hero-saaf swiper-container">
+    <div class="hero-saaf swiper-container" id="heroSwiperContainer">
         <div class="swiper-wrapper">
             <!-- স্লাইড ১ - পরিচিতি -->
             <div class="swiper-slide">
@@ -983,6 +1005,41 @@
             let cartItems = [];
             let heroSwiper = null;
 
+            // ========== হিরো স্লাইডার রি-ইনিশিয়ালাইজ ফাংশন ==========
+            function reinitHeroSlider() {
+                const isRTL = currentLang === 'ar';
+                const container = document.querySelector('.hero-saaf.swiper-container');
+                
+                if (heroSwiper) {
+                    heroSwiper.destroy(true, true);
+                    heroSwiper = null;
+                }
+                
+                if (container && typeof Swiper !== 'undefined') {
+                    heroSwiper = new Swiper('.hero-saaf.swiper-container', {
+                        loop: true,
+                        autoplay: {
+                            delay: 4000,
+                            disableOnInteraction: false,
+                        },
+                        effect: 'slide',
+                        speed: 800,
+                        navigation: {
+                            nextEl: '.swiper-button-next',
+                            prevEl: '.swiper-button-prev',
+                        },
+                        pagination: {
+                            el: '.swiper-pagination',
+                            clickable: true,
+                            dynamicBullets: true,
+                        },
+                        grabCursor: true,
+                        touchRatio: 1,
+                        rtl: isRTL,  // RTL সাপোর্ট অন/অফ
+                    });
+                }
+            }
+
             // ========== হিরো স্লাইডার ল্যাঙ্গুয়েজ আপডেট ফাংশন ==========
             function updateHeroLanguage() {
                 const t = translations[currentLang];
@@ -1010,32 +1067,6 @@
                 if(title3) title3.textContent = t.slide3Title;
                 if(sub3) sub3.textContent = t.slide3Sub;
                 if(orderBtn) orderBtn.textContent = t.slide3Btn;
-            }
-
-            // ========== হিরো স্লাইডার ইনিশিয়ালাইজ ==========
-            function initHeroSlider() {
-                if (document.querySelector('.hero-saaf.swiper-container') && typeof Swiper !== 'undefined') {
-                    heroSwiper = new Swiper('.hero-saaf.swiper-container', {
-                        loop: true,
-                        autoplay: {
-                            delay: 4000,
-                            disableOnInteraction: false,
-                        },
-                        effect: 'slide',
-                        speed: 800,
-                        navigation: {
-                            nextEl: '.swiper-button-next',
-                            prevEl: '.swiper-button-prev',
-                        },
-                        pagination: {
-                            el: '.swiper-pagination',
-                            clickable: true,
-                            dynamicBullets: true,
-                        },
-                        grabCursor: true,
-                        touchRatio: 1,
-                    });
-                }
             }
 
             // ========== কার্ট ফাংশন ==========
@@ -1181,7 +1212,8 @@
                 const dir = currentLang === 'ar' ? 'rtl' : 'ltr';
                 document.documentElement.setAttribute('dir', dir);
                 document.documentElement.setAttribute('lang', currentLang);
-                document.body.classList.toggle('rtl', currentLang === 'ar');
+                document.body.classList.remove('rtl', 'ltr');
+                document.body.classList.add(dir);
             }
 
             function updateSortOptions() {
@@ -1459,7 +1491,12 @@
                 updateLanguageUI();
                 updateSortOptions();
                 buildNavLinks();
-                updateHeroLanguage(); // হিরো স্লাইডার ল্যাঙ্গুয়েজ আপডেট
+                updateHeroLanguage();
+                
+                // স্লাইডার রি-ইনিশিয়ালাইজ (RTL/LTR পরিবর্তনের জন্য)
+                setTimeout(() => {
+                    reinitHeroSlider();
+                }, 50);
                 
                 if (document.getElementById('productSectionView').style.display === 'block') {
                     const displayTitle = currentCategory === 'all' 
@@ -1569,7 +1606,6 @@
                 
                 let rawData = Array.isArray(data) && data.length ? data : DEMO_DATA;
                 
-                // খারাপ ডাটা ফিল্টার
                 rawData = rawData.filter(item => {
                     if (!item.id || item.id.toString().trim() === '') return false;
                     if (!item.name_ar || item.name_ar.toString().trim() === '') return false;
@@ -1608,15 +1644,14 @@
                 setHtmlDirection();
                 updateSortOptions();
                 updateLanguageUI();
-                updateHeroLanguage(); // হিরো স্লাইডার ল্যাঙ্গুয়েজ সেট
+                updateHeroLanguage();
                 buildNavLinks();
                 showHomeView();
                 loadCart();
                 attachEvents();
                 
-                // হিরো স্লাইডার ইনিশিয়ালাইজ
                 setTimeout(() => {
-                    initHeroSlider();
+                    reinitHeroSlider();
                 }, 100);
             }
 
