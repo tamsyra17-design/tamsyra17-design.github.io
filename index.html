@@ -323,7 +323,7 @@
         }
         
         .hero-content h2 { 
-            font-family: 'Cormorant Garamond', serif; 
+            font-family: 'Cormorant Garamond',, serif; 
             font-size: 3.5rem; 
             font-weight: 700; 
             color: var(--saaf-black); 
@@ -431,8 +431,97 @@
         .swiper-slide-active .hero-content { transition-delay: 0.2s; }
         .swiper-slide-active .hero-image { transition-delay: 0.4s; }
 
-        /* ========== Categories & Products Grid ========== */
-        .category-grid-saaf, 
+        /* ========== Improved Categories CSS ========== */
+        .category-grid-saaf { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
+            gap: 30px; 
+            padding: 0 5% 50px; 
+            min-height: 300px;
+        }
+        
+        .category-loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 300px;
+            grid-column: 1 / -1;
+        }
+        
+        .category-loading i {
+            font-size: 3rem;
+            color: var(--saaf-gold);
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .category-card-saaf {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            cursor: pointer;
+            box-shadow: var(--shadow-soft);
+            transition: var(--transition);
+            background: white;
+        }
+        
+        .category-card-saaf:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+        }
+        
+        .category-card-saaf img {
+            width: 100%;
+            height: 240px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .category-card-saaf:hover img {
+            transform: scale(1.08);
+        }
+        
+        .category-overlay-saaf {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 60%, transparent 100%);
+            color: white;
+            padding: 25px 20px 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .category-card-saaf:hover .category-overlay-saaf {
+            padding-bottom: 30px;
+            background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.5) 70%, transparent 100%);
+        }
+        
+        .category-overlay-saaf h3 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            font-family: 'Cormorant Garamond', serif;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+        
+        .category-overlay-saaf p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            display: inline-block;
+            background: rgba(192, 152, 88, 0.8);
+            padding: 4px 12px;
+            border-radius: 30px;
+            font-weight: 500;
+        }
+
+        /* ========== Products Grid & Loading Animation ========== */
         .product-grid-saaf { 
             display: grid; 
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
@@ -440,8 +529,21 @@
             padding: 0 5% 20px; 
         }
         
-        .product-card-saaf, 
-        .category-card-saaf { 
+        .loading-spinner {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 60px 20px;
+            grid-column: 1 / -1;
+        }
+        
+        .loading-spinner i {
+            font-size: 3rem;
+            color: var(--saaf-gold);
+            animation: spin 1s linear infinite;
+        }
+        
+        .product-card-saaf { 
             background: white; 
             border-radius: var(--border-radius-saaf); 
             overflow: hidden; 
@@ -450,8 +552,7 @@
             box-shadow: var(--shadow-soft);
         }
         
-        .product-card-saaf:hover, 
-        .category-card-saaf:hover { 
+        .product-card-saaf:hover { 
             box-shadow: var(--shadow-hover); 
             transform: translateY(-5px); 
         }
@@ -559,34 +660,6 @@
         .btn-whatsapp:disabled {
             opacity: 0.6;
             cursor: not-allowed;
-        }
-
-        /* ========== Category Card ========== */
-        .category-card-saaf {
-            position: relative;
-            cursor: pointer;
-        }
-        
-        .category-card-saaf img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-        }
-        
-        .category-overlay-saaf {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
-            color: white;
-            padding: 20px;
-            text-align: center;
-        }
-        
-        .category-overlay-saaf h3 {
-            font-size: 1.3rem;
-            margin-bottom: 5px;
         }
 
         /* ========== Cart Drawer ========== */
@@ -750,6 +823,8 @@
             .swiper-button-prev {
                 display: none;
             }
+            .category-overlay-saaf h3 { font-size: 1.3rem; }
+            .category-card-saaf img { height: 180px; }
         }
     </style>
 </head>
@@ -802,7 +877,7 @@
                     </button>
                 </div>
                 <div class="hero-image">
-                    <img src="https://aleizom.com/heroImg1.png?auto=compress&cs=tinysrgb&w=600" alt="Traditional Omani">
+                    <img src="https://aleizom.com/heroImg1.png?auto=compress&cs=tinysrgb&w=700" alt="Traditional Omani">
                 </div>
             </div>
             <!-- Slide 2 - Quality -->
@@ -920,7 +995,7 @@
         (function(){
             "use strict";
 
-            // Translations
+            // Translations (same as before)
             const translations = {
                 en: {
                     heroTitle: 'About Us',
@@ -1013,6 +1088,20 @@
             let currentPage = 1;
             const productsPerPage = 25;
             let filteredProducts = [];
+            let isLoading = false;
+
+            // Helper: Show/hide loading spinner in product grid
+            function showLoadingSpinner(show) {
+                const container = document.getElementById('productGridContainer');
+                if (!container) return;
+                if (show) {
+                    container.innerHTML = `<div class="loading-spinner"><i class="fas fa-spinner"></i></div>`;
+                } else {
+                    if (container.children.length === 1 && container.children[0].classList?.contains('loading-spinner')) {
+                        container.innerHTML = '';
+                    }
+                }
+            }
 
             // Hero slider reinit
             function reinitHeroSlider() {
@@ -1218,30 +1307,61 @@
                 currentCategory = 'all';
                 document.getElementById('categoryHomeView').style.display = 'block';
                 document.getElementById('productSectionView').style.display = 'none';
-                renderCategoryGrid();
+                renderCategoryGrid(); // this will show loading spinner
                 buildNavLinks();
             }
+            
+            // Category grid with loading spinner (and now called from loadDataFromGoogle too)
             function renderCategoryGrid() {
-                const t = translations[currentLang];
-                const catsAr = [...new Set(masterData.map(item => item.category_ar || item.category).filter(Boolean))];
                 const grid = document.getElementById('categoryGridContainer');
-                if(!grid) return;
-                let html = '';
-                catsAr.forEach(catAr => {
-                    const cover = masterData.find(p => (p.category_ar || p.category) === catAr);
-                    if (!cover) return;
-                    const count = masterData.filter(p => (p.category_ar || p.category) === catAr).length;
-                    const displayCat = getCategoryDisplayName(catAr, currentLang);
-                    html += `<div class="category-card-saaf" onclick="window.openCategoryView('${catAr}')">
-                        <img src="${cover.image || ''}" alt="${displayCat}" loading="lazy">
-                        <div class="category-overlay-saaf"><h3>${displayCat}</h3><p>${count} ${t.products}</p></div>
-                    </div>`;
-                });
-                grid.innerHTML = html;
+                if (!grid) return;
+                // Show loading spinner
+                grid.innerHTML = `<div class="category-loading"><i class="fas fa-spinner"></i></div>`;
+                
+                // If masterData is empty, wait for it (but we call it after data is ready usually)
+                // However, if called before data is loaded, we just show spinner and return.
+                if (!masterData.length) return;
+                
+                // Small delay to ensure spinner is visible (optional)
+                setTimeout(() => {
+                    const t = translations[currentLang];
+                    const catsAr = [...new Set(masterData.map(item => item.category_ar || item.category).filter(Boolean))];
+                    if (catsAr.length === 0) {
+                        grid.innerHTML = `<div class="category-loading">${currentLang === 'ar' ? 'لا توجد فئات' : 'No categories found'}</div>`;
+                        return;
+                    }
+                    let html = '';
+                    catsAr.forEach(catAr => {
+                        const cover = masterData.find(p => (p.category_ar || p.category) === catAr);
+                        if (!cover) return;
+                        const count = masterData.filter(p => (p.category_ar || p.category) === catAr).length;
+                        const displayCat = getCategoryDisplayName(catAr, currentLang);
+                        html += `<div class="category-card-saaf" onclick="window.openCategoryView('${catAr}')">
+                            <img src="${cover.image || ''}" alt="${displayCat}" loading="lazy">
+                            <div class="category-overlay-saaf">
+                                <h3>${displayCat}</h3>
+                                <p>${count} ${t.products}</p>
+                            </div>
+                        </div>`;
+                    });
+                    grid.innerHTML = html;
+                }, 50); // delay for smooth transition; set to 0 if you don't want delay
+            }
+            
+            // Function to show category loading spinner immediately (for API call start)
+            function showCategoryLoadingSpinner() {
+                const grid = document.getElementById('categoryGridContainer');
+                if (grid) {
+                    grid.innerHTML = `<div class="category-loading"><i class="fas fa-spinner"></i></div>`;
+                }
             }
 
-            // Pagination core
-            function filterAndRenderProducts() {
+            // Product pagination with loading
+            async function filterAndRenderProducts() {
+                if (isLoading) return;
+                isLoading = true;
+                showLoadingSpinner(true);
+                await new Promise(resolve => setTimeout(resolve, 300));
                 let filtered = masterData;
                 if (currentCategory && currentCategory !== 'all') filtered = filtered.filter(p => (p.category_ar || p.category) === currentCategory);
                 if (currentSearchTerm) {
@@ -1267,7 +1387,9 @@
                 filteredProducts = filtered;
                 currentPage = 1;
                 renderCurrentPage();
+                isLoading = false;
             }
+            
             function renderCurrentPage() {
                 const start = (currentPage - 1) * productsPerPage;
                 const end = start + productsPerPage;
@@ -1322,6 +1444,7 @@
                 if(container) container.innerHTML = html;
                 renderPaginationControls();
             }
+            
             function renderPaginationControls() {
                 const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
                 if (totalPages <= 1) {
@@ -1363,6 +1486,7 @@
                     });
                 }
             }
+            
             function handleGlobalSearch() {
                 const searchInput = document.getElementById('globalSearchInput');
                 if(!searchInput) return;
@@ -1465,12 +1589,16 @@
                 updateLanguageUI();
                 updateHeroLanguage();
                 buildNavLinks();
-                showHomeView();
+                showHomeView(); // this will render the category grid (spinner then actual data)
                 loadCart();
                 attachEvents();
                 setTimeout(() => { reinitHeroSlider(); }, 100);
             }
+            
             async function loadDataFromGoogle() {
+                // Immediately show loading spinner in category grid
+                showCategoryLoadingSpinner();
+                
                 const API_URL = "https://script.google.com/macros/s/AKfycbw7-xTbFIWVCFX66EYwaVLaZw2TA_cosAMBK7xh2JtokQ8A0ljpwAqMtVtSGctRFk_I/exec";
                 try {
                     const response = await fetch(API_URL);
