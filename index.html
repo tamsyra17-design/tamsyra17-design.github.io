@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     
     <style>
-        /* ========== CSS রিসেট ও ভেরিয়েবল ========== */
+        /* ========== CSS Reset & Variables ========== */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         :root {
@@ -45,11 +45,11 @@
         body.rtl { direction: rtl; }
         body.ltr { direction: ltr; }
         
-        /* ========== হেডার ========== */
+        /* ========== Header ========== */
         .saaf-header { 
             background: rgba(255, 255, 255, 0.95); 
             backdrop-filter: blur(10px);
-            padding: 3px 5%; 
+            padding: 12px 5%; 
             display: flex; 
             align-items: center;
             justify-content: space-between; 
@@ -85,7 +85,7 @@
         
         .brand-name span { color: var(--saaf-gold); }
         
-        /* ========== সার্চ বক্স ========== */
+        /* ========== Search Box ========== */
         .search-wrapper { 
             flex: 1; 
             max-width: 500px; 
@@ -127,7 +127,7 @@
             font-family: inherit; 
         }
         
-        /* ========== হেডার অ্যাকশন ========== */
+        /* ========== Header Actions ========== */
         .header-actions { 
             display: flex; 
             align-items: center; 
@@ -174,7 +174,7 @@
         
         body.rtl .cart-badge { right: auto; left: -5px; }
 
-        /* ========== সাইড নেভিগেশন ========== */
+        /* ========== Side Navigation ========== */
         .side-nav-overlay {
             position: fixed; 
             top: 0; 
@@ -279,7 +279,7 @@
             color: var(--saaf-gold); 
         }
 
-        /* ========== হিরো সেকশন (Swiper স্লাইডার) ========== */
+        /* ========== Hero Section (Swiper Slider) ========== */
         .hero-saaf {
             background: linear-gradient(135deg, #eaf3f5 0%, #d1e6ec 100%);
             padding: 4rem 5%;
@@ -359,7 +359,7 @@
             box-shadow: 0 10px 20px rgba(192, 152, 88, 0.3); 
         }
         
-        /* Swiper নেভিগেশন বাটন */
+        /* Swiper Navigation Buttons */
         .swiper-button-next,
         .swiper-button-prev {
             color: var(--saaf-gold);
@@ -382,28 +382,24 @@
             color: white;
         }
         
-        /* LTR মোডে বাটন পজিশন ঠিক করা */
         body.ltr .swiper-button-next {
             right: 10px;
             left: auto;
         }
-        
         body.ltr .swiper-button-prev {
             left: 10px;
             right: auto;
         }
-        
         body.rtl .swiper-button-next {
             left: 10px;
             right: auto;
         }
-        
         body.rtl .swiper-button-prev {
             right: 10px;
             left: auto;
         }
         
-        /* পেজিনেশন ডটস */
+        /* Pagination dots */
         .swiper-pagination-bullet {
             background: var(--saaf-muted);
             opacity: 0.5;
@@ -418,7 +414,7 @@
             border-radius: 10px;
         }
         
-        /* স্লাইড অ্যানিমেশন */
+        /* Slide animations */
         .swiper-slide .hero-content,
         .swiper-slide .hero-image {
             opacity: 0;
@@ -432,21 +428,16 @@
             transform: translateY(0);
         }
         
-        .swiper-slide-active .hero-content {
-            transition-delay: 0.2s;
-        }
-        
-        .swiper-slide-active .hero-image {
-            transition-delay: 0.4s;
-        }
+        .swiper-slide-active .hero-content { transition-delay: 0.2s; }
+        .swiper-slide-active .hero-image { transition-delay: 0.4s; }
 
-        /* ========== ক্যাটাগরি ও প্রোডাক্ট গ্রিড ========== */
+        /* ========== Categories & Products Grid ========== */
         .category-grid-saaf, 
         .product-grid-saaf { 
             display: grid; 
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
             gap: 30px; 
-            padding: 0 5% 50px; 
+            padding: 0 5% 20px; 
         }
         
         .product-card-saaf, 
@@ -570,7 +561,7 @@
             cursor: not-allowed;
         }
 
-        /* ========== ক্যাটাগরি কার্ড ========== */
+        /* ========== Category Card ========== */
         .category-card-saaf {
             position: relative;
             cursor: pointer;
@@ -598,7 +589,7 @@
             margin-bottom: 5px;
         }
 
-        /* ========== কার্ট ড্রয়ার ========== */
+        /* ========== Cart Drawer ========== */
         .cart-overlay { 
             position: fixed; 
             top: 0; 
@@ -705,15 +696,6 @@
             margin-left: 0;
             margin-right: auto;
         }
-        .saaf-footer { background: #114a5c; color: #bbb; padding: 40px 5% 20px; margin-top: 40px; }
-        .footer-top { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 30px; margin-bottom: 30px; }
-        .footer-brand { font-family: 'Cormorant Garamond', serif; font-size: 2.0rem; color: white; }
-        .footer-links p { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
-        .footer-links i { color: var(--saaf-gold); }
-        .footer-links a { color: #bbb; text-decoration: none; transition: color 0.2s; }
-        .footer-links a:hover { color: white; }
-        .footer-bottom { text-align: center; border-top: 1px solid #333; padding-top: 20px; font-size: 0.85rem; 
-        }
         
         .empty-cart-msg {
             text-align: center;
@@ -724,8 +706,38 @@
         .section-title {
             font-family: 'Cormorant Garamond', serif;
         }
+        
+        /* Pagination controls */
+        #paginationControls {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 30px 0 50px;
+            flex-wrap: wrap;
+        }
+        
+        .page-btn {
+            padding: 8px 16px;
+            border-radius: 30px;
+            border: 1px solid var(--saaf-border);
+            background: white;
+            cursor: pointer;
+            font-family: inherit;
+            transition: var(--transition);
+        }
+        
+        .page-btn:hover:not(:disabled) {
+            background: var(--saaf-gold);
+            color: white;
+            border-color: var(--saaf-gold);
+        }
+        
+        .page-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
 
-        /* ========== রেসপন্সিভ ========== */
+        /* ========== Responsive ========== */
         @media (max-width: 768px) {
             .saaf-header { padding: 15px; }
             .brand-name { font-size: 2rem; }
@@ -777,10 +789,10 @@
         <div class="side-nav-links" id="dynamicNavLinks"></div>
     </div>
 
-    <!-- ========== হিরো সেকশন (Swiper স্লাইডার) ========== -->
+    <!-- Hero Slider -->
     <div class="hero-saaf swiper-container" id="heroSwiperContainer">
         <div class="swiper-wrapper">
-            <!-- স্লাইড ১ - পরিচিতি -->
+            <!-- Slide 1 - About -->
             <div class="swiper-slide">
                 <div class="hero-content">
                     <h2 id="heroTitle1" data-lang-ar="أنبذة تعريفية" data-lang-en="About Us">أنبذة تعريفية</h2>
@@ -790,14 +802,13 @@
                     </button>
                 </div>
                 <div class="hero-image">
-                    <img src="https://aleizom.com/heroImg1.png?auto=compress&cs=tinysrgb&w=600" alt="Traditional Omani" id="heroImg1">
+                    <img src="https://aleizom.com/heroImg1.png?auto=compress&cs=tinysrgb&w=600" alt="Traditional Omani">
                 </div>
             </div>
-            
-            <!-- স্লাইড ২ - গুণগত মান -->
+            <!-- Slide 2 - Quality -->
             <div class="swiper-slide">
                 <div class="hero-image">
-                    <img src="https://aleizom.com/1.jpeg?auto=compress&cs=tinysrgb&w=700" alt="Quality Products" id="heroImg2">
+                    <img src="https://aleizom.com/1.png?auto=compress&cs=tinysrgb&w=600" alt="Quality Products">
                 </div>
                 <div class="hero-content">
                     <h2 id="heroTitle2" data-lang-ar="جودة عالية" data-lang-en="Premium Quality">جودة عالية</h2>
@@ -807,8 +818,7 @@
                     </button>
                 </div>
             </div>
-            
-            <!-- স্লাইড ৩ - শিপিং -->
+            <!-- Slide 3 - Shipping -->
             <div class="swiper-slide">
                 <div class="hero-content">
                     <h2 id="heroTitle3" data-lang-ar="شحن سريع وآمن" data-lang-en="Fast & Secure Shipping">شحن سريع وآمن</h2>
@@ -818,16 +828,12 @@
                     </button>
                 </div>
                 <div class="hero-image">
-                    <img src="https://images.pexels.com/photos/4391470/pexels-photo-4391470.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Fast Delivery" id="heroImg3">
+                    <img src="https://images.pexels.com/photos/4391470/pexels-photo-4391470.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Fast Delivery">
                 </div>
             </div>
         </div>
-        
-        <!-- নেভিগেশন বাটন -->
         <div class="swiper-button-next"></div>
         <div class="swiper-button-prev"></div>
-        
-        <!-- পেজিনেশন ডটস -->
         <div class="swiper-pagination"></div>
     </div>
 
@@ -843,7 +849,6 @@
         
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 15px;">
             <h2 id="currentCategoryTitleDisplay" style="font-size: 2rem; color: var(--saaf-black);"></h2>
-            
             <div style="display: flex; align-items: center; gap: 10px;">
                 <label for="sortSelectSaaf" data-lang="sort" style="color: var(--saaf-muted);">ترتيب:</label>
                 <select id="sortSelectSaaf" style="padding: 8px 15px; border-radius: 20px; border: 1px solid var(--saaf-border); background: white; font-family: inherit;"></select>
@@ -859,11 +864,8 @@
     <div id="productModalSaaf" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); backdrop-filter: blur(5px); z-index: 2000; align-items: center; justify-content: center;">
         <div style="background: white; max-width: 500px; width: 90%; border-radius: 20px; padding: 25px; position: relative; max-height: 90vh; overflow-y: auto;">
             <button onclick="closeModalSaaf()" style="position: absolute; top: 15px; right: 15px; background: none; border: none; font-size: 24px; cursor: pointer; color: var(--saaf-muted);">&times;</button>
-            
             <img id="modalProductImgSaaf" style="width: 100%; height: 250px; object-fit: cover; border-radius: 12px; margin-bottom: 20px; cursor: zoom-in;" onclick="openZoomSaaf()" />
-            
             <h3 id="modalProductNameSaaf" style="font-size: 1.5rem; margin-bottom: 15px; color: var(--saaf-black);"></h3>
-            
             <div style="display: grid; gap: 10px; margin-bottom: 20px;">
                 <p><strong data-lang="category">الفئة:</strong> <span id="modalCategorySaaf"></span></p>
                 <p><strong data-lang="desc">الوصف:</strong> <span id="modalDescSaaf"></span></p>
@@ -871,7 +873,6 @@
                 <p><strong data-lang="status">الحالة:</strong> <span id="modalStatusSaaf"></span></p>
                 <p style="font-size: 1.5rem; font-weight: bold; color: var(--saaf-gold);"><span id="modalPriceSaaf"></span></p>
             </div>
-            
             <div style="display: flex; gap: 10px;">
                 <button id="modalAddToCartBtn" style="flex: 1; padding: 12px; background: var(--saaf-black); color: white; border: none; border-radius: 8px; cursor: pointer;">
                     <i class="fas fa-cart-plus"></i> <span data-lang="addToCart">أضف للسلة</span>
@@ -894,9 +895,7 @@
             <h3 id="cartTitle" style="font-size: 1.5rem;">سلة التسوق</h3>
             <button id="closeCartBtn" style="background: none; border: none; font-size: 24px; cursor: pointer; color: var(--saaf-muted);">&times;</button>
         </div>
-        
         <div id="cartItemsContainer" style="flex: 1; overflow-y: auto; padding: 20px;"></div>
-        
         <div style="padding: 20px; border-top: 1px solid var(--saaf-border);">
             <div class="cart-total" style="display: flex; justify-content: space-between; margin-bottom: 15px; font-size: 1.2rem; font-weight: bold;">
                 <span data-lang="cartTotal">المجموع</span>
@@ -908,11 +907,9 @@
         </div>
     </div>
 
-    <!-- Swiper JS -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-
     <script>
-        // সাইড প্যানেল টগল ফাংশন
+        // Side panel toggle
         function toggleNavPanel() {
             const panel = document.getElementById('sideNavPanel');
             const overlay = document.getElementById('sideNavOverlay');
@@ -923,7 +920,7 @@
         (function(){
             "use strict";
 
-            // ========== অনুবাদ ==========
+            // Translations
             const translations = {
                 en: {
                     heroTitle: 'About Us',
@@ -944,7 +941,6 @@
                     badgeNew: 'New',
                     badgeBestseller: 'Bestseller',
                     noProducts: 'No products found',
-                    copyright: '©2017 · Tamsirat Aleiz - Official website · All rights reserved.',
                     products: 'Products',
                     allCat: 'All',
                     sortDefault: 'Default',
@@ -984,7 +980,6 @@
                     badgeNew: 'جديد',
                     badgeBestseller: 'الأكثر مبيعاً',
                     noProducts: 'لا توجد منتجات',
-                    copyright: '© 2017 تمصيرة العز. جميع الحقوق محفوظة.',
                     products: 'منتجات',
                     allCat: 'الكل',
                     sortDefault: 'الافتراضي',
@@ -1013,142 +1008,77 @@
             let currentSearchTerm = '';
             let cartItems = [];
             let heroSwiper = null;
+            
+            // Pagination variables
+            let currentPage = 1;
+            const productsPerPage = 25;
+            let filteredProducts = [];
 
-            // ========== হিরো স্লাইডার রি-ইনিশিয়ালাইজ ফাংশন ==========
+            // Hero slider reinit
             function reinitHeroSlider() {
                 const isRTL = currentLang === 'ar';
                 const container = document.querySelector('.hero-saaf.swiper-container');
-                
                 if (heroSwiper) {
                     heroSwiper.destroy(true, true);
                     heroSwiper = null;
                 }
-                
                 if (container && typeof Swiper !== 'undefined') {
                     heroSwiper = new Swiper('.hero-saaf.swiper-container', {
                         loop: true,
-                        autoplay: {
-                            delay: 4000,
-                            disableOnInteraction: false,
-                        },
+                        autoplay: { delay: 4000, disableOnInteraction: false },
                         effect: 'slide',
                         speed: 800,
-                        navigation: {
-                            nextEl: '.swiper-button-next',
-                            prevEl: '.swiper-button-prev',
-                        },
-                        pagination: {
-                            el: '.swiper-pagination',
-                            clickable: true,
-                            dynamicBullets: true,
-                        },
+                        navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
+                        pagination: { el: '.swiper-pagination', clickable: true, dynamicBullets: true },
                         grabCursor: true,
                         touchRatio: 1,
-                        rtl: isRTL,  // RTL সাপোর্ট অন/অফ
+                        rtl: isRTL
                     });
                 }
             }
 
-            // ========== হিরো স্লাইডার ল্যাঙ্গুয়েজ আপডেট ফাংশন ==========
             function updateHeroLanguage() {
                 const t = translations[currentLang];
-                
-                // স্লাইড ১
-                const title1 = document.getElementById('heroTitle1');
-                const sub1 = document.getElementById('heroSub1');
-                const exploreBtn = document.getElementById('exploreBtn');
-                if(title1) title1.textContent = t.heroTitle;
-                if(sub1) sub1.textContent = t.heroSub;
-                if(exploreBtn) exploreBtn.textContent = t.explore;
-                
-                // স্লাইড ২
-                const title2 = document.getElementById('heroTitle2');
-                const sub2 = document.getElementById('heroSub2');
-                const shopBtn = document.getElementById('shopBtn');
-                if(title2) title2.textContent = t.slide2Title;
-                if(sub2) sub2.textContent = t.slide2Sub;
-                if(shopBtn) shopBtn.textContent = t.slide2Btn;
-                
-                // স্লাইড ৩
-                const title3 = document.getElementById('heroTitle3');
-                const sub3 = document.getElementById('heroSub3');
-                const orderBtn = document.getElementById('orderBtn');
-                if(title3) title3.textContent = t.slide3Title;
-                if(sub3) sub3.textContent = t.slide3Sub;
-                if(orderBtn) orderBtn.textContent = t.slide3Btn;
+                document.getElementById('heroTitle1').textContent = t.heroTitle;
+                document.getElementById('heroSub1').textContent = t.heroSub;
+                document.getElementById('exploreBtn').textContent = t.explore;
+                document.getElementById('heroTitle2').textContent = t.slide2Title;
+                document.getElementById('heroSub2').textContent = t.slide2Sub;
+                document.getElementById('shopBtn').textContent = t.slide2Btn;
+                document.getElementById('heroTitle3').textContent = t.slide3Title;
+                document.getElementById('heroSub3').textContent = t.slide3Sub;
+                document.getElementById('orderBtn').textContent = t.slide3Btn;
             }
 
-            // ========== কার্ট ফাংশন ==========
-            function saveCart() { 
-                localStorage.setItem('tamsirat_cart', JSON.stringify(cartItems)); 
-                updateCartBadge(); 
-                renderCartDrawer(); 
-            }
-            
-            function loadCart() { 
-                const saved = localStorage.getItem('tamsirat_cart'); 
-                cartItems = saved ? JSON.parse(saved) : []; 
-                updateCartBadge(); 
-                renderCartDrawer(); 
-            }
-            
-            function updateCartBadge() { 
-                const badge = document.getElementById('cartCountBadge'); 
-                if(badge) badge.innerText = cartItems.reduce((sum,i)=> sum + i.quantity, 0); 
-            }
-            
-            function showToast(msg, duration=1800) { 
-                const toast = document.getElementById('toastMsg'); 
-                if(toast) { 
-                    toast.innerText = msg; 
-                    toast.style.opacity = '1'; 
-                    setTimeout(()=> toast.style.opacity = '0', duration); 
-                } 
-            }
+            // Cart functions
+            function saveCart() { localStorage.setItem('tamsirat_cart', JSON.stringify(cartItems)); updateCartBadge(); renderCartDrawer(); }
+            function loadCart() { const saved = localStorage.getItem('tamsirat_cart'); cartItems = saved ? JSON.parse(saved) : []; updateCartBadge(); renderCartDrawer(); }
+            function updateCartBadge() { const badge = document.getElementById('cartCountBadge'); if(badge) badge.innerText = cartItems.reduce((sum,i)=> sum + i.quantity, 0); }
+            function showToast(msg, duration=1800) { const toast = document.getElementById('toastMsg'); if(toast) { toast.innerText = msg; toast.style.opacity = '1'; setTimeout(()=> toast.style.opacity = '0', duration); } }
 
             function addToCart(productId, qty=1) {
                 const product = masterData.find(p=> p.id === productId);
                 if(!product) return;
                 const isOutOfStock = product.status && (product.status.toLowerCase().includes('نفذ') || product.status === 'out of stock');
-                if(isOutOfStock) { 
-                    showToast(translations[currentLang].outOfStock, 1500); 
-                    return; 
-                }
+                if(isOutOfStock) { showToast(translations[currentLang].outOfStock, 1500); return; }
                 const existing = cartItems.find(i=> i.id === productId);
                 if(existing) existing.quantity += qty;
                 else {
                     const name = getLocalizedField(product, 'name_ar', 'name_en');
-                    cartItems.push({ 
-                        id: product.id, 
-                        name: name, 
-                        price: product.price, 
-                        quantity: qty, 
-                        image: product.image 
-                    });
+                    cartItems.push({ id: product.id, name: name, price: product.price, quantity: qty, image: product.image });
                 }
                 saveCart();
                 showToast(translations[currentLang].addedToast, 1200);
                 openCartDrawer();
             }
-
-            function removeCartItem(id) { 
-                cartItems = cartItems.filter(i=> i.id !== id); 
-                saveCart(); 
-                renderCartDrawer(); 
-            }
-            
+            function removeCartItem(id) { cartItems = cartItems.filter(i=> i.id !== id); saveCart(); renderCartDrawer(); }
             function updateQuantity(id, delta) {
                 const idx = cartItems.findIndex(i=> i.id === id);
                 if(idx === -1) return;
                 let newQ = cartItems[idx].quantity + delta;
                 if(newQ <= 0) removeCartItem(id);
-                else { 
-                    cartItems[idx].quantity = newQ; 
-                    saveCart(); 
-                    renderCartDrawer(); 
-                }
+                else { cartItems[idx].quantity = newQ; saveCart(); renderCartDrawer(); }
             }
-
             function renderCartDrawer() {
                 const container = document.getElementById('cartItemsContainer');
                 if(!container) return;
@@ -1160,8 +1090,7 @@
                 }
                 let total = 0, html = '';
                 cartItems.forEach(item => {
-                    const itemTotal = item.price * item.quantity; 
-                    total += itemTotal;
+                    const itemTotal = item.price * item.quantity; total += itemTotal;
                     html += `<div class="cart-item">
                         <img class="cart-item-img" src="${item.image}" alt="${item.name}">
                         <div class="cart-item-info">
@@ -1178,45 +1107,21 @@
                 });
                 container.innerHTML = html;
                 document.getElementById('cartTotalPrice').innerHTML = `OMR ${total.toFixed(3)}`;
-                
-                container.querySelectorAll('.cart-qty-btn').forEach(btn => btn.addEventListener('click', (e) => { 
-                    e.stopPropagation(); 
-                    updateQuantity(btn.dataset.id, parseInt(btn.dataset.delta)); 
-                }));
-                container.querySelectorAll('.remove-item').forEach(btn => btn.addEventListener('click', (e) => { 
-                    e.stopPropagation(); 
-                    removeCartItem(btn.dataset.id); 
-                }));
+                container.querySelectorAll('.cart-qty-btn').forEach(btn => btn.addEventListener('click', (e) => { e.stopPropagation(); updateQuantity(btn.dataset.id, parseInt(btn.dataset.delta)); }));
+                container.querySelectorAll('.remove-item').forEach(btn => btn.addEventListener('click', (e) => { e.stopPropagation(); removeCartItem(btn.dataset.id); }));
             }
-
-            function openCartDrawer() { 
-                document.getElementById('cartOverlay')?.classList.add('open'); 
-                document.getElementById('cartDrawer')?.classList.add('open'); 
-            }
-            
-            function closeCartDrawer() { 
-                document.getElementById('cartOverlay')?.classList.remove('open'); 
-                document.getElementById('cartDrawer')?.classList.remove('open'); 
-            }
-
+            function openCartDrawer() { document.getElementById('cartOverlay')?.classList.add('open'); document.getElementById('cartDrawer')?.classList.add('open'); }
+            function closeCartDrawer() { document.getElementById('cartOverlay')?.classList.remove('open'); document.getElementById('cartDrawer')?.classList.remove('open'); }
             function sendCartWhatsApp() {
-                if(!cartItems.length) { 
-                    showToast(translations[currentLang].emptyCart, 1500); 
-                    return; 
-                }
-                let msg = ''; 
-                let total = 0;
-                cartItems.forEach(i => { 
-                    total += i.price * i.quantity; 
-                    msg += `• ${i.name} × ${i.quantity} = ${(i.price*i.quantity).toFixed(3)} OMR\n`; 
-                });
+                if(!cartItems.length) { showToast(translations[currentLang].emptyCart, 1500); return; }
+                let msg = '', total = 0;
+                cartItems.forEach(i => { total += i.price * i.quantity; msg += `• ${i.name} × ${i.quantity} = ${(i.price*i.quantity).toFixed(3)} OMR\n`; });
                 msg += `\n${translations[currentLang].cartTotal}: ${total.toFixed(3)} OMR\n\n${currentLang === 'ar' ? 'أود تأكيد الطلب' : 'I want to confirm order'}`;
                 window.open(`https://api.whatsapp.com/send/?phone=96895149291&text=${encodeURIComponent(msg)}`, '_blank');
             }
-
             window.addToCartById = (id) => addToCart(id, 1);
 
-            // ========== হেল্পার ফাংশন ==========
+            // Helpers
             function setHtmlDirection() {
                 const dir = currentLang === 'ar' ? 'rtl' : 'ltr';
                 document.documentElement.setAttribute('dir', dir);
@@ -1224,129 +1129,78 @@
                 document.body.classList.remove('rtl', 'ltr');
                 document.body.classList.add(dir);
             }
-
             function updateSortOptions() {
                 const select = document.getElementById('sortSelectSaaf');
                 if (!select) return;
                 const t = translations[currentLang];
-                select.innerHTML = `
-                    <option value="default">${t.sortDefault}</option>
-                    <option value="price-asc">${t.sortPriceAsc}</option>
-                    <option value="price-desc">${t.sortPriceDesc}</option>
-                    <option value="name-asc">${t.sortNameAsc}</option>
-                `;
+                select.innerHTML = `<option value="default">${t.sortDefault}</option><option value="price-asc">${t.sortPriceAsc}</option><option value="price-desc">${t.sortPriceDesc}</option><option value="name-asc">${t.sortNameAsc}</option>`;
             }
-
             function getCategoryDisplayName(catAr, lang) {
                 if (lang === 'en') {
                     const sample = masterData.find(item => (item.category_ar || item.category) === catAr);
-                    if (sample && sample.category_en && sample.category_en.trim() !== '') {
-                        return sample.category_en;
-                    }
+                    if (sample && sample.category_en && sample.category_en.trim() !== '') return sample.category_en;
                 }
                 return catAr;
             }
-
             function getLocalizedField(item, fieldAr, fieldEn) {
-                if (currentLang === 'en' && item[fieldEn] && item[fieldEn].trim() !== '') {
-                    return item[fieldEn];
-                }
+                if (currentLang === 'en' && item[fieldEn] && item[fieldEn].trim() !== '') return item[fieldEn];
                 return item[fieldAr] || '';
             }
 
-            // ========== UI ফাংশন ==========
+            // UI Functions
             window.scrollToCategories = () => document.getElementById('categoryHomeView')?.scrollIntoView({behavior:'smooth'});
-            
-            window.closeModalSaaf = () => {
-                document.getElementById('productModalSaaf').style.display = 'none';
-            };
-            
-            window.openZoomSaaf = () => {
-                document.getElementById('zoomedImageSaaf').src = document.getElementById('modalProductImgSaaf').src;
-                document.getElementById('zoomLightboxSaaf').style.display = 'flex';
-            };
-            
-            window.closeZoomSaaf = (e) => { 
-                if(e) e.stopPropagation(); 
-                document.getElementById('zoomLightboxSaaf').style.display = 'none'; 
-            };
-            
+            window.closeModalSaaf = () => { document.getElementById('productModalSaaf').style.display = 'none'; };
+            window.openZoomSaaf = () => { document.getElementById('zoomedImageSaaf').src = document.getElementById('modalProductImgSaaf').src; document.getElementById('zoomLightboxSaaf').style.display = 'flex'; };
+            window.closeZoomSaaf = (e) => { if(e) e.stopPropagation(); document.getElementById('zoomLightboxSaaf').style.display = 'none'; };
             window.orderWhatsApp = (name, price) => {
                 const phone = "96895149291";
-                const msg = currentLang === 'ar' 
-                    ? `السلام عليكم، أرغب في شراء:\nالمنتج: ${name}\nالسعر: ${price} ريال عماني` 
-                    : `Hello, I'm interested in purchasing:\nItem: ${name}\nPrice: OMR ${price}`;
+                const msg = currentLang === 'ar' ? `السلام عليكم، أرغب في شراء:\nالمنتج: ${name}\nالسعر: ${price} ريال عماني` : `Hello, I'm interested in purchasing:\nItem: ${name}\nPrice: OMR ${price}`;
                 window.open(`https://api.whatsapp.com/send/?phone=${phone}&text=${encodeURIComponent(msg)}`, '_blank');
             };
-
             window.openCategoryView = function(catAr) {
                 currentCategory = catAr;
                 document.getElementById('categoryHomeView').style.display = 'none';
                 document.getElementById('productSectionView').style.display = 'block';
-                const displayTitle = currentCategory === 'all' 
-                    ? translations[currentLang].allCat 
-                    : getCategoryDisplayName(currentCategory, currentLang);
+                const displayTitle = currentCategory === 'all' ? translations[currentLang].allCat : getCategoryDisplayName(currentCategory, currentLang);
                 document.getElementById('currentCategoryTitleDisplay').textContent = displayTitle;
                 filterAndRenderProducts();
                 buildNavLinks();
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             };
-
             window.openModalSaaf = function(item) {
                 const t = translations[currentLang];
                 const name = getLocalizedField(item, 'name_ar', 'name_en');
                 const desc = getLocalizedField(item, 'description_ar', 'description_en');
                 const material = getLocalizedField(item, 'material_ar', 'material_en');
                 const category = getCategoryDisplayName(item.category_ar || item.category, currentLang);
-                
                 document.getElementById('modalProductNameSaaf').textContent = name;
                 document.getElementById('modalProductImgSaaf').src = item.image || '';
                 document.getElementById('modalCategorySaaf').textContent = category;
                 document.getElementById('modalDescSaaf').textContent = desc || '-';
                 document.getElementById('modalMaterialSaaf').textContent = material || '-';
-                
                 const priceNum = parseFloat(item.price);
                 document.getElementById('modalPriceSaaf').textContent = isNaN(priceNum) ? 'OMR 0.000' : `OMR ${priceNum.toFixed(3)}`;
-                
                 const out = item.status?.toLowerCase().includes('نفذ') || item.status === 'out of stock';
                 const statusEl = document.getElementById('modalStatusSaaf');
                 statusEl.textContent = out ? t.outOfStock : (item.status || t.inStock);
                 statusEl.style.color = out ? 'red' : 'green';
-                
                 const addBtn = document.getElementById('modalAddToCartBtn');
-                if(addBtn) addBtn.onclick = () => { 
-                    if(out) showToast(t.outOfStock); 
-                    else addToCart(item.id, 1); 
-                };
-                
+                if(addBtn) addBtn.onclick = () => { if(out) showToast(t.outOfStock); else addToCart(item.id, 1); };
                 const orderBtn = document.getElementById('modalOrderBtnSaaf');
-                if(orderBtn) orderBtn.onclick = () => {
-                    if(out) alert(currentLang === 'ar' ? 'عذراً، المنتج غير متوفر حالياً.' : 'Sorry, this item is out of stock.');
-                    else window.orderWhatsApp(name, priceNum.toFixed(3));
-                };
-                
+                if(orderBtn) orderBtn.onclick = () => { if(out) alert(currentLang === 'ar' ? 'عذراً، المنتج غير متوفر حالياً.' : 'Sorry, this item is out of stock.'); else window.orderWhatsApp(name, priceNum.toFixed(3)); };
                 document.getElementById('productModalSaaf').style.display = 'flex';
             };
-
             function buildNavLinks() {
                 const categoriesAr = [...new Set(masterData.map(item => item.category_ar || item.category).filter(Boolean))];
                 const nav = document.getElementById('dynamicNavLinks');
                 if(!nav) return;
                 const t = translations[currentLang];
-                
                 document.getElementById('navMenuTitle').innerText = currentLang === 'ar' ? 'القائمة' : 'Menu';
-                
-                let html = `<a href="#" class="${currentCategory === 'all' ? 'active' : ''}" data-cat="all">
-                    <i class="fas fa-store"></i> ${t.allCat}
-                </a>`;
-                
+                let html = `<a href="#" class="${currentCategory === 'all' ? 'active' : ''}" data-cat="all"><i class="fas fa-store"></i> ${t.allCat}</a>`;
                 categoriesAr.forEach(catAr => {
                     const displayCat = getCategoryDisplayName(catAr, currentLang);
-                    html += `<a href="#" class="${currentCategory === catAr ? 'active' : ''}" data-cat="${catAr}">
-                        <i class="fas fa-angle-${currentLang === 'ar' ? 'left' : 'right'}"></i> ${displayCat}
-                    </a>`;
+                    html += `<a href="#" class="${currentCategory === catAr ? 'active' : ''}" data-cat="${catAr}"><i class="fas fa-angle-${currentLang === 'ar' ? 'left' : 'right'}"></i> ${displayCat}</a>`;
                 });
-                
                 nav.innerHTML = html;
                 nav.querySelectorAll('a').forEach(link => {
                     link.addEventListener('click', (e) => {
@@ -1360,7 +1214,6 @@
                     });
                 });
             }
-
             function showHomeView() {
                 currentCategory = 'all';
                 document.getElementById('categoryHomeView').style.display = 'block';
@@ -1368,38 +1221,29 @@
                 renderCategoryGrid();
                 buildNavLinks();
             }
-
             function renderCategoryGrid() {
                 const t = translations[currentLang];
                 const catsAr = [...new Set(masterData.map(item => item.category_ar || item.category).filter(Boolean))];
                 const grid = document.getElementById('categoryGridContainer');
                 if(!grid) return;
-                
                 let html = '';
                 catsAr.forEach(catAr => {
                     const cover = masterData.find(p => (p.category_ar || p.category) === catAr);
                     if (!cover) return;
                     const count = masterData.filter(p => (p.category_ar || p.category) === catAr).length;
                     const displayCat = getCategoryDisplayName(catAr, currentLang);
-                    html += `
-                    <div class="category-card-saaf" onclick="window.openCategoryView('${catAr}')">
+                    html += `<div class="category-card-saaf" onclick="window.openCategoryView('${catAr}')">
                         <img src="${cover.image || ''}" alt="${displayCat}" loading="lazy">
-                        <div class="category-overlay-saaf">
-                            <h3>${displayCat}</h3>
-                            <p>${count} ${t.products}</p>
-                        </div>
+                        <div class="category-overlay-saaf"><h3>${displayCat}</h3><p>${count} ${t.products}</p></div>
                     </div>`;
                 });
                 grid.innerHTML = html;
             }
 
+            // Pagination core
             function filterAndRenderProducts() {
                 let filtered = masterData;
-                
-                if (currentCategory && currentCategory !== 'all') {
-                    filtered = filtered.filter(p => (p.category_ar || p.category) === currentCategory);
-                }
-                
+                if (currentCategory && currentCategory !== 'all') filtered = filtered.filter(p => (p.category_ar || p.category) === currentCategory);
                 if (currentSearchTerm) {
                     filtered = filtered.filter(p => {
                         const name = getLocalizedField(p, 'name_ar', 'name_en').toLowerCase();
@@ -1407,7 +1251,6 @@
                         return name.includes(currentSearchTerm) || cat.includes(currentSearchTerm);
                     });
                 }
-                
                 const sortSelect = document.getElementById('sortSelectSaaf');
                 if(sortSelect) {
                     const sort = sortSelect.value;
@@ -1421,28 +1264,29 @@
                         });
                     }
                 }
-
+                filteredProducts = filtered;
+                currentPage = 1;
+                renderCurrentPage();
+            }
+            function renderCurrentPage() {
+                const start = (currentPage - 1) * productsPerPage;
+                const end = start + productsPerPage;
+                const productsToShow = filteredProducts.slice(start, end);
                 const container = document.getElementById('productGridContainer');
                 const noMsg = document.getElementById('noProductsMessage');
                 const t = translations[currentLang];
-                
-                if (filtered.length === 0) {
+                if (productsToShow.length === 0 && filteredProducts.length === 0) {
                     if(container) container.innerHTML = '';
-                    if(noMsg) {
-                        noMsg.style.display = 'block';
-                        noMsg.textContent = t.noProducts;
-                    }
+                    if(noMsg) { noMsg.style.display = 'block'; noMsg.textContent = t.noProducts; }
+                    document.getElementById('paginationControls')?.remove();
                     return;
                 }
-                
                 if(noMsg) noMsg.style.display = 'none';
-                
                 let html = '';
-                filtered.forEach(item => {
+                productsToShow.forEach(item => {
                     const out = item.status?.toLowerCase().includes('نفذ') || item.status === 'out of stock';
                     const priceNum = parseFloat(item.price);
                     const priceFormatted = isNaN(priceNum) ? '0.000' : priceNum.toFixed(3);
-                    
                     let badge = item.badge;
                     if (currentLang === 'ar' && badge) {
                         if(badge === 'New') badge = t.badgeNew;
@@ -1453,13 +1297,10 @@
                         else if(badge === 'الأكثر مبيعاً') badge = t.badgeBestseller;
                         else if(badge === 'محدود') badge = t.limited;
                     }
-                    
                     const displayName = getLocalizedField(item, 'name_ar', 'name_en');
                     const escapedName = displayName.replace(/'/g, "\\'").replace(/"/g, '&quot;');
                     const itemStr = JSON.stringify(item).replace(/'/g, "&apos;").replace(/"/g, '&quot;');
-                    
-                    html += `
-                    <div class="product-card-saaf">
+                    html += `<div class="product-card-saaf">
                         <div class="product-img-saaf" onclick='window.openModalSaaf(${itemStr})'>
                             ${badge ? `<span class="badge-saaf">${badge}</span>` : ''}
                             <img src="${item.image || ''}" alt="${escapedName}" loading="lazy">
@@ -1479,21 +1320,60 @@
                     </div>`;
                 });
                 if(container) container.innerHTML = html;
+                renderPaginationControls();
             }
-
+            function renderPaginationControls() {
+                const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
+                if (totalPages <= 1) {
+                    document.getElementById('paginationControls')?.remove();
+                    return;
+                }
+                let controlsHtml = `<div id="paginationControls">`;
+                controlsHtml += `<button class="page-btn" data-page="prev" ${currentPage === 1 ? 'disabled' : ''}><i class="fas fa-chevron-${currentLang === 'ar' ? 'right' : 'left'}"></i> ${currentLang === 'ar' ? 'السابق' : 'Previous'}</button>`;
+                let startPage = Math.max(1, currentPage - 2);
+                let endPage = Math.min(totalPages, startPage + 4);
+                if (endPage - startPage < 4) startPage = Math.max(1, endPage - 4);
+                if (startPage > 1) {
+                    controlsHtml += `<button class="page-btn" data-page="1">1</button>`;
+                    if (startPage > 2) controlsHtml += `<span style="padding: 0 5px;">...</span>`;
+                }
+                for (let i = startPage; i <= endPage; i++) {
+                    controlsHtml += `<button class="page-btn" data-page="${i}" style="background: ${i === currentPage ? 'var(--saaf-gold)' : 'white'}; color: ${i === currentPage ? 'white' : 'var(--saaf-text)'};">${i}</button>`;
+                }
+                if (endPage < totalPages) {
+                    if (endPage < totalPages - 1) controlsHtml += `<span style="padding: 0 5px;">...</span>`;
+                    controlsHtml += `<button class="page-btn" data-page="${totalPages}">${totalPages}</button>`;
+                }
+                controlsHtml += `<button class="page-btn" data-page="next" ${currentPage === totalPages ? 'disabled' : ''}>${currentLang === 'ar' ? 'التالي' : 'Next'} <i class="fas fa-chevron-${currentLang === 'ar' ? 'left' : 'right'}"></i></button>`;
+                controlsHtml += `</div>`;
+                const oldControls = document.getElementById('paginationControls');
+                if (oldControls) oldControls.remove();
+                const productSection = document.getElementById('productSectionView');
+                if (productSection) {
+                    productSection.insertAdjacentHTML('beforeend', controlsHtml);
+                    document.querySelectorAll('.page-btn').forEach(btn => {
+                        btn.addEventListener('click', (e) => {
+                            const pageVal = btn.dataset.page;
+                            if (pageVal === 'prev') { if (currentPage > 1) currentPage--; }
+                            else if (pageVal === 'next') { if (currentPage < totalPages) currentPage++; }
+                            else { currentPage = parseInt(pageVal); }
+                            renderCurrentPage();
+                            window.scrollTo({ top: document.getElementById('productSectionView').offsetTop - 100, behavior: 'smooth' });
+                        });
+                    });
+                }
+            }
             function handleGlobalSearch() {
                 const searchInput = document.getElementById('globalSearchInput');
                 if(!searchInput) return;
                 const term = searchInput.value.trim().toLowerCase();
                 currentSearchTerm = term;
-                
-                if (document.getElementById('categoryHomeView').style.display === 'block' && term !== '') {
-                    window.openCategoryView('all');
-                } else {
-                    filterAndRenderProducts();
-                }
+                currentPage = 1;
+                if (document.getElementById('categoryHomeView').style.display === 'block' && term !== '') window.openCategoryView('all');
+                else filterAndRenderProducts();
             }
 
+            // Language toggle
             window.toggleLanguage = function() {
                 currentLang = currentLang === 'en' ? 'ar' : 'en';
                 setHtmlDirection();
@@ -1501,128 +1381,62 @@
                 updateSortOptions();
                 buildNavLinks();
                 updateHeroLanguage();
-                
-                // স্লাইডার রি-ইনিশিয়ালাইজ (RTL/LTR পরিবর্তনের জন্য)
-                setTimeout(() => {
-                    reinitHeroSlider();
-                }, 50);
-                
+                setTimeout(() => { reinitHeroSlider(); }, 50);
                 if (document.getElementById('productSectionView').style.display === 'block') {
-                    const displayTitle = currentCategory === 'all' 
-                        ? translations[currentLang].allCat 
-                        : getCategoryDisplayName(currentCategory, currentLang);
+                    const displayTitle = currentCategory === 'all' ? translations[currentLang].allCat : getCategoryDisplayName(currentCategory, currentLang);
                     document.getElementById('currentCategoryTitleDisplay').textContent = displayTitle;
                     filterAndRenderProducts();
-                } else {
-                    renderCategoryGrid();
-                }
+                } else { renderCategoryGrid(); }
                 renderCartDrawer();
             };
-
             function updateLanguageUI() {
                 const t = translations[currentLang];
                 document.querySelectorAll('[data-lang]').forEach(el => {
                     const key = el.dataset.lang;
                     if (t[key]) el.textContent = t[key];
                 });
-                
                 const searchInput = document.getElementById('globalSearchInput');
                 if(searchInput) {
-                    searchInput.placeholder = currentLang === 'ar' 
-                        ? 'ابحث عن مصار، كمه، خنجر...' 
-                        : 'Search for mussar, kumma, khanjar...';
+                    searchInput.placeholder = currentLang === 'ar' ? 'ابحث عن مصار، كمه، خنجر...' : 'Search for mussar, kumma, khanjar...';
                 }
-                
-                const cartTitle = document.getElementById('cartTitle');
-                if(cartTitle) cartTitle.innerText = t.cartTitle;
-                
-                const checkoutBtn = document.querySelector('#cartCheckoutBtn span');
-                if(checkoutBtn) checkoutBtn.innerText = t.checkoutWhatsApp;
-                
+                document.getElementById('cartTitle').innerText = t.cartTitle;
+                const checkoutSpan = document.querySelector('#cartCheckoutBtn span');
+                if(checkoutSpan) checkoutSpan.innerText = t.checkoutWhatsApp;
                 const totalLabel = document.querySelector('.cart-total span:first-child');
                 if(totalLabel) totalLabel.innerText = t.cartTotal;
-                
-                const modalAddBtn = document.getElementById('modalAddToCartBtn');
-                if(modalAddBtn) {
-                    const span = modalAddBtn.querySelector('span');
-                    if(span) span.innerText = t.addToCart;
-                }
-                
-                const modalOrderBtn = document.getElementById('modalOrderBtnSaaf');
-                if(modalOrderBtn) {
-                    const span = modalOrderBtn.querySelector('span');
-                    if(span) span.innerText = t.orderWhatsApp;
-                }
+                const modalAddSpan = document.querySelector('#modalAddToCartBtn span');
+                if(modalAddSpan) modalAddSpan.innerText = t.addToCart;
+                const modalOrderSpan = document.querySelector('#modalOrderBtnSaaf span');
+                if(modalOrderSpan) modalOrderSpan.innerText = t.orderWhatsApp;
             }
-
-            function debounce(fn, d) { 
-                let t; 
-                return (...a) => { 
-                    clearTimeout(t); 
-                    t = setTimeout(() => fn(...a), d); 
-                }; 
-            }
-
+            function debounce(fn, d) { let t; return (...a) => { clearTimeout(t); t = setTimeout(() => fn(...a), d); }; }
             function attachEvents() {
-                const langBtn = document.getElementById('langToggleBtn');
-                if(langBtn) langBtn.onclick = window.toggleLanguage;
-                
-                const backBtn = document.getElementById('backToCategoriesBtn');
-                if(backBtn) backBtn.onclick = (e) => { 
-                    e.preventDefault(); 
-                    showHomeView(); 
-                };
-                
-                const sortSelect = document.getElementById('sortSelectSaaf');
-                if(sortSelect) sortSelect.addEventListener('change', filterAndRenderProducts);
-                
-                const searchInput = document.getElementById('globalSearchInput');
-                if(searchInput) searchInput.addEventListener('input', debounce(handleGlobalSearch, 300));
-                
-                const cartIcon = document.getElementById('cartIconBtn');
-                if(cartIcon) cartIcon.addEventListener('click', openCartDrawer);
-                
-                const closeCart = document.getElementById('closeCartBtn');
-                if(closeCart) closeCart.addEventListener('click', closeCartDrawer);
-                
-                const cartOverlay = document.getElementById('cartOverlay');
-                if(cartOverlay) cartOverlay.addEventListener('click', closeCartDrawer);
-                
-                const checkoutBtn = document.getElementById('cartCheckoutBtn');
-                if(checkoutBtn) checkoutBtn.addEventListener('click', sendCartWhatsApp);
-                
-                window.addEventListener('click', (e) => {
-                    const modal = document.getElementById('productModalSaaf');
-                    if (e.target === modal) window.closeModalSaaf();
-                });
+                document.getElementById('langToggleBtn').onclick = window.toggleLanguage;
+                document.getElementById('backToCategoriesBtn').onclick = (e) => { e.preventDefault(); showHomeView(); };
+                document.getElementById('sortSelectSaaf').addEventListener('change', () => { currentPage = 1; filterAndRenderProducts(); });
+                document.getElementById('globalSearchInput').addEventListener('input', debounce(handleGlobalSearch, 300));
+                document.getElementById('cartIconBtn').addEventListener('click', openCartDrawer);
+                document.getElementById('closeCartBtn').addEventListener('click', closeCartDrawer);
+                document.getElementById('cartOverlay').addEventListener('click', closeCartDrawer);
+                document.getElementById('cartCheckoutBtn').addEventListener('click', sendCartWhatsApp);
+                window.addEventListener('click', (e) => { if (e.target === document.getElementById('productModalSaaf')) window.closeModalSaaf(); });
             }
 
-            // ========== ডেমো ডাটা ==========
+            // Demo data
             const DEMO_DATA = [
                 { id:"1", name_ar:"بشمينا vip", name_en:"Pasmina VIP", category_ar:"بشمينا vip", category_en:"Pasmina VIP", price:55, image:"https://images.pexels.com/photos/1485657/pexels-photo-1485657.jpeg?auto=compress&cs=tinysrgb&w=600", status:"in stock", badge:"New", description_ar:"بشمينا فاخرة", description_en:"Luxury Pasmina", material_ar:"كشمير", material_en:"Cashmere" },
                 { id:"2", name_ar:"بشمينا", name_en:"Pasmina", category_ar:"بشمينا", category_en:"Pasmina", price:11, image:"https://images.pexels.com/photos/994517/pexels-photo-994517.jpeg?auto=compress&cs=tinysrgb&w=600", status:"in stock", badge:"New", description_ar:"", description_en:"", material_ar:"", material_en:"" },
                 { id:"3", name_ar:"سوبر تورمة قلم كاري", name_en:"Super Turma Qalam Kari", category_ar:"سوبر تورمة قلم كاري", category_en:"Superturma kalam kari", price:33, image:"https://images.pexels.com/photos/1453008/pexels-photo-1453008.jpeg?auto=compress&cs=tinysrgb&w=600", status:"in stock", badge:"New", description_ar:"", description_en:"", material_ar:"", material_en:"" },
-                { id:"4", name_ar:"عطر", name_en:"Perfume", category_ar:"عطر", category_en:"Perfume", description_ar:"", description_en:"", material_ar:"", material_en:"", price:25, image:"https://images.pexels.com/photos/965989/pexels-photo-965989.jpeg?auto=compress&cs=tinysrgb&w=600", status:"in stock", badge:"" },
-                { id:"5", name_ar:"كمة عمانية", name_en:"Omani Kumma", category_ar:"الكمة", category_en:"Kumma", description_ar:"كمة عمانية أصيلة", description_en:"Authentic Omani Kumma", material_ar:"قطن", material_en:"Cotton", price:15, image:"https://images.pexels.com/photos/1453008/pexels-photo-1453008.jpeg?auto=compress&cs=tinysrgb&w=600", status:"in stock", badge:"Bestseller" }
+                { id:"4", name_ar:"عطر", name_en:"Perfume", category_ar:"عطر", category_en:"Perfume", price:25, image:"https://images.pexels.com/photos/965989/pexels-photo-965989.jpeg?auto=compress&cs=tinysrgb&w=600", status:"in stock", badge:"", description_ar:"", description_en:"", material_ar:"", material_en:"" },
+                { id:"5", name_ar:"كمة عمانية", name_en:"Omani Kumma", category_ar:"الكمة", category_en:"Kumma", price:15, image:"https://images.pexels.com/photos/1453008/pexels-photo-1453008.jpeg?auto=compress&cs=tinysrgb&w=600", status:"in stock", badge:"Bestseller", description_ar:"كمة عمانية أصيلة", description_en:"Authentic Omani Kumma", material_ar:"قطن", material_en:"Cotton" }
             ];
 
             function initializeStore(data) {
-                console.log("🚀 Initializing store with data:", data?.length, "items");
-                
+                let rawData = Array.isArray(data) && data.length ? data : DEMO_DATA;
+                rawData = rawData.filter(item => item.id && item.id.toString().trim() && item.name_ar && item.name_ar.toString().trim());
                 const appName = "Untitledspreadsheet-168153147";
                 const tableName = "Untitled spreadsheet";
                 const baseUrl = "https://www.appsheet.com/image/getimageurl";
-                
-                let rawData = Array.isArray(data) && data.length ? data : DEMO_DATA;
-                
-                rawData = rawData.filter(item => {
-                    if (!item.id || item.id.toString().trim() === '') return false;
-                    if (!item.name_ar || item.name_ar.toString().trim() === '') return false;
-                    return true;
-                });
-                
-                console.log("✅ Filtered data:", rawData.length, "items");
-                
                 masterData = rawData.map(item => {
                     let imgUrl = item.image ? String(item.image) : "";
                     if (imgUrl && !imgUrl.startsWith('http')) {
@@ -1630,10 +1444,9 @@
                     }
                     let price = parseFloat(String(item.price).replace(/[^0-9.]/g, ''));
                     if (isNaN(price)) price = 0;
-                    
                     return {
-                        id: String(item.id || `prod_${Date.now()}_${Math.random()}`),
-                        name_ar: item.name_ar || item.name || "",
+                        id: String(item.id),
+                        name_ar: item.name_ar || "",
                         name_en: item.name_en || "",
                         category_ar: item.category_ar || item.category || "",
                         category_en: item.category_en || "",
@@ -1647,9 +1460,6 @@
                         badge: item.badge || ""
                     };
                 });
-                
-                console.log("📦 masterData ready:", masterData.length, "products");
-                
                 setHtmlDirection();
                 updateSortOptions();
                 updateLanguageUI();
@@ -1658,48 +1468,22 @@
                 showHomeView();
                 loadCart();
                 attachEvents();
-                
-                setTimeout(() => {
-                    reinitHeroSlider();
-                }, 100);
+                setTimeout(() => { reinitHeroSlider(); }, 100);
             }
-
             async function loadDataFromGoogle() {
                 const API_URL = "https://script.google.com/macros/s/AKfycbw7-xTbFIWVCFX66EYwaVLaZw2TA_cosAMBK7xh2JtokQ8A0ljpwAqMtVtSGctRFk_I/exec";
-                
-                console.log("🌐 Fetching from API...");
-                
                 try {
-                    const response = await fetch(API_URL, { method: 'GET', redirect: 'follow' });
-                    console.log("📡 Response status:", response.status);
-                    
-                    if (!response.ok) throw new Error('Network response was not ok');
-                    
+                    const response = await fetch(API_URL);
+                    if (!response.ok) throw new Error();
                     const data = await response.json();
-                    console.log("📦 API data received:", data?.length, "items");
-                    
                     initializeStore(data);
                 } catch (error) {
-                    console.warn("⚠️ API Error, using demo data:", error.message);
+                    console.warn("Using demo data");
                     initializeStore(DEMO_DATA);
                 }
             }
-
             document.addEventListener('DOMContentLoaded', loadDataFromGoogle);
         })();
     </script>
-<footer class="saaf-footer">
-        <div class="footer-top">
-            <div class="footer-brand">تمصيرة العز</div>
-            <div class="footer-links">
-                <p><i class="fas fa-phone-alt"></i> <a href="tel:+96895149291" class="ltr-phone" style="direction:ltr;">+968 9514 9291</a></p>
-                <p><i class="fas fa-envelope"></i> <a href="mailto:admin@alezsaham.qzz.io">admin@aleizom.com</a></p>
-                <p><i class="fab fa-instagram"></i> <a href="https://www.instagram.com/omanitmsyra" target="_blank">@omanitmsyra</a></p>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p data-lang="copyright">© 2017 تمصيرة العز. جميع الحقوق محفوظة. مستوحى من سعف عمان.</p>
-        </div>
-    </footer>
-    </body>
+</body>
 </html>
