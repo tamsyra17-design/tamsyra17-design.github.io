@@ -311,10 +311,10 @@
             color: var(--saaf-gold); 
         }
 
-        /* ========== Hero Section (Swiper Slider) ========== */
+        /* ========== Hero Section (Swiper Slider) - HEIGHT REDUCED ========== */
         .hero-saaf {
             background: linear-gradient(135deg, #eaf3f5 0%, #d1e6ec 100%);
-            padding: 4rem 5%;
+            padding: 2rem 5%;
             margin-bottom: 3rem;
             position: relative;
             overflow: hidden;
@@ -325,7 +325,7 @@
             align-items: center;
             justify-content: space-between;
             flex-wrap: wrap;
-            gap: 30px;
+            gap: 20px;
         }
         
         .hero-content {
@@ -342,7 +342,7 @@
         
         .hero-image img {
             width: 100%;
-            max-width: 350px;
+            max-width: 250px;
             border-radius: 20px;
             box-shadow: 0 20px 40px rgba(0,0,0,0.15);
             transition: var(--transition);
@@ -351,22 +351,22 @@
         
         @keyframes floatImage {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-15px); }
+            50% { transform: translateY(-10px); }
         }
         
         .hero-content h2 { 
             font-family: 'Cormorant Garamond',serif,'Noto Kufi Arabic', serif; 
-            font-size: 3.5rem; 
+            font-size: 2.8rem; 
             font-weight: 700; 
             color: var(--saaf-black); 
-            margin-bottom: 1rem; 
+            margin-bottom: 0.8rem; 
         }
         
         .hero-content p {
             color: var(--saaf-black);
             font-size: clamp(0.9rem, 1.2vw, 1.2rem);
-            line-height: 1.8;
-            margin: 0 auto 1.8rem;
+            line-height: 1.7;
+            margin: 0 auto 1.2rem;
             text-align: center;
         }
         
@@ -374,8 +374,8 @@
             background: var(--saaf-black); 
             color: white; 
             border: none; 
-            padding: 15px 35px;
-            font-size: 1rem; 
+            padding: 12px 28px;
+            font-size: 0.95rem; 
             font-weight: 600; 
             border-radius: 40px; 
             cursor: pointer; 
@@ -970,10 +970,17 @@
             .saaf-header { padding: 15px; }
             .brand-name { font-size: 2rem; }
             .search-wrapper { order: 3; max-width: 100%; margin-top: 15px; }
-            .hero-saaf { padding: 3rem 5%; }
+            .hero-saaf { 
+                padding: 1.5rem 5%; 
+            }
             .swiper-slide { flex-direction: column; text-align: center; }
             .hero-content, .hero-image { max-width: 100%; }
-            .hero-image img { max-width: 250px; }
+            .hero-image img { 
+                max-width: 200px; 
+            }
+            .hero-content h2 {
+                font-size: 2.2rem;
+            }
             .swiper-button-next,
             .swiper-button-prev {
                 display: none;
