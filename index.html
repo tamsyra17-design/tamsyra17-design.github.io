@@ -713,6 +713,14 @@
             right: 8px;
         }
 
+        body.rtl .card-swiper-prev i,
+        body.rtl .card-swiper-next i,
+        body.rtl .modal-gallery-nav-prev i,
+        body.rtl .modal-gallery-nav-next i {
+            transform: scaleX(-1);
+            display: inline-block;
+        }
+
         .product-card-saaf:hover .card-swiper-next,
         .product-card-saaf:hover .card-swiper-prev,
         .modal-gallery-nav-next:hover,
@@ -1550,6 +1558,7 @@
             let heroSwiper = null;
             let modalGallerySwiper = null;
             let cardSwipers = [];
+            let productSlideState = {};
             let currentPage = 1;
             const productsPerPage = 25;
             let filteredProducts = [];
@@ -1887,7 +1896,23 @@
                 refs.footerCopyright.textContent = t.copyright;
             }
 
+            function saveProductSwiperState() {
+                const nextState = {};
+                cardSwipers.forEach(function (swiperInstance) {
+                    if (!swiperInstance || !swiperInstance.el) return;
+                    const productRoot = swiperInstance.el.closest('.product-img-saaf');
+                    if (!productRoot) return;
+                    const productCard = productRoot.closest('.product-card-saaf');
+                    if (!productCard) return;
+                    const productId = productCard.getAttribute('data-product-id');
+                    if (!productId) return;
+                    nextState[productId] = typeof swiperInstance.realIndex === 'number' ? swiperInstance.realIndex : 0;
+                });
+                productSlideState = nextState;
+            }
+
             function destroyAllCardSwipers() {
+                saveProductSwiperState();
                 cardSwipers.forEach(function (swiperInstance) {
                     if (swiperInstance && typeof swiperInstance.destroy === 'function') {
                         swiperInstance.destroy(true, true);
@@ -2219,12 +2244,15 @@
                     const images = getProductImages(item);
                     if (!swiperContainer || images.length <= 1) return;
 
+                    const savedIndex = Number.isInteger(productSlideState[item.id]) ? productSlideState[item.id] : 0;
+
                     try {
                         const cardSwiper = new Swiper(swiperContainer, {
                             slidesPerView: 1,
                             spaceBetween: 0,
                             loop: true,
                             speed: 400,
+                            initialSlide: savedIndex,
                             autoplay: {
                                 delay: 3000,
                                 disableOnInteraction: false,
@@ -2239,13 +2267,24 @@
                                 prevEl: swiperEl.querySelector('.card-swiper-prev')
                             },
                             observer: true,
-                            observeParents: true
+                            observeParents: true,
+                            on: {
+                                init: function () {
+                                    if (this.params.loop) {
+                                        this.slideToLoop(savedIndex, 0, false);
+                                    }
+                                },
+                                slideChange: function () {
+                                    productSlideState[item.id] = typeof this.realIndex === 'number' ? this.realIndex : 0;
+                                }
+                            }
                         });
 
                         if (cardSwiper.autoplay && !cardSwiper.autoplay.running) {
                             cardSwiper.autoplay.start();
                         }
 
+                        productSlideState[item.id] = savedIndex;
                         cardSwipers.push(cardSwiper);
                     } catch (error) {
                         console.error('Card swiper init error:', error);
@@ -2354,6 +2393,7 @@
             }
 
             function toggleLanguage() {
+                saveProductSwiperState();
                 currentLang = currentLang === 'en' ? 'ar' : 'en';
                 updateLanguageUI();
                 updateSortOptions();
