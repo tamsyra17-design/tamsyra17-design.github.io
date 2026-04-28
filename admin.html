@@ -1,31 +1,1441 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="bn" dir="ltr">
 <head>
-    <meta charset="UTF-8">
-    <title>ফুল স্ক্রিন iframe</title>
-    <style>
-        /* ব্রাউজারের পুরো জায়গা নিতে */
-        html, body {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden; /* নিজস্ব স্ক্রল বন্ধ */
-        }
-        iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-            display: block;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel | Tamsirat Aleiz</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Kufi+Arabic:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f4f7f8;
+      --panel: #ffffff;
+      --text: #17212b;
+      --muted: #6b7280;
+      --line: #e5e7eb;
+      --gold: #c09858;
+      --teal: #006d6f;
+      --danger: #dc2626;
+      --green: #16a34a;
+      --shadow: 0 18px 45px rgba(15, 23, 42, 0.08);
+      --radius: 18px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, 'Noto Kufi Arabic', system-ui, sans-serif;
+      min-height: 100vh;
+    }
+
+    button, input, textarea, select { font: inherit; }
+
+    .wrap {
+      width: min(1180px, calc(100% - 28px));
+      margin: 0 auto;
+      padding: 24px 0 60px;
+    }
+
+    .topbar {
+      background: linear-gradient(135deg, var(--teal), #0b8790);
+      color: #fff;
+      padding: 24px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .brand h1 {
+      margin: 0;
+      font-size: clamp(1.35rem, 2.5vw, 2rem);
+      line-height: 1.1;
+    }
+
+    .brand p {
+      margin: 8px 0 0;
+      color: rgba(255,255,255,0.78);
+    }
+
+    .toolbar {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .btn {
+      border: 0;
+      border-radius: 999px;
+      padding: 10px 16px;
+      cursor: pointer;
+      font-weight: 700;
+      transition: 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      white-space: nowrap;
+    }
+
+    .btn:hover { transform: translateY(-1px); }
+    .btn:disabled { opacity: 0.55; cursor: not-allowed; transform: none; }
+    .btn-primary { background: var(--gold); color: #fff; }
+    .btn-white { background: #fff; color: var(--teal); }
+    .btn-muted { background: #eef2f7; color: var(--text); }
+    .btn-danger { background: var(--danger); color: #fff; }
+    .btn-green { background: var(--green); color: #fff; }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 18px;
+      margin-top: 18px;
+    }
+
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .panel-head {
+      padding: 18px 20px;
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .panel-head h2 {
+      margin: 0;
+      font-size: 1.15rem;
+    }
+
+    .panel-body { padding: 20px; }
+
+    .login-card {
+      max-width: 460px;
+      margin: 70px auto;
+    }
+
+    .field { display: grid; gap: 7px; }
+
+    .field label {
+      color: var(--muted);
+      font-size: 0.88rem;
+      font-weight: 700;
+    }
+
+    .input, .select, .textarea {
+      width: 100%;
+      border: 1px solid var(--line);
+      background: #fff;
+      border-radius: 14px;
+      padding: 12px 13px;
+      outline: none;
+      transition: 0.2s ease;
+    }
+
+    .textarea { min-height: 90px; resize: vertical; }
+
+    .input:focus, .select:focus, .textarea:focus {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 4px rgba(192, 152, 88, 0.12);
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .span-2 { grid-column: span 2; }
+
+    .filters {
+      display: grid;
+      grid-template-columns: 1fr 220px 170px;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 920px;
+    }
+
+    th, td {
+      text-align: left;
+      border-bottom: 1px solid var(--line);
+      padding: 12px 14px;
+      vertical-align: middle;
+      font-size: 0.92rem;
+    }
+
+    th {
+      color: var(--muted);
+      background: #fafafa;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    tr:hover td { background: #fffaf1; }
+
+    .thumb {
+      width: 54px;
+      height: 54px;
+      object-fit: cover;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      background: #f8fafc;
+    }
+
+
+    .image-preview-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(74px, 1fr));
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .image-preview-grid img,
+    .image-preview-placeholder {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      background: #f8fafc;
+    }
+
+    .image-preview-placeholder {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      font-size: 0.78rem;
+      text-align: center;
+      padding: 8px;
+    }
+
+
+    .upload-panel {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      padding: 12px;
+      border: 1px dashed #cbd5e1;
+      border-radius: 16px;
+      background: #f8fafc;
+    }
+
+    .upload-panel .input { flex: 1; min-width: 240px; }
+
+    .bulk-modal-card { width: min(1120px, 100%); }
+
+    .bulk-common-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-bottom: 16px;
+      padding: 14px;
+      background: #f8fafc;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+    }
+
+    .bulk-actions {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin: 14px 0;
+    }
+
+    .bulk-rows { display: grid; gap: 14px; }
+
+    .bulk-row {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: #fff;
+      overflow: hidden;
+    }
+
+    .bulk-row-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 12px 14px;
+      background: #fffaf1;
+      border-bottom: 1px solid var(--line);
+      font-weight: 800;
+    }
+
+    .bulk-row-grid {
+      display: grid;
+      grid-template-columns: 110px 1fr 1fr 130px;
+      gap: 12px;
+      padding: 14px;
+    }
+
+    .bulk-full { grid-column: 1 / -1; }
+    .bulk-row .textarea { min-height: 56px; }
+
+    .mini-preview-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(54px, 1fr));
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .mini-preview-grid img,
+    .mini-preview-placeholder {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      border-radius: 10px;
+      border: 1px solid var(--line);
+      background: #f8fafc;
+    }
+
+    .mini-preview-placeholder {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      font-size: 0.72rem;
+      text-align: center;
+      padding: 6px;
+    }
+
+    .badge {
+      display: inline-flex;
+      padding: 5px 10px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 800;
+      background: #eef2ff;
+      color: #3730a3;
+    }
+
+    .badge.in { background: #dcfce7; color: #166534; }
+    .badge.out { background: #fee2e2; color: #991b1b; }
+    .badge.limited { background: #fef3c7; color: #92400e; }
+
+    .row-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .small-btn {
+      border: 1px solid var(--line);
+      background: #fff;
+      border-radius: 10px;
+      padding: 8px 10px;
+      cursor: pointer;
+      font-weight: 800;
+    }
+
+    .small-btn:hover { border-color: var(--gold); color: var(--gold); }
+    .small-btn.danger:hover { border-color: var(--danger); color: var(--danger); }
+
+    .empty {
+      text-align: center;
+      padding: 36px 20px;
+      color: var(--muted);
+    }
+
+    .notice {
+      border-radius: 14px;
+      padding: 12px 14px;
+      background: #eff6ff;
+      color: #1d4ed8;
+      margin-bottom: 14px;
+      display: none;
+    }
+
+    .notice.error { background: #fef2f2; color: #b91c1c; }
+    .notice.success { background: #f0fdf4; color: #15803d; }
+
+    .hidden { display: none !important; }
+
+    .help {
+      color: var(--muted);
+      font-size: 0.82rem;
+      margin-top: 6px;
+      line-height: 1.5;
+    }
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.5);
+      backdrop-filter: blur(4px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+      z-index: 50;
+    }
+
+    .modal.open { display: flex; }
+
+    .modal-card {
+      width: min(860px, 100%);
+      max-height: 92vh;
+      overflow-y: auto;
+      background: #fff;
+      border-radius: 22px;
+      box-shadow: 0 28px 70px rgba(15, 23, 42, 0.25);
+    }
+
+    .modal-card .panel-head {
+      position: sticky;
+      top: 0;
+      background: #fff;
+      z-index: 2;
+    }
+
+    .rtl-input { direction: rtl; font-family: 'Noto Kufi Arabic', Inter, sans-serif; }
+
+    @media (max-width: 760px) {
+      .form-grid, .filters { grid-template-columns: 1fr; }
+      .span-2 { grid-column: auto; }
+      .topbar { align-items: flex-start; }
+      .toolbar { width: 100%; }
+      .toolbar .btn { flex: 1; }
+      .bulk-common-grid, .bulk-row-grid { grid-template-columns: 1fr; }
+      .upload-panel .input { min-width: 100%; }
+    }
+  </style>
 </head>
 <body>
-    <!-- src-এ আপনার কাঙ্ক্ষিত URL বসান -->
-    <iframe 
-        src="https://script.google.com/macros/s/AKfycbw7-xTbFIWVCFX66EYwaVLaZw2TA_cosAMBK7xh2JtokQ8A0ljpwAqMtVtSGctRFk_I/exec?admin=1" 
-        title="পূর্ণ পর্দা কন্টেন্ট"
-        allowfullscreen>
-    </iframe>
+  <main class="wrap">
+    <section id="loginView" class="login-card panel">
+      <div class="panel-head">
+        <div>
+          <h2>Admin Login</h2>
+          <p style="margin:6px 0 0;color:var(--muted);">পণ্য যোগ, সম্পাদনা ও ডিলিট করার জন্য লগইন করুন।</p>
+        </div>
+      </div>
+      <div class="panel-body">
+        <div id="loginNotice" class="notice"></div>
+        <div class="field">
+          <label for="passwordInput">Admin Password</label>
+          <input id="passwordInput" class="input" type="password" placeholder="আপনার admin password লিখুন" autocomplete="current-password">
+        </div>
+        <button id="loginBtn" class="btn btn-primary" type="button" style="width:100%;margin-top:14px;">Login</button>
+        <p class="help">প্রথমবার ব্যবহার করার আগে Code.gs ফাইলে <b>ADMIN_PASSWORD_FALLBACK</b> পরিবর্তন করুন, অথবা Script Property <b>ADMIN_PASSWORD</b> সেট করুন।</p>
+      </div>
+    </section>
+
+    <section id="adminView" class="hidden">
+      <header class="topbar">
+        <div class="brand">
+          <h1>تمصيرة العز Admin Panel</h1>
+          <p>Google Sheet পণ্য ব্যবস্থাপনা — Add, Edit, Delete, Search</p>
+        </div>
+        <div class="toolbar">
+          <button id="newProductBtn" class="btn btn-white" type="button">+ নতুন পণ্য</button>
+          <button id="bulkAddBtn" class="btn btn-white" type="button">+ একই ধরনের একাধিক পণ্য</button>
+          <button id="refreshBtn" class="btn btn-primary" type="button">Refresh</button>
+          <button id="logoutBtn" class="btn btn-muted" type="button">Logout</button>
+        </div>
+      </header>
+
+      <div class="grid">
+        <section class="panel">
+          <div class="panel-head">
+            <h2>পণ্য তালিকা</h2>
+            <span id="countText" style="color:var(--muted);font-weight:700;"></span>
+          </div>
+          <div class="panel-body">
+            <div id="mainNotice" class="notice"></div>
+            <div class="filters">
+              <input id="searchInput" class="input" type="search" placeholder="নাম, ID, ফিল্টার...">
+              <select id="categoryFilter" class="select">
+                <option value="">সব ক্যাটাগরি</option>
+              </select>
+              <select id="statusFilter" class="select">
+                <option value="">সব স্ট্যাটাস</option>
+                <option value="in">Available / متوفر</option>
+                <option value="limited">Limited / محدود</option>
+                <option value="out">Out of stock / نفذ</option>
+              </select>
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Image</th>
+                  <th>ID</th>
+                  <th>Name</th>
+                  <th>Category</th>
+                  <th>Price</th>
+                  <th>Status</th>
+                  <th>Badge</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="itemsTbody"></tbody>
+            </table>
+            <div id="emptyState" class="empty hidden">কোনো পণ্য পাওয়া যায়নি।</div>
+          </div>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <div id="editorModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="editorTitle">
+    <div class="modal-card">
+      <div class="panel-head">
+        <h2 id="editorTitle">নতুন পণ্য</h2>
+        <button id="closeEditorBtn" class="btn btn-muted" type="button">Close</button>
+      </div>
+      <div class="panel-body">
+        <div id="editorNotice" class="notice"></div>
+        <form id="productForm" class="form-grid">
+          <input type="hidden" id="rowNumber" name="rowNumber">
+
+          <div class="field">
+            <label for="id">ID *</label>
+            <input id="id" name="id" class="input" type="text" required>
+          </div>
+
+          <div class="field">
+            <label for="price">Price / OMR *</label>
+            <input id="price" name="price" class="input" type="number" min="0" step="0.001" required>
+          </div>
+
+          <div class="field">
+            <label for="name_ar">Arabic Name *</label>
+            <input id="name_ar" name="name_ar" class="input rtl-input" type="text" dir="rtl" placeholder="اسم المنتج">
+          </div>
+
+          <div class="field">
+            <label for="name_en">English Name</label>
+            <input id="name_en" name="name_en" class="input" type="text" placeholder="Product name">
+          </div>
+
+          <div class="field">
+            <label for="category_ar">Arabic Category *</label>
+            <input id="category_ar" name="category_ar" class="input rtl-input" type="text" dir="rtl" placeholder="الفئة">
+          </div>
+
+          <div class="field">
+            <label for="category_en">English Category</label>
+            <input id="category_en" name="category_en" class="input" type="text" placeholder="Category">
+          </div>
+
+          <div class="field span-2">
+            <label for="description_ar">Arabic Description</label>
+            <textarea id="description_ar" name="description_ar" class="textarea rtl-input" dir="rtl" placeholder="وصف المنتج"></textarea>
+          </div>
+
+          <div class="field span-2">
+            <label for="description_en">English Description</label>
+            <textarea id="description_en" name="description_en" class="textarea" placeholder="Product description"></textarea>
+          </div>
+
+          <div class="field">
+            <label for="material_ar">Arabic Material</label>
+            <input id="material_ar" name="material_ar" class="input rtl-input" type="text" dir="rtl" placeholder="الخامة">
+          </div>
+
+          <div class="field">
+            <label for="material_en">English Material</label>
+            <input id="material_en" name="material_en" class="input" type="text" placeholder="Material">
+          </div>
+
+          <div class="field">
+            <label for="status">Status</label>
+            <select id="status" name="status" class="select">
+              <option value="متوفر">متوفر / Available</option>
+              <option value="محدود">محدود / Limited</option>
+              <option value="نفذ من المخزون">نفذ من المخزون / Out of stock</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="badge">Badge</label>
+            <input id="badge" name="badge" class="input" type="text" placeholder="New / Bestseller / جديد">
+          </div>
+
+          <div class="field span-2">
+            <label for="images">Images URLs / AppSheet paths / Uploaded links</label>
+            <textarea id="images" name="images" class="textarea" placeholder="https://example.com/1.jpg, Untitled spreadsheet_Images/8788.image.191622.jpg"></textarea>
+            <div class="help">একাধিক ছবি কমা দিয়ে আলাদা করুন। Direct URL, AppSheet path, অথবা নিচের upload button দিয়ে phone/computer storage থেকে ছবি আপলোড করতে পারবেন।</div>
+          </div>
+
+          <div class="field span-2">
+            <label for="imageUploadInput">Upload images from storage</label>
+            <div class="upload-panel">
+              <input id="imageUploadInput" class="input" type="file" accept="image/*" multiple>
+              <button id="uploadImagesBtn" class="btn btn-primary" type="button">Upload selected images</button>
+            </div>
+            <div class="help">ছবি AppSheet image folder-এ save হবে এবং path যেমন Untitled spreadsheet_Images/product.image....jpg স্বয়ংক্রিয়ভাবে Images box-এ যোগ হবে। একবারে সর্বোচ্চ 12টি, প্রতি ছবি 6MB-এর কম রাখুন।</div>
+          </div>
+
+          <div class="field span-2">
+            <label for="image">Main Image</label>
+            <input id="image" name="image" class="input" type="text" placeholder="প্রথম ছবির URL; খালি থাকলে Images-এর প্রথম URL নেওয়া হবে">
+          </div>
+
+          <div class="field span-2">
+            <label>Image Preview</label>
+            <div id="imagePreviewGrid" class="image-preview-grid">
+              <div class="image-preview-placeholder">No image</div>
+            </div>
+            <div class="help">AppSheet paths such as <b>Untitled spreadsheet_Images/8788.image.191622.jpg</b> will preview here.</div>
+          </div>
+
+
+          <div class="span-2" style="display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap;margin-top:6px;">
+            <button id="deleteFromEditorBtn" class="btn btn-danger hidden" type="button">Delete</button>
+            <button class="btn btn-muted" type="button" id="resetFormBtn">Reset</button>
+            <button class="btn btn-green" type="submit" id="saveBtn">Save Product</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+
+  <div id="bulkModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="bulkTitle">
+    <div class="modal-card bulk-modal-card">
+      <div class="panel-head">
+        <div>
+          <h2 id="bulkTitle">একই ধরনের একাধিক পণ্য যোগ করুন</h2>
+          <p style="margin:6px 0 0;color:var(--muted);">একই category/type, material, status দিয়ে অনেক item একসাথে sheet-এ add হবে।</p>
+        </div>
+        <button id="closeBulkBtn" class="btn btn-muted" type="button">Close</button>
+      </div>
+      <div class="panel-body">
+        <div id="bulkNotice" class="notice"></div>
+        <form id="bulkForm">
+          <h3 style="margin:0 0 10px;">Common type/category info</h3>
+          <div class="bulk-common-grid">
+            <div class="field">
+              <label for="bulkCategoryAr">Arabic Category *</label>
+              <input id="bulkCategoryAr" class="input rtl-input" type="text" dir="rtl" placeholder="الفئة">
+            </div>
+            <div class="field">
+              <label for="bulkCategoryEn">English Category</label>
+              <input id="bulkCategoryEn" class="input" type="text" placeholder="Category">
+            </div>
+            <div class="field">
+              <label for="bulkStatus">Status</label>
+              <select id="bulkStatus" class="select">
+                <option value="متوفر">متوفر / Available</option>
+                <option value="محدود">محدود / Limited</option>
+                <option value="نفذ من المخزون">نفذ من المخزون / Out of stock</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="bulkMaterialAr">Arabic Material</label>
+              <input id="bulkMaterialAr" class="input rtl-input" type="text" dir="rtl" placeholder="الخامة">
+            </div>
+            <div class="field">
+              <label for="bulkMaterialEn">English Material</label>
+              <input id="bulkMaterialEn" class="input" type="text" placeholder="Material">
+            </div>
+            <div class="field">
+              <label for="bulkBadge">Badge</label>
+              <input id="bulkBadge" class="input" type="text" placeholder="New / Bestseller / جديد">
+            </div>
+          </div>
+
+          <div class="bulk-actions">
+            <div style="display:flex;gap:10px;flex-wrap:wrap;">
+              <button id="addBulkRowBtn" class="btn btn-muted" type="button">+ Add row</button>
+              <button id="bulkFillIdsBtn" class="btn btn-muted" type="button">Auto-fill IDs</button>
+            </div>
+            <button id="bulkSaveBtn" class="btn btn-green" type="submit">Save all items</button>
+          </div>
+
+          <div id="bulkRows" class="bulk-rows"></div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const state = {
+      password: sessionStorage.getItem('admin_password') || '',
+      items: [],
+      filtered: [],
+      editing: null,
+      bulkRowCounter: 0
+    };
+
+    const $ = (id) => document.getElementById(id);
+
+    // When this file is hosted on GitHub Pages, google.script.run is not available.
+    // This URL is used as the Apps Script backend for login, product save/delete, bulk add, and image upload.
+    // Keep this as the /exec deployment URL, not the /dev URL.
+    const APPS_SCRIPT_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbw7-xTbFIWVCFX66EYwaVLaZw2TA_cosAMBK7xh2JtokQ8A0ljpwAqMtVtSGctRFk_I/exec';
+    const BRIDGE_MESSAGE_TYPE = 'TAMSIRAT_ADMIN_RESPONSE';
+    const BRIDGE_TIMEOUT_MS = 120000;
+    const pendingBridgeRequests = new Map();
+
+    window.addEventListener('message', (event) => {
+      const data = event.data;
+      if (!data || data.type !== BRIDGE_MESSAGE_TYPE || !data.requestId) return;
+
+      const pending = pendingBridgeRequests.get(data.requestId);
+      if (!pending) return;
+
+      pendingBridgeRequests.delete(data.requestId);
+      window.clearTimeout(pending.timer);
+      pending.cleanup();
+
+      if (data.ok) {
+        pending.resolve(data.result);
+      } else {
+        pending.reject(new Error(data.error || 'Apps Script request failed.'));
+      }
+    });
+
+    function appendHiddenField(form, name, value) {
+      const input = document.createElement('input');
+      input.type = 'hidden';
+      input.name = name;
+      input.value = value;
+      form.appendChild(input);
+    }
+
+    function runServerViaIframeBridge(method, args) {
+      return new Promise((resolve, reject) => {
+        if (!APPS_SCRIPT_WEB_APP_URL || APPS_SCRIPT_WEB_APP_URL.includes('YOUR_DEPLOYMENT_ID')) {
+          reject(new Error('APPS_SCRIPT_WEB_APP_URL সেট করা হয়নি। Admin.html-এর script section-এ /exec URL দিন।'));
+          return;
+        }
+
+        const requestId = 'req_' + Date.now() + '_' + Math.random().toString(36).slice(2);
+        const iframeName = 'admin_bridge_' + requestId;
+        const iframe = document.createElement('iframe');
+        iframe.name = iframeName;
+        iframe.style.display = 'none';
+        iframe.setAttribute('title', 'Admin API bridge');
+
+        const form = document.createElement('form');
+        form.method = 'POST';
+        form.action = APPS_SCRIPT_WEB_APP_URL;
+        form.target = iframeName;
+        form.style.display = 'none';
+        form.acceptCharset = 'UTF-8';
+
+        appendHiddenField(form, 'method', method);
+        appendHiddenField(form, 'requestId', requestId);
+        appendHiddenField(form, 'payload', JSON.stringify({ args }));
+
+        const cleanup = () => {
+          form.remove();
+          window.setTimeout(() => iframe.remove(), 50);
+        };
+
+        const timer = window.setTimeout(() => {
+          pendingBridgeRequests.delete(requestId);
+          cleanup();
+          reject(new Error('Apps Script response পাওয়া যায়নি। Deployment setting Execute as: Me এবং Who has access: Anyone আছে কিনা দেখুন।'));
+        }, BRIDGE_TIMEOUT_MS);
+
+        pendingBridgeRequests.set(requestId, { resolve, reject, cleanup, timer });
+        document.body.appendChild(iframe);
+        document.body.appendChild(form);
+        form.submit();
+      });
+    }
+
+
+    const APPSHEET_CONFIG = {
+      appName: 'Untitledspreadsheet-168153147',
+      tableName: 'Untitled spreadsheet',
+      baseUrl: 'https://www.appsheet.com/image/getimageurl',
+      appVersion: '1.000005',
+      signature: '0d8b1dc9710c0ee701c0f177f7806c4565cd7916e512d6577e52fcf3658928d7'
+    };
+
+    function processImageUrl(filename) {
+      if (!filename) return '';
+      const str = String(filename).trim();
+      if (!str) return '';
+      if (/^(https?:)?\/\//i.test(str) || /^data:/i.test(str)) return str;
+      return `${APPSHEET_CONFIG.baseUrl}?appName=${encodeURIComponent(APPSHEET_CONFIG.appName)}&tableName=${encodeURIComponent(APPSHEET_CONFIG.tableName)}&fileName=${encodeURIComponent(str)}&appVersion=${encodeURIComponent(APPSHEET_CONFIG.appVersion)}&signature=${encodeURIComponent(APPSHEET_CONFIG.signature)}`;
+    }
+
+    function splitImageList(value) {
+      if (Array.isArray(value)) return value.map((url) => String(url || '').trim()).filter(Boolean);
+      return String(value || '').split(/[\n,]+/).map((url) => url.trim()).filter(Boolean);
+    }
+
+    const refs = {
+      loginView: $('loginView'),
+      adminView: $('adminView'),
+      passwordInput: $('passwordInput'),
+      loginBtn: $('loginBtn'),
+      loginNotice: $('loginNotice'),
+      mainNotice: $('mainNotice'),
+      editorNotice: $('editorNotice'),
+      itemsTbody: $('itemsTbody'),
+      emptyState: $('emptyState'),
+      countText: $('countText'),
+      searchInput: $('searchInput'),
+      categoryFilter: $('categoryFilter'),
+      statusFilter: $('statusFilter'),
+      newProductBtn: $('newProductBtn'),
+      bulkAddBtn: $('bulkAddBtn'),
+      refreshBtn: $('refreshBtn'),
+      logoutBtn: $('logoutBtn'),
+      editorModal: $('editorModal'),
+      closeEditorBtn: $('closeEditorBtn'),
+      editorTitle: $('editorTitle'),
+      productForm: $('productForm'),
+      resetFormBtn: $('resetFormBtn'),
+      deleteFromEditorBtn: $('deleteFromEditorBtn'),
+      saveBtn: $('saveBtn'),
+      imageUploadInput: $('imageUploadInput'),
+      uploadImagesBtn: $('uploadImagesBtn'),
+      bulkModal: $('bulkModal'),
+      closeBulkBtn: $('closeBulkBtn'),
+      bulkForm: $('bulkForm'),
+      bulkRows: $('bulkRows'),
+      bulkNotice: $('bulkNotice'),
+      addBulkRowBtn: $('addBulkRowBtn'),
+      bulkFillIdsBtn: $('bulkFillIdsBtn'),
+      bulkSaveBtn: $('bulkSaveBtn')
+    };
+
+    function escapeHtml(value) {
+      return String(value ?? '').replace(/[&<>'"]/g, (char) => ({
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#39;'
+      })[char]);
+    }
+
+    function showNotice(el, message, type = 'success') {
+      el.className = 'notice ' + type;
+      el.textContent = message;
+      el.style.display = 'block';
+      if (type !== 'error') {
+        window.setTimeout(() => { el.style.display = 'none'; }, 2200);
+      }
+    }
+
+    function setBusy(button, busy, text) {
+      if (!button) return;
+      if (busy) {
+        button.dataset.oldText = button.textContent;
+        button.textContent = text || 'Loading...';
+        button.disabled = true;
+      } else {
+        button.textContent = button.dataset.oldText || button.textContent;
+        button.disabled = false;
+      }
+    }
+
+    function runServer(method, ...args) {
+      if (window.google && google.script && google.script.run) {
+        return new Promise((resolve, reject) => {
+          google.script.run
+            .withSuccessHandler(resolve)
+            .withFailureHandler(reject)[method](...args);
+        });
+      }
+
+      return runServerViaIframeBridge(method, args);
+    }
+
+    function normalizeStatus(status) {
+      const value = String(status || '').trim().toLowerCase();
+      if (value.includes('نفذ') || value.includes('out of stock') || value.includes('sold out') || value === 'false' || value === '0') return 'out';
+      if (value.includes('limited') || value.includes('محدود')) return 'limited';
+      return 'in';
+    }
+
+    function getItemImages(item) {
+      const images = splitImageList(item.images);
+      if (!images.length && item.image) images.push(String(item.image).trim());
+      return images.map(processImageUrl).filter(Boolean);
+    }
+
+    function firstImage(item) {
+      return getItemImages(item)[0] || '';
+    }
+
+    function renderImagePreview() {
+      const preview = document.getElementById('imagePreviewGrid');
+      if (!preview) return;
+      const imageInput = document.getElementById('image');
+      const imagesInput = document.getElementById('images');
+      const item = {
+        image: imageInput ? imageInput.value : '',
+        images: imagesInput ? imagesInput.value : ''
+      };
+      const images = getItemImages(item);
+      if (!images.length) {
+        preview.innerHTML = '<div class="image-preview-placeholder">No image</div>';
+        return;
+      }
+      preview.innerHTML = images.map((url) => `<img src="${escapeHtml(url)}" alt="" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('div'), {className: 'image-preview-placeholder', textContent: 'Image failed'}))">`).join('');
+    }
+
+
+    const MAX_UPLOAD_FILES_CLIENT = 12;
+    const MAX_UPLOAD_BYTES_CLIENT = 6 * 1024 * 1024;
+
+    function fileToDataUrl(file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = () => reject(new Error('Could not read file: ' + file.name));
+        reader.readAsDataURL(file);
+      });
+    }
+
+    async function uploadFilesFromInput(fileInput, button, noticeEl, productId) {
+      const files = Array.from(fileInput && fileInput.files ? fileInput.files : []);
+      if (!files.length) {
+        showNotice(noticeEl, 'আগে ছবি select করুন।', 'error');
+        return [];
+      }
+      if (files.length > MAX_UPLOAD_FILES_CLIENT) {
+        showNotice(noticeEl, `একবারে সর্বোচ্চ ${MAX_UPLOAD_FILES_CLIENT}টি ছবি upload করুন।`, 'error');
+        return [];
+      }
+      for (const file of files) {
+        if (!file.type || !file.type.startsWith('image/')) {
+          showNotice(noticeEl, 'শুধু image file upload করা যাবে: ' + file.name, 'error');
+          return [];
+        }
+        if (file.size > MAX_UPLOAD_BYTES_CLIENT) {
+          showNotice(noticeEl, `${file.name} বড় হয়ে গেছে। প্রতি ছবি 6MB-এর কম রাখুন।`, 'error');
+          return [];
+        }
+      }
+
+      setBusy(button, true, 'Uploading...');
+      try {
+        const payload = [];
+        for (const file of files) {
+          payload.push({
+            name: file.name,
+            mimeType: file.type,
+            size: file.size,
+            data: await fileToDataUrl(file)
+          });
+        }
+        const response = await runServer('uploadAdminImages', state.password, payload, productId || 'product');
+        const urls = (response.files || []).map((file) => file.path || file.appSheetPath || file.url).filter(Boolean);
+        fileInput.value = '';
+        showNotice(noticeEl, `${urls.length}টি ছবি upload হয়েছে।`, 'success');
+        return urls;
+      } catch (error) {
+        showNotice(noticeEl, error.message || String(error), 'error');
+        return [];
+      } finally {
+        setBusy(button, false);
+      }
+    }
+
+    function appendUrlsToTextarea(textarea, urls) {
+      if (!textarea || !urls || !urls.length) return;
+      const existing = splitImageList(textarea.value);
+      textarea.value = [...existing, ...urls].join(', ');
+    }
+
+    function syncMainImageFromImages() {
+      const imageInput = document.getElementById('image');
+      const imagesInput = document.getElementById('images');
+      if (!imageInput || !imagesInput || imageInput.value.trim()) return;
+      const first = splitImageList(imagesInput.value)[0] || '';
+      imageInput.value = first;
+    }
+
+    async function handleEditorImageUpload() {
+      const urls = await uploadFilesFromInput(refs.imageUploadInput, refs.uploadImagesBtn, refs.editorNotice, document.getElementById('id').value || 'product');
+      if (!urls.length) return;
+      const imagesInput = document.getElementById('images');
+      appendUrlsToTextarea(imagesInput, urls);
+      syncMainImageFromImages();
+      renderImagePreview();
+    }
+
+    function renderMiniPreview(row) {
+      const preview = row.querySelector('[data-bulk-preview]');
+      const imagesField = row.querySelector('[data-bulk-field="images"]');
+      if (!preview || !imagesField) return;
+      const images = splitImageList(imagesField.value).map(processImageUrl).filter(Boolean);
+      if (!images.length) {
+        preview.innerHTML = '<div class="mini-preview-placeholder">No image</div>';
+        return;
+      }
+      preview.innerHTML = images.map((url) => `<img src="${escapeHtml(url)}" alt="" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('div'), {className: 'mini-preview-placeholder', textContent: 'Failed'}))">`).join('');
+    }
+
+    function createBulkRow(item = {}) {
+      state.bulkRowCounter += 1;
+      const rowNo = state.bulkRowCounter;
+      const row = document.createElement('div');
+      row.className = 'bulk-row';
+      row.dataset.bulkRow = String(rowNo);
+      row.innerHTML = `
+        <div class="bulk-row-head">
+          <span>Item row #${rowNo}</span>
+          <button class="small-btn danger" type="button" data-bulk-action="remove">Remove</button>
+        </div>
+        <div class="bulk-row-grid">
+          <div class="field">
+            <label>ID</label>
+            <input class="input" type="text" data-bulk-field="id" value="${escapeHtml(item.id || '')}" placeholder="Auto">
+          </div>
+          <div class="field">
+            <label>Arabic Name *</label>
+            <input class="input rtl-input" type="text" dir="rtl" data-bulk-field="name_ar" value="${escapeHtml(item.name_ar || '')}" placeholder="اسم المنتج">
+          </div>
+          <div class="field">
+            <label>English Name</label>
+            <input class="input" type="text" data-bulk-field="name_en" value="${escapeHtml(item.name_en || '')}" placeholder="Product name">
+          </div>
+          <div class="field">
+            <label>Price *</label>
+            <input class="input" type="number" min="0" step="0.001" data-bulk-field="price" value="${escapeHtml(item.price || '')}" placeholder="0.000">
+          </div>
+          <div class="field bulk-full">
+            <label>Arabic Description</label>
+            <textarea class="textarea rtl-input" dir="rtl" data-bulk-field="description_ar" placeholder="وصف المنتج">${escapeHtml(item.description_ar || '')}</textarea>
+          </div>
+          <div class="field bulk-full">
+            <label>English Description</label>
+            <textarea class="textarea" data-bulk-field="description_en" placeholder="Product description">${escapeHtml(item.description_en || '')}</textarea>
+          </div>
+          <div class="field bulk-full">
+            <label>Images for this item</label>
+            <textarea class="textarea" data-bulk-field="images" placeholder="Upload below, or paste URLs / AppSheet paths">${escapeHtml(item.images || '')}</textarea>
+            <div class="upload-panel" style="margin-top:8px;">
+              <input class="input" type="file" accept="image/*" multiple data-bulk-upload-input>
+              <button class="btn btn-primary" type="button" data-bulk-action="upload">Upload to this row</button>
+            </div>
+            <div class="help">এই row-এর জন্য একাধিক ছবি select করে upload করুন।</div>
+            <div class="mini-preview-grid" data-bulk-preview></div>
+          </div>
+        </div>
+      `;
+      refs.bulkRows.appendChild(row);
+      renderMiniPreview(row);
+      return row;
+    }
+
+    function openBulkModal() {
+      refs.bulkNotice.style.display = 'none';
+      refs.bulkForm.reset();
+      document.getElementById('bulkStatus').value = 'متوفر';
+      refs.bulkRows.innerHTML = '';
+      state.bulkRowCounter = 0;
+      createBulkRow();
+      createBulkRow();
+      createBulkRow();
+      refs.bulkModal.classList.add('open');
+      fillBulkIds();
+    }
+
+    function closeBulkModal() {
+      refs.bulkModal.classList.remove('open');
+    }
+
+    function getBulkCommon() {
+      return {
+        category_ar: document.getElementById('bulkCategoryAr').value.trim(),
+        category_en: document.getElementById('bulkCategoryEn').value.trim(),
+        material_ar: document.getElementById('bulkMaterialAr').value.trim(),
+        material_en: document.getElementById('bulkMaterialEn').value.trim(),
+        status: document.getElementById('bulkStatus').value.trim() || 'متوفر',
+        badge: document.getElementById('bulkBadge').value.trim()
+      };
+    }
+
+    function getBulkRows() {
+      return Array.from(refs.bulkRows.querySelectorAll('.bulk-row'));
+    }
+
+    function bulkRowToItem(row, common) {
+      const item = { ...common };
+      row.querySelectorAll('[data-bulk-field]').forEach((field) => {
+        item[field.dataset.bulkField] = String(field.value || '').trim();
+      });
+      const first = splitImageList(item.images)[0] || '';
+      item.image = first;
+      return item;
+    }
+
+    async function fillBulkIds() {
+      const rows = getBulkRows();
+      const emptyIdInputs = rows.map((row) => row.querySelector('[data-bulk-field="id"]')).filter((input) => input && !input.value.trim());
+      if (!emptyIdInputs.length) return;
+      setBusy(refs.bulkFillIdsBtn, true, 'Loading IDs...');
+      try {
+        const ids = await runServer('getNextProductIds', state.password, emptyIdInputs.length);
+        emptyIdInputs.forEach((input, index) => { input.value = ids[index] || ''; });
+      } catch (error) {
+        showNotice(refs.bulkNotice, error.message || String(error), 'error');
+      } finally {
+        setBusy(refs.bulkFillIdsBtn, false);
+      }
+    }
+
+    async function uploadForBulkRow(row, button) {
+      const input = row.querySelector('[data-bulk-upload-input]');
+      const idInput = row.querySelector('[data-bulk-field="id"]');
+      const urls = await uploadFilesFromInput(input, button, refs.bulkNotice, idInput && idInput.value ? idInput.value : 'bulk');
+      if (!urls.length) return;
+      const textarea = row.querySelector('[data-bulk-field="images"]');
+      appendUrlsToTextarea(textarea, urls);
+      renderMiniPreview(row);
+    }
+
+    async function saveBulkItems(event) {
+      event.preventDefault();
+      const common = getBulkCommon();
+      if (!common.category_ar && !common.category_en) {
+        showNotice(refs.bulkNotice, 'Common category দিতে হবে।', 'error');
+        return;
+      }
+
+      const items = getBulkRows().map((row) => bulkRowToItem(row, common)).filter((item) => {
+        return item.name_ar || item.name_en || item.price || item.images;
+      });
+
+      if (!items.length) {
+        showNotice(refs.bulkNotice, 'কমপক্ষে একটি item row পূরণ করুন।', 'error');
+        return;
+      }
+
+      for (let i = 0; i < items.length; i += 1) {
+        const item = items[i];
+        if (!item.name_ar && !item.name_en) {
+          showNotice(refs.bulkNotice, `Row ${i + 1}: Arabic অথবা English নাম দিতে হবে।`, 'error');
+          return;
+        }
+        if (!item.price) {
+          showNotice(refs.bulkNotice, `Row ${i + 1}: price দিতে হবে।`, 'error');
+          return;
+        }
+      }
+
+      setBusy(refs.bulkSaveBtn, true, 'Saving...');
+      try {
+        const response = await runServer('saveAdminItems', state.password, items);
+        showNotice(refs.bulkNotice, `${response.count || items.length}টি পণ্য সেভ হয়েছে।`, 'success');
+        await loadItems();
+        window.setTimeout(closeBulkModal, 900);
+      } catch (error) {
+        showNotice(refs.bulkNotice, error.message || String(error), 'error');
+      } finally {
+        setBusy(refs.bulkSaveBtn, false);
+      }
+    }
+
+    function displayName(item) {
+      return item.name_ar || item.name_en || '-';
+    }
+
+    function displayCategory(item) {
+      return item.category_ar || item.category_en || '-';
+    }
+
+    async function login() {
+      const password = refs.passwordInput.value.trim() || state.password;
+      if (!password) {
+        showNotice(refs.loginNotice, 'Password লিখুন।', 'error');
+        return;
+      }
+
+      setBusy(refs.loginBtn, true, 'Checking...');
+      try {
+        await runServer('adminLogin', password);
+        state.password = password;
+        sessionStorage.setItem('admin_password', password);
+        refs.loginView.classList.add('hidden');
+        refs.adminView.classList.remove('hidden');
+        await loadItems();
+      } catch (error) {
+        showNotice(refs.loginNotice, error.message || String(error), 'error');
+      } finally {
+        setBusy(refs.loginBtn, false);
+      }
+    }
+
+    async function loadItems() {
+      setBusy(refs.refreshBtn, true, 'Loading...');
+      try {
+        const response = await runServer('getAdminItems', state.password);
+        state.items = response.items || [];
+        buildCategoryFilter();
+        applyFilters();
+      } catch (error) {
+        showNotice(refs.mainNotice, error.message || String(error), 'error');
+      } finally {
+        setBusy(refs.refreshBtn, false);
+      }
+    }
+
+    function buildCategoryFilter() {
+      const current = refs.categoryFilter.value;
+      const categories = [...new Set(state.items.map(displayCategory).filter(Boolean))].sort();
+      refs.categoryFilter.innerHTML = '<option value="">সব ক্যাটাগরি</option>' + categories.map((cat) => `<option value="${escapeHtml(cat)}">${escapeHtml(cat)}</option>`).join('');
+      refs.categoryFilter.value = categories.includes(current) ? current : '';
+    }
+
+    function applyFilters() {
+      const q = refs.searchInput.value.trim().toLowerCase();
+      const cat = refs.categoryFilter.value;
+      const status = refs.statusFilter.value;
+
+      state.filtered = state.items.filter((item) => {
+        const haystack = [item.id, item.name_ar, item.name_en, item.category_ar, item.category_en, item.price, item.status, item.badge].join(' ').toLowerCase();
+        const matchQ = !q || haystack.includes(q);
+        const matchCat = !cat || displayCategory(item) === cat;
+        const matchStatus = !status || normalizeStatus(item.status) === status;
+        return matchQ && matchCat && matchStatus;
+      });
+
+      renderTable();
+    }
+
+    function renderTable() {
+      refs.countText.textContent = `${state.filtered.length} / ${state.items.length} products`;
+
+      if (!state.filtered.length) {
+        refs.itemsTbody.innerHTML = '';
+        refs.emptyState.classList.remove('hidden');
+        return;
+      }
+
+      refs.emptyState.classList.add('hidden');
+      refs.itemsTbody.innerHTML = state.filtered.map((item) => {
+        const img = firstImage(item);
+        const status = normalizeStatus(item.status);
+        const statusText = status === 'out' ? 'Out' : status === 'limited' ? 'Limited' : 'Available';
+        return `
+          <tr>
+            <td>${img ? `<img class="thumb" src="${escapeHtml(img)}" alt="" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('div'), {className: 'thumb'}))">` : '<div class="thumb"></div>'}</td>
+            <td><b>${escapeHtml(item.id)}</b></td>
+            <td>${escapeHtml(displayName(item))}<br><small style="color:var(--muted);">${escapeHtml(item.name_en || '')}</small></td>
+            <td>${escapeHtml(displayCategory(item))}</td>
+            <td><b>OMR ${Number(item.price || 0).toFixed(3)}</b></td>
+            <td><span class="badge ${status}">${escapeHtml(statusText)}</span></td>
+            <td>${escapeHtml(item.badge || '')}</td>
+            <td>
+              <div class="row-actions">
+                <button class="small-btn" type="button" data-action="edit" data-row="${item.rowNumber}">Edit</button>
+                <button class="small-btn danger" type="button" data-action="delete" data-row="${item.rowNumber}" data-id="${escapeHtml(item.id)}">Delete</button>
+              </div>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    function formToItem() {
+      const formData = new FormData(refs.productForm);
+      const item = {};
+      for (const [key, value] of formData.entries()) {
+        item[key] = String(value || '').trim();
+      }
+      return item;
+    }
+
+    function fillForm(item) {
+      const fields = ['rowNumber', 'id', 'name_ar', 'name_en', 'category_ar', 'category_en', 'description_ar', 'description_en', 'material_ar', 'material_en', 'price', 'image', 'images', 'status', 'badge'];
+      fields.forEach((field) => {
+        const input = document.getElementById(field);
+        if (input) input.value = item && item[field] ? item[field] : '';
+      });
+      if (!document.getElementById('status').value) document.getElementById('status').value = 'متوفر';
+      renderImagePreview();
+    }
+
+    async function openNewEditor() {
+      state.editing = null;
+      refs.editorTitle.textContent = 'নতুন পণ্য';
+      fillForm({ status: 'متوفر' });
+      refs.deleteFromEditorBtn.classList.add('hidden');
+      refs.editorNotice.style.display = 'none';
+      refs.editorModal.classList.add('open');
+
+      try {
+        const nextId = await runServer('getNextProductId', state.password);
+        document.getElementById('id').value = nextId;
+      } catch (error) {
+        console.warn(error);
+      }
+    }
+
+    function openEditEditor(rowNumber) {
+      const item = state.items.find((entry) => Number(entry.rowNumber) === Number(rowNumber));
+      if (!item) return;
+      state.editing = item;
+      refs.editorTitle.textContent = `Edit Product #${item.id}`;
+      fillForm(item);
+      refs.deleteFromEditorBtn.classList.remove('hidden');
+      refs.editorNotice.style.display = 'none';
+      refs.editorModal.classList.add('open');
+    }
+
+    function closeEditor() {
+      refs.editorModal.classList.remove('open');
+      state.editing = null;
+    }
+
+    async function saveProduct(event) {
+      event.preventDefault();
+      const item = formToItem();
+      if (!item.name_ar && !item.name_en) {
+        showNotice(refs.editorNotice, 'Arabic অথবা English নাম দিতে হবে।', 'error');
+        return;
+      }
+      if (!item.category_ar && !item.category_en) {
+        showNotice(refs.editorNotice, 'Arabic অথবা English ক্যাটাগরি দিতে হবে।', 'error');
+        return;
+      }
+
+      setBusy(refs.saveBtn, true, 'Saving...');
+      try {
+        await runServer('saveAdminItem', state.password, item);
+        showNotice(refs.editorNotice, 'পণ্য সেভ হয়েছে।', 'success');
+        await loadItems();
+        window.setTimeout(closeEditor, 700);
+      } catch (error) {
+        showNotice(refs.editorNotice, error.message || String(error), 'error');
+      } finally {
+        setBusy(refs.saveBtn, false);
+      }
+    }
+
+    async function deleteProduct(rowNumber, id) {
+      const ok = window.confirm(`Product ${id || ''} ডিলিট করতে চান?`);
+      if (!ok) return;
+
+      try {
+        await runServer('deleteAdminItem', state.password, rowNumber, id);
+        showNotice(refs.mainNotice, 'পণ্য ডিলিট হয়েছে।', 'success');
+        closeEditor();
+        await loadItems();
+      } catch (error) {
+        showNotice(refs.mainNotice, error.message || String(error), 'error');
+      }
+    }
+
+    function logout() {
+      state.password = '';
+      sessionStorage.removeItem('admin_password');
+      refs.passwordInput.value = '';
+      refs.adminView.classList.add('hidden');
+      refs.loginView.classList.remove('hidden');
+    }
+
+    function bindEvents() {
+      refs.loginBtn.addEventListener('click', login);
+      refs.passwordInput.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter') login();
+      });
+      refs.refreshBtn.addEventListener('click', loadItems);
+      refs.newProductBtn.addEventListener('click', openNewEditor);
+      refs.bulkAddBtn.addEventListener('click', openBulkModal);
+      refs.logoutBtn.addEventListener('click', logout);
+      refs.closeEditorBtn.addEventListener('click', closeEditor);
+      refs.productForm.addEventListener('submit', saveProduct);
+      refs.uploadImagesBtn.addEventListener('click', handleEditorImageUpload);
+      refs.resetFormBtn.addEventListener('click', () => fillForm(state.editing || { status: 'متوفر' }));
+      refs.searchInput.addEventListener('input', applyFilters);
+      refs.categoryFilter.addEventListener('change', applyFilters);
+      refs.statusFilter.addEventListener('change', applyFilters);
+      document.getElementById('images').addEventListener('input', renderImagePreview);
+      document.getElementById('image').addEventListener('input', renderImagePreview);
+      refs.closeBulkBtn.addEventListener('click', closeBulkModal);
+      refs.addBulkRowBtn.addEventListener('click', () => createBulkRow());
+      refs.bulkFillIdsBtn.addEventListener('click', fillBulkIds);
+      refs.bulkForm.addEventListener('submit', saveBulkItems);
+
+      refs.bulkRows.addEventListener('click', (event) => {
+        const button = event.target.closest('[data-bulk-action]');
+        if (!button) return;
+        const row = button.closest('.bulk-row');
+        const action = button.getAttribute('data-bulk-action');
+        if (action === 'remove' && row) {
+          row.remove();
+          return;
+        }
+        if (action === 'upload' && row) uploadForBulkRow(row, button);
+      });
+
+      refs.bulkRows.addEventListener('input', (event) => {
+        if (!event.target.matches('[data-bulk-field="images"]')) return;
+        const row = event.target.closest('.bulk-row');
+        if (row) renderMiniPreview(row);
+      });
+
+      refs.itemsTbody.addEventListener('click', (event) => {
+        const button = event.target.closest('[data-action]');
+        if (!button) return;
+        const action = button.getAttribute('data-action');
+        const row = button.getAttribute('data-row');
+        const id = button.getAttribute('data-id');
+        if (action === 'edit') openEditEditor(row);
+        if (action === 'delete') deleteProduct(row, id);
+      });
+
+      refs.deleteFromEditorBtn.addEventListener('click', () => {
+        const item = formToItem();
+        deleteProduct(item.rowNumber, item.id);
+      });
+
+      refs.editorModal.addEventListener('click', (event) => {
+        if (event.target === refs.editorModal) closeEditor();
+      });
+
+      refs.bulkModal.addEventListener('click', (event) => {
+        if (event.target === refs.bulkModal) closeBulkModal();
+      });
+
+      document.addEventListener('keydown', (event) => {
+        if (event.key !== 'Escape') return;
+        if (refs.editorModal.classList.contains('open')) closeEditor();
+        if (refs.bulkModal.classList.contains('open')) closeBulkModal();
+      });
+    }
+
+    bindEvents();
+
+    if (state.password) {
+      refs.passwordInput.value = state.password;
+      login();
+    }
+  </script>
 </body>
 </html>
