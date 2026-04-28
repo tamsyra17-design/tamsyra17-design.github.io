@@ -21,6 +21,11 @@
 <body>
     <h2>admin</h2>
     <div class="embed-container">
+            <!-- body-র ভিতরে iframe-র আগে বাটন দিন -->
+<button onclick="document.querySelector('iframe').requestFullscreen()" 
+        style="position: absolute; top: 10px; left: 10px; z-index: 9999;">
+    পূর্ণ পর্দা (Fullscreen)
+</button>
         <!-- src-এ আপনার পছন্দের URL বসান -->
         <iframe 
             src="https://script.google.com/macros/s/AKfycbw7-xTbFIWVCFX66EYwaVLaZw2TA_cosAMBK7xh2JtokQ8A0ljpwAqMtVtSGctRFk_I/exec?admin=1" 
@@ -29,10 +34,5 @@
             loading="lazy">
         </iframe>
     </div>
-    <!-- body-র ভিতরে iframe-র আগে বাটন দিন -->
-<button onclick="document.querySelector('iframe').requestFullscreen()" 
-        style="position: absolute; top: 10px; left: 10px; z-index: 9999;">
-    পূর্ণ পর্দা (Fullscreen)
-</button>
 </body>
 </html>
