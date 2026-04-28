@@ -2,7 +2,7 @@
 <html lang="bn">
 <head>
     <meta charset="UTF-8">
-    <title>iframe উদাহরণ</title>
+    <title>admin</title>
     <style>
         /* চাইলে স্টাইল দিয়ে আকার ঠিক করতে পারেন */
         .embed-container {
@@ -19,7 +19,7 @@
     </style>
 </head>
 <body>
-    <h2>এম্বেড করা পেজ</h2>
+    <h2>admin</h2>
     <div class="embed-container">
         <!-- src-এ আপনার পছন্দের URL বসান -->
         <iframe 
@@ -29,5 +29,10 @@
             loading="lazy">
         </iframe>
     </div>
+    <!-- body-র ভিতরে iframe-র আগে বাটন দিন -->
+<button onclick="document.querySelector('iframe').requestFullscreen()" 
+        style="position: absolute; top: 10px; left: 10px; z-index: 9999;">
+    পূর্ণ পর্দা (Fullscreen)
+</button>
 </body>
 </html>
