@@ -2,9 +2,10 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>تمصيرة العز | التراث العماني الأصيل</title>
     <meta name="description" content="متجر تمصيرة العز للمستلزمات الرجالية والمنتجات العمانية الأصيلة مع عرض الفئات، سلة التسوق، والطلب عبر واتساب.">
+    <meta name="theme-color" content="#006d6f">
     <link rel="icon" href="https://aleizom.com/favicon-48x48.png" sizes="48x48" type="image/png">
     <link rel="icon" href="https://aleizom.com/favicon-16x16.png" sizes="16x16" type="image/png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1915,6 +1916,247 @@
             .product-img-saaf {
                 height: 285px;
             }
+        }
+
+
+        /* Professional mobile-first polish: layout only, original HTML/JS unchanged */
+        :root {
+            --saaf-black: #111827;
+            --saaf-gold: #bd8b3f;
+            --saaf-gold-deep: #9a6b2f;
+            --saaf-teal: #006d6f;
+            --saaf-teal-dark: #064f55;
+            --saaf-gray: #f4f7f8;
+            --saaf-border: rgba(17, 24, 39, 0.09);
+            --shadow-soft: 0 14px 36px rgba(17, 24, 39, 0.08);
+            --shadow-hover: 0 24px 52px rgba(17, 24, 39, 0.14);
+            --border-radius-saaf: 20px;
+        }
+
+        html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+        body {
+            overflow-x: hidden;
+            background:
+                radial-gradient(circle at 85% 0%, rgba(0,109,111,0.12), transparent 28rem),
+                radial-gradient(circle at 5% 18%, rgba(189,139,63,0.12), transparent 24rem),
+                linear-gradient(180deg, #fafdfd 0%, #f1f6f7 48%, #f8faf9 100%);
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: -1;
+            background-image: linear-gradient(rgba(17,24,39,0.018) 1px, transparent 1px), linear-gradient(90deg, rgba(17,24,39,0.018) 1px, transparent 1px);
+            background-size: 34px 34px;
+            mask-image: linear-gradient(180deg, rgba(0,0,0,.65), transparent 72%);
+        }
+
+        .saaf-header {
+            width: min(1180px, calc(100% - 24px));
+            margin: 12px auto 0;
+            top: 10px;
+            padding: 12px 16px;
+            border-radius: 24px;
+            border: 1px solid rgba(255,255,255,0.72);
+            background: rgba(255,255,255,0.84);
+            box-shadow: 0 18px 48px rgba(17,24,39,0.08);
+            backdrop-filter: blur(18px) saturate(145%);
+            -webkit-backdrop-filter: blur(18px) saturate(145%);
+        }
+
+        .brand-group { min-width: 0; }
+        .main-logo { max-height: 58px; filter: drop-shadow(0 8px 16px rgba(17,24,39,0.11)); }
+        .brand-name { color: var(--saaf-teal); line-height: 1; letter-spacing: -0.04em; white-space: nowrap; }
+        .brand-name span { color: var(--saaf-gold); }
+
+        .search-box-saaf {
+            min-height: 48px;
+            background: rgba(244,247,248,0.9);
+            border-color: rgba(17,24,39,0.07);
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.75);
+        }
+        .search-box-saaf:focus-within { box-shadow: 0 0 0 5px rgba(189,139,63,0.13); }
+
+        .icon-btn {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(180deg, #fff, #f3f6f7);
+            border: 1px solid rgba(17,24,39,0.08);
+            box-shadow: 0 8px 22px rgba(17,24,39,0.06);
+        }
+        .icon-btn:hover { background: linear-gradient(135deg, var(--saaf-gold), var(--saaf-gold-deep)); transform: translateY(-2px); }
+
+        .hero-saaf {
+            width: min(1180px, calc(100% - 24px));
+            margin: 24px auto 3.2rem;
+            padding: 0;
+            border-radius: 36px;
+            background: radial-gradient(circle at 20% 12%, rgba(255,255,255,0.48), transparent 19rem), linear-gradient(135deg, #075875 0%, #0c7b81 47%, #dcecef 100%);
+            box-shadow: 0 28px 70px rgba(7,88,117,0.18);
+        }
+        .hero-swiper .swiper-slide { min-height: clamp(390px, 44vw, 560px); padding: clamp(24px,5vw,58px) clamp(18px,5vw,72px); }
+        .hero-content { text-align: start; max-width: 680px; }
+        .hero-content h1, .hero-content h2 { color: #fff; font-size: clamp(2.1rem,5vw,4.1rem); line-height: 1.06; text-shadow: 0 12px 34px rgba(0,0,0,.18); }
+        .hero-content p { color: rgba(255,255,255,.92); max-width: 62ch; margin-inline: 0; text-align: inherit; text-shadow: 0 4px 16px rgba(0,0,0,.13); }
+        .hero-btn { background: linear-gradient(135deg, #fff, #fff4df); color: var(--saaf-teal-dark); box-shadow: 0 18px 36px rgba(17,24,39,.16); }
+        .hero-btn:hover { color: #fff; background: linear-gradient(135deg, var(--saaf-gold), var(--saaf-gold-deep)); }
+        .hero-image img { max-width: min(330px, 78vw); border-radius: 30px; border: 8px solid rgba(255,255,255,.30); box-shadow: 0 30px 65px rgba(17,24,39,.28); }
+
+        .section-title, .section-toolbar, .category-grid-saaf, .product-grid-saaf {
+            width: min(1180px, calc(100% - 28px));
+            margin-inline: auto;
+        }
+        .section-title { font-size: clamp(1.6rem,3vw,2.35rem); letter-spacing: -0.025em; }
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 76px;
+            height: 4px;
+            margin-top: 10px;
+            border-radius: 999px;
+            background: linear-gradient(90deg, var(--saaf-gold), rgba(0,109,111,.25));
+        }
+        body.rtl .section-title::after { background: linear-gradient(270deg, var(--saaf-gold), rgba(0,109,111,.25)); }
+
+        .category-grid-saaf, .product-grid-saaf { padding-inline: 0; gap: clamp(16px,2.3vw,30px); }
+        .category-card-saaf, .product-card-saaf { border: 1px solid rgba(255,255,255,.86); background: rgba(255,255,255,.94); box-shadow: 0 10px 30px rgba(17,24,39,.07); }
+        .category-card-saaf { border-radius: 28px; }
+        .category-card-saaf img { height: clamp(230px,28vw,310px); }
+        .category-overlay-saaf { background: linear-gradient(to top, rgba(3,31,38,.92), rgba(3,31,38,.42) 58%, transparent); }
+        .category-overlay-saaf p { background: rgba(255,255,255,.14); border: 1px solid rgba(255,255,255,.25); backdrop-filter: blur(10px); }
+
+        .product-card-saaf { border-radius: 24px; }
+        .product-img-saaf { height: clamp(290px,38vw,420px); background: linear-gradient(180deg, #eef4f5, #fff); }
+        .product-name-saaf { line-height: 1.55; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; min-height: 3.1em; }
+        .product-price-saaf { color: var(--saaf-gold-deep); }
+        .badge-saaf { background: linear-gradient(135deg, var(--saaf-gold), var(--saaf-gold-deep)); box-shadow: 0 10px 22px rgba(189,139,63,.25); }
+        .btn-cart, .btn-whatsapp, .hero-btn, .back-btn, .page-btn { touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
+        .btn-cart, .btn-whatsapp { min-height: 44px; border-radius: 14px; }
+        .btn-cart { background: linear-gradient(180deg, #fff8ed, #f3e6d0); border: 1px solid rgba(189,139,63,.18); }
+        .btn-whatsapp { background: linear-gradient(135deg, #25D366, #128C7E); }
+        .sort-group { padding: 8px 10px; border: 1px solid rgba(17,24,39,.08); border-radius: 999px; background: rgba(255,255,255,.78); box-shadow: 0 8px 22px rgba(17,24,39,.05); }
+        #sortSelectSaaf { min-height: 38px; border: none; outline: none; background: transparent; }
+
+        .side-nav-panel, .cart-drawer { max-width: 420px; }
+        .side-nav-header { background: linear-gradient(135deg, #fff8ed, #eef7f7); }
+        .modal-overlay, .lightbox-overlay, .side-nav-overlay, .cart-overlay { backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+        .modal-dialog { border-radius: 28px; border: 1px solid rgba(255,255,255,.72); box-shadow: 0 30px 90px rgba(0,0,0,.22); }
+        .modal-gallery-container { border-radius: 22px; background: linear-gradient(180deg, #eef4f5, #fff); }
+        .saaf-footer { width: min(1180px, calc(100% - 24px)); margin: 3rem auto 18px; border-radius: 34px; background: radial-gradient(circle at top left, rgba(189,139,63,.17), transparent 22rem), linear-gradient(135deg, #111827, #061f24); box-shadow: 0 28px 70px rgba(17,24,39,.16); }
+
+        @media (max-width: 1024px) {
+            .brand-name { font-size: 2.25rem; }
+            .main-logo { max-height: 54px; }
+            .header-actions { gap: 10px; }
+            .product-grid-saaf { grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); }
+        }
+
+        @media (max-width: 768px) {
+            body { padding-bottom: env(safe-area-inset-bottom); }
+            .saaf-header {
+                display: grid;
+                grid-template-columns: auto 1fr auto;
+                align-items: center;
+                gap: 10px;
+                width: calc(100% - 16px);
+                margin-top: 8px;
+                top: 8px;
+                padding: 10px;
+                border-radius: 22px;
+            }
+            .brand-group { grid-column: 1 / 3; gap: 8px; min-width: 0; }
+            .header-actions { grid-column: 3 / 4; justify-content: flex-end; gap: 8px; }
+            .search-wrapper { grid-column: 1 / -1; order: initial; width: 100%; max-width: 100%; min-width: 0; margin: 0; }
+            .main-logo { max-height: 44px; }
+            .brand-name { font-size: clamp(1.35rem, 6vw, 1.85rem); overflow: hidden; text-overflow: ellipsis; }
+            .icon-btn { width: 42px; height: 42px; font-size: 1.05rem; }
+            .search-box-saaf { min-height: 44px; padding: 2px 16px; border-radius: 18px; }
+
+            .hero-saaf { width: calc(100% - 16px); margin-top: 16px; margin-bottom: 2.4rem; border-radius: 28px; }
+            .hero-swiper .swiper-slide { min-height: auto; padding: 28px 18px 44px; flex-direction: column; text-align: center; gap: 18px; }
+            .hero-content { max-width: 100%; text-align: center; }
+            .hero-content h1, .hero-content h2 { font-size: clamp(1.85rem, 9vw, 2.6rem); }
+            .hero-content p { max-width: 100%; margin-inline: auto; font-size: .94rem; line-height: 1.75; display: -webkit-box; -webkit-line-clamp: 6; -webkit-box-orient: vertical; overflow: hidden; }
+            .hero-image { order: -1; }
+            .hero-image img { max-width: min(210px, 70vw); border-radius: 24px; border-width: 6px; }
+            .hero-btn { min-height: 46px; padding: 11px 20px; font-size: .9rem; }
+
+            .section-title, .section-toolbar, .category-grid-saaf, .product-grid-saaf { width: calc(100% - 24px); }
+            .section-title { margin-top: 1.35rem; margin-bottom: 1rem; font-size: 1.55rem; }
+            .category-grid-saaf { grid-template-columns: repeat(2, minmax(0, 1fr)); min-height: 180px; gap: 14px; }
+            .category-card-saaf { border-radius: 22px; min-height: 170px; }
+            .category-card-saaf img { height: 175px; }
+            .category-overlay-saaf { padding: 55px 10px 14px; }
+            .category-overlay-saaf h3 { font-size: 1rem; margin-bottom: 6px; }
+            .category-overlay-saaf p { font-size: .72rem; padding: 3px 8px; }
+
+            .product-grid-saaf { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+            .product-card-saaf { border-radius: 20px; }
+            .product-img-saaf { height: clamp(158px, 48vw, 230px); }
+            .product-info-saaf { padding: 12px; }
+            .product-name-saaf { font-size: .88rem; min-height: 2.8em; line-height: 1.45; }
+            .product-price-saaf { font-size: 1.02rem; margin-bottom: 12px; }
+            .product-actions, .modal-actions { flex-direction: column; gap: 8px; }
+            .btn-cart, .btn-whatsapp { min-height: 40px; padding: 9px 8px; border-radius: 12px; font-size: .76rem; }
+            .badge-saaf { top: 9px; font-size: .68rem; padding: 4px 9px; }
+            .card-swiper-next, .card-swiper-prev, .modal-gallery-nav-next, .modal-gallery-nav-prev { width: 30px; height: 30px; font-size: 13px; }
+
+            .section-toolbar { align-items: stretch; }
+            .section-toolbar .section-title { width: auto; flex: 1 1 100%; }
+            .sort-group { width: 100%; border-radius: 18px; justify-content: space-between; padding: 8px 12px; }
+            #sortSelectSaaf { width: min(64%, 260px); }
+            .back-btn { margin-inline-start: 12px; margin-bottom: 14px; min-height: 42px; }
+
+            .side-nav-panel, .cart-drawer { width: min(92vw, 420px); max-width: none; }
+            .modal-overlay { align-items: flex-end; padding: 0; }
+            .modal-dialog { width: 100%; max-width: 100%; max-height: 92svh; border-radius: 26px 26px 0 0; padding: 16px; }
+            .modal-gallery-container { height: min(58vw, 300px); min-height: 230px; border-radius: 20px; }
+            .modal-thumbnail-strip { justify-content: flex-start; overflow-x: auto; flex-wrap: nowrap; padding-bottom: 4px; }
+            .modal-thumbnail-strip img { width: 54px; height: 54px; flex: 0 0 auto; }
+
+            .floating-whatsapp { width: 54px; height: 54px; bottom: calc(16px + env(safe-area-inset-bottom)); font-size: 1.75rem; }
+            .scroll-top-btn { width: 44px; height: 44px; bottom: calc(78px + env(safe-area-inset-bottom)); font-size: 1.15rem; }
+            .saaf-footer { width: calc(100% - 16px); margin-top: 2rem; margin-bottom: 8px; padding: 2.2rem 18px 1.2rem; border-radius: 28px; }
+            .footer-links { width: 100%; gap: 14px; flex-direction: column; align-items: center; }
+            #paginationControls { width: calc(100% - 24px); margin-inline: auto; gap: 8px; }
+            .page-btn { min-height: 38px; padding: 7px 12px; font-size: .86rem; }
+            #toastMsg { width: calc(100% - 32px); max-width: 420px; text-align: center; bottom: calc(14px + env(safe-area-inset-bottom)); border-radius: 18px; }
+        }
+
+        @media (max-width: 430px) {
+            .saaf-header { grid-template-columns: auto minmax(0, 1fr) auto; padding: 8px; border-radius: 20px; }
+            .main-logo { max-height: 40px; }
+            .brand-name { font-size: clamp(1.18rem, 5.6vw, 1.5rem); }
+            .icon-btn { width: 39px; height: 39px; }
+            .header-actions { gap: 6px; }
+            .hero-content p { -webkit-line-clamp: 5; }
+            .hero-image img { max-width: min(190px, 68vw); }
+            .category-grid-saaf, .product-grid-saaf { width: calc(100% - 18px); gap: 10px; }
+            .category-card-saaf img { height: 150px; }
+            .category-overlay-saaf h3 { font-size: .92rem; }
+            .product-img-saaf { height: clamp(145px, 47vw, 190px); }
+            .product-info-saaf { padding: 10px; }
+            .product-name-saaf { font-size: .82rem; }
+            .product-price-saaf { font-size: .95rem; }
+            .btn-cart, .btn-whatsapp { min-height: 38px; font-size: .72rem; padding-inline: 6px; }
+            .modal-gallery-container { min-height: 205px; }
+            .cart-item { gap: 10px; }
+            .cart-item-img { width: 62px; height: 62px; }
+        }
+
+        @media (max-width: 350px) {
+            .brand-name { font-size: 1.08rem; }
+            .main-logo { max-height: 36px; }
+            .icon-btn { width: 36px; height: 36px; }
+            .product-grid-saaf, .category-grid-saaf { grid-template-columns: 1fr; }
+            .product-img-saaf { height: 250px; }
+            .category-card-saaf img { height: 190px; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: .001ms !important; }
         }
 
     </style>
