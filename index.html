@@ -348,6 +348,9 @@ body.rtl .cart-badge { right:auto; left:-4px; }
   transition:all var(--t2) var(--ease);
 }
 .swiper-button-next::after, .swiper-button-prev::after { font-size:16px; font-weight:900; }
+/* RTL: Swiper handles RTL natively — no extra flip needed for hero nav */
+body.rtl .swiper-button-next::after { content:'next'; }
+body.rtl .swiper-button-prev::after { content:'prev'; }
 .swiper-button-next:hover, .swiper-button-prev:hover { background:var(--gold); border-color:var(--gold); }
 .swiper-pagination-bullet { background:rgba(255,255,255,.5); opacity:1; width:8px; height:8px; }
 .swiper-pagination-bullet-active { background:var(--gold); width:28px; border-radius:4px; }
@@ -549,8 +552,12 @@ body.rtl .out-badge { left:auto; right:12px; }
 .card-nav:hover { background:var(--gold); color:#fff; }
 .card-nav-prev { left:8px; }
 .card-nav-next { right:8px; }
+/* RTL: swap positions */
 body.rtl .card-nav-prev { left:auto; right:8px; }
 body.rtl .card-nav-next { right:auto; left:8px; }
+/* RTL: flip chevron icons so they point the correct direction */
+body.rtl .card-nav-prev i,
+body.rtl .card-nav-next i { display:inline-block; transform:scaleX(-1); }
 
 .prod-img-wrap .swiper-pagination-bullet { background:rgba(255,255,255,.6); opacity:1; width:6px; height:6px; }
 .prod-img-wrap .swiper-pagination-bullet-active { background:var(--gold); width:20px; border-radius:3px; }
@@ -806,8 +813,12 @@ body.rtl .modal-close { right:auto; left:14px; }
 .modal-gallery-nav:hover { background:var(--gold); color:#fff; }
 .modal-gallery-prev { left:10px; }
 .modal-gallery-next { right:10px; }
+/* RTL: swap positions */
 body.rtl .modal-gallery-prev { left:auto; right:10px; }
 body.rtl .modal-gallery-next { right:auto; left:10px; }
+/* RTL: flip chevron icons */
+body.rtl .modal-gallery-prev i,
+body.rtl .modal-gallery-next i { display:inline-block; transform:scaleX(-1); }
 
 .modal-thumbs { display:flex; gap:8px; padding:14px 20px; overflow-x:auto; flex-wrap:nowrap; }
 .modal-thumb { flex-shrink:0; width:58px; height:58px; border-radius:var(--r-sm); overflow:hidden; cursor:pointer; border:2px solid transparent; transition:border-color var(--t1); }
