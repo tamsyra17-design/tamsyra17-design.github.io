@@ -2024,7 +2024,7 @@ function initStore(raw) {
 }
 async function fetchData() {
   try {
-    const res=await fetch('https://script.google.com/macros/s/AKfycbw7-xTbFIWVCFX66EYwaVLaZw2TA_cosAMBK7xh2JtokQ8A0ljpwAqMtVtSGctRFk_I/exec');
+    const res=await fetch('https://script.google.com/macros/s/AKfycbwGJRPy_nILWkfwAigsHaD-lB2hx6hU0F7cSEk8CHD7ilERlhculKt1KYwAdXwkDQ/exec');
     if(!res.ok) throw new Error(res.status);
     initStore(await res.json());
   } catch(e){ console.warn('Using demo data',e); initStore(DEMO); }
