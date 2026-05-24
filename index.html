@@ -1531,6 +1531,102 @@ body.rtl .hero-shell::after{
   .hero-media::before{inset:-5px !important;border-radius:18px !important;}
 }
 
+
+
+/* ═══════════════════════════════════
+   DESKTOP FULL SCREEN WIDTH FIX
+   Makes main layout use full desktop viewport while keeping mobile unchanged
+═══════════════════════════════════ */
+@media (min-width: 1025px){
+  .hdr,
+  .hero-wrap,
+  .trust-bar,
+  .sec-head,
+  .cat-grid,
+  #productSectionView,
+  .cta-strip,
+  .footer{
+    width: calc(100% - 48px) !important;
+    max-width: none !important;
+  }
+
+  .hdr{
+    margin: 8px 24px !important;
+  }
+
+  .hero-wrap{
+    margin: 10px 24px 32px !important;
+  }
+
+  .trust-bar,
+  .sec-head,
+  .cat-grid,
+  #productSectionView,
+  .cta-strip,
+  .footer{
+    margin-left: 24px !important;
+    margin-right: 24px !important;
+  }
+
+  .hero-shell,
+  .hero-swiper,
+  .hero-swiper .swiper-slide{
+    width: 100% !important;
+  }
+
+  .hero-txt{
+    max-width: 760px !important;
+  }
+
+  .hero-media{
+    flex-basis: 180px !important;
+    width: 180px !important;
+    height: 180px !important;
+  }
+
+  .hero-media img{
+    max-width: 180px !important;
+    max-height: 180px !important;
+  }
+
+  .cat-grid{
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)) !important;
+  }
+
+  .prod-grid{
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)) !important;
+  }
+}
+
+@media (min-width: 1600px){
+  .hdr,
+  .hero-wrap,
+  .trust-bar,
+  .sec-head,
+  .cat-grid,
+  #productSectionView,
+  .cta-strip,
+  .footer{
+    width: calc(100% - 72px) !important;
+  }
+
+  .hdr{
+    margin-left: 36px !important;
+    margin-right: 36px !important;
+  }
+
+  .hero-wrap,
+  .trust-bar,
+  .sec-head,
+  .cat-grid,
+  #productSectionView,
+  .cta-strip,
+  .footer{
+    margin-left: 36px !important;
+    margin-right: 36px !important;
+  }
+}
+
 </style>
 </head>
 <body class="rtl">
