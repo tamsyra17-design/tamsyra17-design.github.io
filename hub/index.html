@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aleiz · All our sites</title>
+    <meta name="description" content="Visit the Aleiz shop, the point-of-sale system and every store on the platform.">
+    <meta name="robots" content="index, follow">
+    <link rel="icon" href="https://aleizom.com/favicon-48x48.png" sizes="48x48" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Tajawal:wght@500;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #f6f4ee;
+            --surface: #ffffff;
+            --ink: #0f1a1b;
+            --muted: #5d6b6c;
+            --teal: #0e4a4c;
+            --teal-soft: #e5efef;
+            --gold: #b8862b;
+            --line: #e3e7e6;
+        }
+        * { box-sizing: border-box; }
+        html, body { margin: 0; padding: 0; }
+        body {
+            font-family: 'DM Sans', system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--ink);
+            min-height: 100vh;
+            line-height: 1.5;
+        }
+        .hero {
+            background: linear-gradient(135deg, #0e4a4c 0%, #156b6d 100%);
+            color: #fff;
+            padding: 64px 24px 88px;
+            text-align: center;
+        }
+        .hero h1 {
+            font-family: 'Tajawal', sans-serif;
+            font-weight: 800;
+            font-size: clamp(2rem, 4vw, 3rem);
+            margin: 0 0 12px;
+        }
+        .hero p {
+            margin: 0 auto;
+            max-width: 560px;
+            color: #d4e8e8;
+            font-size: 1.05rem;
+        }
+        .wrap {
+            max-width: 1080px;
+            margin: -56px auto 48px;
+            padding: 0 20px;
+        }
+        .section-title {
+            font-family: 'Tajawal', sans-serif;
+            font-weight: 700;
+            font-size: 1.25rem;
+            margin: 40px 0 16px;
+            color: var(--teal);
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 18px;
+        }
+        .card {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            background: var(--surface);
+            border: 1px solid var(--line);
+            border-radius: 16px;
+            padding: 22px;
+            text-decoration: none;
+            color: inherit;
+            box-shadow: 0 6px 20px rgba(15, 26, 27, .06);
+            transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+        }
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 28px rgba(15, 26, 27, .12);
+            border-color: #bcd3d3;
+        }
+        .tag {
+            align-self: flex-start;
+            font-size: .72rem;
+            font-weight: 700;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+            padding: 4px 10px;
+            border-radius: 999px;
+            background: var(--teal-soft);
+            color: var(--teal);
+        }
+        .tag.gold { background: #f6ecd9; color: #7a5a17; }
+        .card h3 {
+            margin: 4px 0 0;
+            font-family: 'Tajawal', sans-serif;
+            font-size: 1.3rem;
+        }
+        .card p {
+            margin: 0;
+            color: var(--muted);
+            font-size: .95rem;
+            flex: 1;
+        }
+        .address {
+            font-family: ui-monospace, Menlo, Consolas, monospace;
+            font-size: .85rem;
+            color: var(--teal);
+            word-break: break-all;
+        }
+        .go {
+            font-weight: 700;
+            color: var(--teal);
+            margin-top: 6px;
+        }
+        .note {
+            margin-top: 28px;
+            padding: 18px 22px;
+            border-radius: 14px;
+            background: #fff8e8;
+            border: 1px solid #f0e0b5;
+            color: #6b5317;
+            font-size: .95rem;
+        }
+        footer {
+            text-align: center;
+            color: var(--muted);
+            font-size: .85rem;
+            padding: 24px;
+        }
+        footer a { color: var(--teal); }
+    </style>
+</head>
+<body>
+
+<header class="hero">
+    <h1>Aleiz</h1>
+    <p>Everything we run in one place. Pick a site below to visit it.</p>
+</header>
+
+<main class="wrap">
+
+    <h2 class="section-title">Main</h2>
+    <div class="grid">
+        <a class="card" href="https://aleizom.com/">
+            <span class="tag">Shop</span>
+            <h3>Tamsirat Aleiz</h3>
+            <p>Our online shop for men's essentials and authentic Omani products, since 1986.</p>
+            <span class="address">aleizom.com</span>
+            <span class="go">Visit the shop →</span>
+        </a>
+
+        <a class="card" href="https://pos.aleizom.com/login">
+            <span class="tag gold">Staff</span>
+            <h3>Point of sale</h3>
+            <p>Sales, rentals, customer tokens, purchases and cash-up for staff.</p>
+            <span class="address">pos.aleizom.com</span>
+            <span class="go">Sign in →</span>
+        </a>
+    </div>
+
+    <h2 class="section-title">Stores on the platform</h2>
+    <div class="grid">
+        <a class="card" href="https://lookman.aleizom.com/login">
+            <span class="tag">Store</span>
+            <h3>Lookman Bicycles</h3>
+            <p>Bicycle sales, rentals and workshop accounts.</p>
+            <span class="address">lookman.aleizom.com</span>
+            <span class="go">Sign in →</span>
+        </a>
+
+        <a class="card" href="https://pos.aleizom.com/register-store">
+            <span class="tag gold">New</span>
+            <h3>Open a store account</h3>
+            <p>Run your own shop on the platform. Each store gets its own address and private database.</p>
+            <span class="address">pos.aleizom.com/register-store</span>
+            <span class="go">Apply now →</span>
+        </a>
+    </div>
+
+    <h2 class="section-title">Other addresses</h2>
+    <div class="grid">
+        <a class="card" href="https://pos.aleiz.qzz.io/login">
+            <span class="tag">Alternate</span>
+            <h3>Point of sale (alternate)</h3>
+            <p>The same POS on our original address.</p>
+            <span class="address">pos.aleiz.qzz.io</span>
+            <span class="go">Sign in →</span>
+        </a>
+
+        <a class="card" href="https://aleiz.qzz.io/">
+            <span class="tag">Alternate</span>
+            <h3>Shop (alternate)</h3>
+            <p>The shop on our original address.</p>
+            <span class="address">aleiz.qzz.io</span>
+            <span class="go">Visit →</span>
+        </a>
+    </div>
+
+    <div class="note">
+        Store accounts are created when an application is approved, so new stores appear
+        here after they are added to the list. If a link does not open, please contact us.
+    </div>
+</main>
+
+<footer>
+    &copy; 2026 Aleiz · <a href="https://aleizom.com/">aleizom.com</a>
+</footer>
+
+</body>
+</html>
