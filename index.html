@@ -1743,6 +1743,20 @@ body{background:
 
 ::selection{background:var(--gold-lt);color:var(--ink)}
 
+/* Frosted panel: product text sits on a blurred band over the bottom of the photo */
+.prod-card .prod-body{
+  position:relative;z-index:3;
+  margin-top:calc(-1 * var(--glass-h,120px));
+  padding-top:calc(var(--glass-h,120px) * .55);
+  background:rgba(255,255,255,.62);
+  -webkit-backdrop-filter:blur(14px) saturate(1.25);
+  backdrop-filter:blur(14px) saturate(1.25);
+  -webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 40%);
+  mask-image:linear-gradient(to bottom,transparent 0,#000 40%);
+}
+.prod-card .prod-img .swiper-pagination{bottom:calc(var(--glass-h,120px) + 8px)!important}
+.prod-card .prod-body > *{position:relative}
+
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{
     animation-duration:.01ms!important;
