@@ -8,7 +8,7 @@
 
 **Tech Stack:** Laravel 12 (PHP 8.3+), MySQL 8, Sanctum, Spatie Permission, Filament 3+, Next.js (App Router), TypeScript, Tailwind CSS, shadcn/ui, next-intl, React Query, Zustand, Pest, Playwright.
 
-**Spec:** `D:\xampp\htdocs\docs\superpowers\specs\2026-11-15-omani-heritage-shop-design.md`
+**Spec:** `docs/superpowers/specs/2026-11-15-omani-heritage-shop-design.md`
 
 ## Global Constraints
 
@@ -52,8 +52,8 @@ These input classes are easy to miss and expensive to fix later. Each line has a
 
 Run:
 ```powershell
-cd D:\xampp\htdocs
-composer create-project laravel/laravel:^12.0 omani-shop\api
+cd D:\xampp\htdocs\omani-shop
+composer create-project laravel/laravel:^12.0 api
 ```
 
 - [ ] **Step 2: Create the database and configure `.env`**
@@ -103,7 +103,7 @@ Expected: PASS.
 - [ ] **Step 7: Commit**
 
 ```bash
-git add omani-shop/api
+git add api
 git commit -m "chore: scaffold Laravel API with health endpoint"
 ```
 
@@ -179,7 +179,7 @@ Expected: PASS.
 - [ ] **Step 8: Commit**
 
 ```bash
-git add omani-shop/web
+git add web
 git commit -m "feat: scaffold bilingual RTL Next.js frontend"
 ```
 
@@ -229,7 +229,7 @@ Expected: PASS.
 - [ ] **Step 5: Commit**
 
 ```bash
-git add omani-shop/web
+git add web
 git commit -m "feat: add shared layout, header, footer, locale switcher"
 ```
 
@@ -307,7 +307,7 @@ Expected: PASS.
 - [ ] **Step 6: Commit**
 
 ```bash
-git add omani-shop/api
+git add api
 git commit -m "feat: add customer auth, staff auth, roles and permissions"
 ```
 
@@ -370,7 +370,7 @@ Expected: PASS.
 - [ ] **Step 6: Commit**
 
 ```bash
-git add omani-shop/api
+git add api
 git commit -m "feat: add Filament admin with role-based access"
 ```
 
@@ -429,7 +429,7 @@ Expected: PASS.
 - [ ] **Step 6: Commit**
 
 ```bash
-git add omani-shop/api
+git add api
 git commit -m "feat: add categories model, API and admin resource"
 ```
 
@@ -494,7 +494,7 @@ Expected: PASS.
 - [ ] **Step 6: Commit**
 
 ```bash
-git add omani-shop/api
+git add api
 git commit -m "feat: add products with translations and public API"
 ```
 
@@ -549,7 +549,7 @@ Expected: PASS.
 - [ ] **Step 6: Commit**
 
 ```bash
-git add omani-shop/api
+git add api
 git commit -m "feat: add product images, variants and sale stock"
 ```
 
@@ -617,7 +617,7 @@ Expected: PASS.
 - [ ] **Step 8: Commit**
 
 ```bash
-git add omani-shop/api
+git add api
 git commit -m "feat: add Arabic-tolerant product search"
 ```
 
@@ -674,7 +674,7 @@ Expected: PASS.
 - [ ] **Step 6: Commit**
 
 ```bash
-git add omani-shop/api
+git add api
 git commit -m "feat: add settings, pages and Oman shipping rates"
 ```
 
@@ -723,7 +723,7 @@ Expected: PASS.
 - [ ] **Step 5: Commit**
 
 ```bash
-git add omani-shop/web
+git add web
 git commit -m "feat: add storefront catalog pages and OMR formatting"
 ```
 
@@ -797,7 +797,7 @@ Expected: PASS.
 - [ ] **Step 8: Commit**
 
 ```bash
-git add omani-shop/web
+git add web
 git commit -m "feat: add product detail page and persistent cart"
 ```
 
@@ -848,7 +848,7 @@ Expected: PASS.
 - [ ] **Step 5: Commit**
 
 ```bash
-git add omani-shop/web
+git add web
 git commit -m "feat: add cart page and checkout shell"
 ```
 
@@ -912,7 +912,7 @@ Expected: PASS.
 - [ ] **Step 6: Commit**
 
 ```bash
-git add omani-shop/api
+git add api
 git commit -m "feat: add order creation with COD and stock decrement"
 ```
 
@@ -974,7 +974,7 @@ Expected: PASS.
 - [ ] **Step 6: Commit**
 
 ```bash
-git add omani-shop/web
+git add web
 git commit -m "feat: add guest checkout, confirmation and order tracking"
 ```
 
@@ -1024,7 +1024,7 @@ Expected: PASS.
 - [ ] **Step 5: Commit**
 
 ```bash
-git add omani-shop/api
+git add api
 git commit -m "feat: add configurable rental policies"
 ```
 
@@ -1089,7 +1089,7 @@ Expected: PASS.
 - [ ] **Step 6: Commit**
 
 ```bash
-git add omani-shop/api
+git add api
 git commit -m "feat: add rental units and availability service"
 ```
 
@@ -1165,7 +1165,7 @@ Expected: PASS.
 - [ ] **Step 7: Commit**
 
 ```bash
-git add omani-shop/api
+git add api
 git commit -m "feat: add configurable rental pricing and quote API"
 ```
 
@@ -1215,7 +1215,7 @@ Expected: PASS.
 - [ ] **Step 5: Commit**
 
 ```bash
-git add omani-shop/web
+git add web
 git commit -m "feat: add rental storefront with availability and live quote"
 ```
 
@@ -1281,7 +1281,7 @@ Expected: PASS.
 - [ ] **Step 7: Commit**
 
 ```bash
-git add omani-shop/api
+git add api
 git commit -m "feat: add rental booking, deposit records and guest lookup"
 ```
 
@@ -1335,7 +1335,7 @@ Expected: PASS.
 - [ ] **Step 5: Commit**
 
 ```bash
-git add omani-shop/web
+git add web
 git commit -m "feat: add rental checkout and confirmation"
 ```
 
@@ -1388,7 +1388,7 @@ Expected: PASS.
 - [ ] **Step 5: Commit**
 
 ```bash
-git add omani-shop/api
+git add api
 git commit -m "feat: add rental admin actions, returns and deposit release"
 ```
 
@@ -1445,7 +1445,7 @@ Expected: PASS.
 - [ ] **Step 5: Commit**
 
 ```bash
-git add omani-shop/api
+git add api
 git commit -m "feat: add payment adapters and idempotent webhook"
 ```
 
@@ -1515,8 +1515,7 @@ Expected: PASS.
 - [ ] **Step 7: Commit**
 
 ```bash
-git add omani-shop
-git commit -m "feat: add Oman shipping rates and checkout integration"
+git add .`r`ngit commit -m "feat: add Oman shipping rates and checkout integration"
 ```
 
 ---
@@ -1562,7 +1561,7 @@ Expected: PASS.
 - [ ] **Step 5: Commit**
 
 ```bash
-git add omani-shop/api
+git add api
 git commit -m "feat: add admin dashboard and reports"
 ```
 
@@ -1612,7 +1611,7 @@ Expected: PASS.
 - [ ] **Step 5: Commit**
 
 ```bash
-git add omani-shop/web
+git add web
 git commit -m "feat: add SEO metadata, sitemap and CMS pages"
 ```
 
@@ -1691,8 +1690,7 @@ Apply the smallest fix in the owning task's code. Do not weaken assertions. Re-r
 - [ ] **Step 6: Commit**
 
 ```bash
-git add omani-shop
-git commit -m "test: cover RTL, OMR precision, rental overlaps and guest isolation"
+git add .`r`ngit commit -m "test: cover RTL, OMR precision, rental overlaps and guest isolation"
 ```
 
 ---
@@ -1735,8 +1733,7 @@ Confirm health endpoint, Arabic home, English home, shop listing, rental page, a
 - [ ] **Step 6: Commit**
 
 ```bash
-git add omani-shop
-git commit -m "chore: add local run scripts, demo seed and deployment notes"
+git add .`r`ngit commit -m "chore: add local run scripts, demo seed and deployment notes"
 ```
 
 ---
