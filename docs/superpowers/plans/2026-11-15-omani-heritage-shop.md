@@ -1515,7 +1515,8 @@ Expected: PASS.
 - [ ] **Step 7: Commit**
 
 ```bash
-git add .`r`ngit commit -m "feat: add Oman shipping rates and checkout integration"
+git add .
+git commit -m "feat: add Oman shipping rates and checkout integration"
 ```
 
 ---
@@ -1690,7 +1691,8 @@ Apply the smallest fix in the owning task's code. Do not weaken assertions. Re-r
 - [ ] **Step 6: Commit**
 
 ```bash
-git add .`r`ngit commit -m "test: cover RTL, OMR precision, rental overlaps and guest isolation"
+git add .
+git commit -m "test: cover RTL, OMR precision, rental overlaps and guest isolation"
 ```
 
 ---
@@ -1733,7 +1735,8 @@ Confirm health endpoint, Arabic home, English home, shop listing, rental page, a
 - [ ] **Step 6: Commit**
 
 ```bash
-git add .`r`ngit commit -m "chore: add local run scripts, demo seed and deployment notes"
+git add .
+git commit -m "chore: add local run scripts, demo seed and deployment notes"
 ```
 
 ---
