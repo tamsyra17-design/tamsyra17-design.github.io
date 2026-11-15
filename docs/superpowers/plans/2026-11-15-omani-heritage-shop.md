@@ -54,6 +54,8 @@ Run:
 ```powershell
 cd D:\xampp\htdocs\omani-shop
 composer create-project laravel/laravel:^12.0 api
+cd api
+php artisan install:api
 ```
 
 - [ ] **Step 2: Create the database and configure `.env`**
@@ -136,7 +138,7 @@ npx playwright install
 
 - [ ] **Step 2: Configure next-intl**
 
-Create `routing.ts` with locales `['ar','en']`, default `ar`. Create `middleware.ts` using `createMiddleware(routing)`. Wrap `layout.tsx` with `NextIntlClientProvider`; set `<html lang={locale} dir={locale === 'ar' ? 'rtl' : 'ltr'}>`.
+Create `routing.ts` with locales `['ar','en']`, default `ar`. Create `middleware.ts` using `createMiddleware(routing)`. Wrap `layout.tsx` with `NextIntlClientProvider`; set `<html lang={locale} dir={locale === 'ar' ? 'rtl' : 'ltr'}>`. In `next.config.ts`, wrap the config with `createNextIntlPlugin('./src/i18n/request.ts')`.
 
 - [ ] **Step 3: Add messages**
 
@@ -255,8 +257,7 @@ git commit -m "feat: add shared layout, header, footer, locale switcher"
 Run:
 ```powershell
 cd api
-composer require laravel/sanctum spatie/laravel-permission
-php artisan install:api
+composer require spatie/laravel-permission
 php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvider"
 php artisan migrate
 ```
@@ -505,6 +506,7 @@ git commit -m "feat: add products with translations and public API"
 **Files:**
 - Create: `api/database/migrations/*_create_product_images_table.php`, `*_create_product_variants_table.php`
 - Create: `api/app/Models/ProductImage.php`, `ProductVariant.php`
+- Create: `api/database/factories/ProductVariantFactory.php`
 - Modify: `api/app/Models/Product.php`
 - Create: `api/app/Filament/Resources/ProductResource/RelationManagers/ImagesRelationManager.php`, `VariantsRelationManager.php`
 - Test: `api/tests/Feature/ProductVariantTest.php`
@@ -628,6 +630,7 @@ git commit -m "feat: add Arabic-tolerant product search"
 **Files:**
 - Create: `api/database/migrations/*_create_settings_table.php`, `*_create_pages_table.php`, `*_create_shipping_zones_table.php`, `*_create_shipping_rates_table.php`
 - Create: `api/app/Models/Setting.php`, `Page.php`, `ShippingZone.php`, `ShippingRate.php`
+- Create: `api/database/factories/ShippingRateFactory.php`, `ShippingZoneFactory.php`
 - Create: `api/app/Http/Controllers/Api/V1/SettingController.php`, `PageController.php`
 - Create: `api/app/Filament/Resources/SettingResource.php`, `PageResource.php`, `ShippingZoneResource.php`
 - Test: `api/tests/Feature/PublicSettingsTest.php`
@@ -689,8 +692,8 @@ git commit -m "feat: add settings, pages and Oman shipping rates"
 - Test: `web/e2e/catalog.spec.ts`
 
 **Interfaces:**
-- Produces: `apiGet<T>(path, params?)` typed fetch wrapper.
-- Produces: `formatOmr(baisa: number): string` → `"OMR 12.500"` (3 decimals, locale-aware).
+- Produces: `apiGet<T>(path, params?)` typed fetch wrapper reading `NEXT_PUBLIC_API_URL` (default `http://localhost:8000`).
+- Produces: `formatOmr(baisa: number, locale: 'ar' | 'en' = 'en'): string` → `"OMR 12.500"` for English, `"ر.ع. ١٢٫٥٠٠"` for Arabic (3 decimals, locale-aware).
 - Consumes: `GET /api/v1/products`, `GET /api/v1/categories`.
 
 - [ ] **Step 1: Write the failing test**
@@ -713,7 +716,7 @@ Expected: FAIL.
 
 - [ ] **Step 3: Implement API client, money helper, cards and pages**
 
-`formatOmr` divides baisa by 1000 and uses `Intl.NumberFormat('ar-OM', { style: 'currency', currency: 'OMR', minimumFractionDigits: 3 })`. ProductCard shows image, localized name, price, and rental badge if `is_rentable`. Pages fetch server-side with `cache: 'no-store'` in dev.
+`formatOmr` divides baisa by 1000 and uses `Intl.NumberFormat(locale === 'ar' ? 'ar-OM' : 'en-OM', { style: 'currency', currency: 'OMR', minimumFractionDigits: 3 })`. ProductCard shows image, localized name, price, and rental badge if `is_rentable`; it sets `data-testid="product-card"`. Price sets `data-testid="price"`. Pages fetch server-side with `cache: 'no-store'` in dev.
 
 - [ ] **Step 4: Run the test to verify it passes**
 
@@ -741,7 +744,9 @@ git commit -m "feat: add storefront catalog pages and OMR formatting"
 - Produces: `useCartStore` with `items`, `addItem(product, variant, qty)`, `removeItem`, `clear`, `subtotalBaisa`.
 - Produces: product detail page with gallery, price, stock state, add-to-cart, rental CTA if rentable.
 
-- [ ] **Step 1: Write the failing cart unit test**
+- [ ] **Step 1: Install Vitest and write the failing cart unit test**
+
+Run: `cd web; npm install -D vitest jsdom`. Create `web/vitest.config.ts` with `test: { environment: 'jsdom' }`.
 
 ```ts
 // web/src/stores/cart.test.ts
@@ -787,7 +792,7 @@ Expected: FAIL.
 
 - [ ] **Step 6: Implement detail page and button**
 
-Fetch `GET /api/v1/products/{slug}`. Disable add-to-cart when `!inStock`. Show rental CTA linking to `/rental/{slug}`. Header cart count reads Zustand.
+Fetch `GET /api/v1/products/{slug}`. Disable add-to-cart when `!inStock`. Show rental CTA linking to `/rental/{slug}`. Header cart count reads Zustand and sets `data-testid="cart-count"`. The add button sets `data-testid="add-to-cart"`.
 
 - [ ] **Step 7: Run tests to verify they pass**
 
@@ -838,7 +843,7 @@ Expected: FAIL.
 
 - [ ] **Step 3: Implement cart and checkout shell**
 
-Cart line shows localized name, unit price, qty stepper, line total, remove. Summary shows subtotal and "shipping calculated at checkout". Checkout shows address/payment placeholders and disabled submit until Task 14.
+Cart line shows localized name, unit price, qty stepper, line total, remove. Qty increase sets `data-testid="qty-plus"`. Summary shows subtotal with `data-testid="cart-subtotal"` and "shipping calculated at checkout". Checkout shows address/payment placeholders and disabled submit until Task 14.
 
 - [ ] **Step 4: Run the test to verify it passes**
 
@@ -859,10 +864,12 @@ git commit -m "feat: add cart page and checkout shell"
 **Files:**
 - Create: `api/database/migrations/*_create_orders_table.php`, `*_create_order_items_table.php`, `*_create_payments_table.php`
 - Create: `api/app/Models/Order.php`, `OrderItem.php`, `Payment.php`
+- Create: `api/database/factories/OrderFactory.php`, `PaymentFactory.php`
 - Create: `api/app/Http/Controllers/Api/V1/OrderController.php`
 - Create: `api/app/Http/Requests/StoreOrderRequest.php`
 - Create: `api/app/Services/OrderNumberGenerator.php`
 - Create: `api/app/Services/ShippingCalculator.php`
+- Create: `api/app/Services/Payments/PaymentManager.php`, `PaymentDriver.php`, `CodDriver.php`, `BankTransferDriver.php`
 - Test: `api/tests/Feature/OrderApiTest.php`
 
 **Interfaces:**
@@ -876,9 +883,10 @@ git commit -m "feat: add cart page and checkout shell"
 <?php
 // api/tests/Feature/OrderApiTest.php
 it('creates a COD order and decrements stock', function () {
-    $p = \App\Models\Product::factory()->create(['price_baisa' => 10000]);
+    $p = \App\Models\Product::factory()->create(['price_baisa' => 10000, 'weight_grams' => 500]);
     $v = \App\Models\ProductVariant::factory()->create(['product_id' => $p->id, 'sale_stock' => 5]);
-    \App\Models\ShippingRate::factory()->create(['governorate' => 'Muscat', 'rate_baisa' => 2000, 'min_weight_grams' => 0, 'max_weight_grams' => 5000]);
+    $zone = \App\Models\ShippingZone::factory()->create(['governorate' => 'Muscat']);
+    \App\Models\ShippingRate::factory()->create(['shipping_zone_id' => $zone->id, 'rate_baisa' => 2000, 'min_weight_grams' => 0, 'max_weight_grams' => 5000]);
 
     $this->postJson('/api/v1/orders', [
         'customer' => ['name' => 'Salim', 'phone' => '+96890000000', 'email' => 's@example.com'],
@@ -900,9 +908,9 @@ Expected: FAIL.
 
 `orders`: number unique, customer fields, address JSON snapshot, subtotal/shipping/total baisa, status, payment_status, payment_method, placed_at. `order_items`: order_id, product_id, variant_id, name snapshot JSON, sku, unit_price_baisa, qty, line_total_baisa. `payments`: payable morph, gateway, method, amount_baisa, status, transaction_ref, payload JSON, paid_at.
 
-- [ ] **Step 4: Implement order service**
+- [ ] **Step 4: Implement order service and payment manager**
 
-Validate stock in a DB transaction with `lockForUpdate()`. Calculate subtotal, shipping, total. Create order/items/payment. Decrement variant stock. Return `OrderResource`.
+Validate stock in a DB transaction with `lockForUpdate()`. Calculate subtotal, shipping, total. Create order/items/payment. Decrement variant stock. Return `OrderResource`. Create `PaymentManager` with `driver(string $method): PaymentDriver`; `CodDriver` marks payment pending, `BankTransferDriver` returns bank instructions. `GatewayDriver` is added in Task 23.
 
 - [ ] **Step 5: Run the test to verify it passes**
 
@@ -960,7 +968,7 @@ Expected: FAIL.
 
 - [ ] **Step 3: Implement address form, payment picker and submit**
 
-Use React Hook Form + Zod. Governorate select from `/api/v1/settings/public` or hardcoded Oman list; wilayat text. On success clear cart and navigate.
+Use React Hook Form + Zod. Governorate select from `/api/v1/settings/public` or hardcoded Oman list; wilayat text. On success clear cart and navigate. The order number element sets `data-testid="order-number"`; the place-order button sets `data-testid="place-order"`.
 
 - [ ] **Step 4: Implement order detail and guest tracking**
 
@@ -985,6 +993,7 @@ git commit -m "feat: add guest checkout, confirmation and order tracking"
 **Files:**
 - Create: `api/database/migrations/*_create_rental_policies_table.php`
 - Create: `api/app/Models/RentalPolicy.php`
+- Create: `api/database/factories/RentalPolicyFactory.php`
 - Create: `api/app/Filament/Resources/RentalPolicyResource.php`
 - Create: `api/database/seeders/RentalPolicySeeder.php`
 - Test: `api/tests/Feature/RentalPolicyTest.php`
@@ -1034,7 +1043,8 @@ git commit -m "feat: add configurable rental policies"
 
 **Files:**
 - Create: `api/database/migrations/*_create_rental_units_table.php`, `*_create_rental_bookings_table.php`
-- Create: `api/app/Models/RentalUnit.php`
+- Create: `api/app/Models/RentalUnit.php`, `RentalBooking.php`
+- Create: `api/database/factories/RentalUnitFactory.php`, `RentalBookingFactory.php`
 - Create: `api/app/Services/RentalAvailabilityService.php`
 - Create: `api/app/Http/Controllers/Api/V1/RentalAvailabilityController.php`
 - Create: `api/app/Filament/Resources/RentalUnitResource.php`
@@ -1123,9 +1133,9 @@ it('charges base fee plus extra days', function () {
     $quote = app(\App\Services\RentalPricingService::class)
         ->quote($p, \Carbon\Carbon::parse('2026-12-01'), \Carbon\Carbon::parse('2026-12-05'), $policy);
 
-    expect($quote->days)->toBe(5);
-    expect($quote->extra_days)->toBe(3);
-    expect($quote->total_baisa)->toBe(29000); // 10000 + 3*3000 + 20000 deposit
+    expect($quote->days)->toBe(4);
+    expect($quote->extra_days)->toBe(2);
+    expect($quote->total_baisa)->toBe(36000); // 10000 + 2*3000 + 20000 deposit
 });
 ```
 
@@ -1205,7 +1215,7 @@ Expected: FAIL.
 
 - [ ] **Step 3: Implement rental listing and detail**
 
-Listing uses rental product API with badge "For rent". Detail has date inputs, availability message, quote card (days, base fee, extra days, deposit, total), and CTA. Disable CTA when unavailable or invalid range.
+Listing uses rental product API with badge "For rent"; cards set `data-testid="rental-card"`. Detail has date inputs (`data-testid="rental-from"` and `data-testid="rental-to"`), availability message, quote card (days, base fee, extra days, deposit, total with `data-testid="rental-total"`), and CTA. Disable CTA when unavailable or invalid range.
 
 - [ ] **Step 4: Run the test to verify it passes**
 
@@ -1226,6 +1236,7 @@ git commit -m "feat: add rental storefront with availability and live quote"
 **Files:**
 - Create: `api/database/migrations/*_create_rentals_table.php`, `*_create_rental_items_table.php`, `*_create_rental_deposits_table.php`, `*_create_rental_returns_table.php`
 - Create: `api/app/Models/Rental.php`, `RentalItem.php`, `RentalDeposit.php`, `RentalReturn.php`
+- Create: `api/database/factories/RentalFactory.php`, `RentalDepositFactory.php`
 - Create: `api/app/Http/Controllers/Api/V1/RentalController.php`
 - Create: `api/app/Http/Requests/StoreRentalRequest.php`
 - Create: `api/app/Services/RentalNumberGenerator.php`
@@ -1325,7 +1336,7 @@ Expected: FAIL.
 
 - [ ] **Step 3: Implement form and confirmation**
 
-Show ID upload only when policy requires it. Show contract checkbox only when required. Submit `POST /api/v1/rentals`, redirect to `/rentals/{number}`. Confirmation shows deposit status as "pending" until admin records it.
+Show ID upload only when policy requires it. Show contract checkbox only when required. Submit `POST /api/v1/rentals`, redirect to `/rentals/{number}`. The book button sets `data-testid="book-rental"`; the rental number sets `data-testid="rental-number"`. Confirmation shows deposit status as "pending" until admin records it.
 
 - [ ] **Step 4: Run the test to verify it passes**
 
@@ -1397,9 +1408,9 @@ git commit -m "feat: add rental admin actions, returns and deposit release"
 ### Task 23: Payment adapters and idempotent webhook
 
 **Files:**
-- Create: `api/app/Services/Payments/PaymentManager.php`, `PaymentDriver.php`, `CodDriver.php`, `BankTransferDriver.php`, `GatewayDriver.php`
+- Create: `api/app/Services/Payments/GatewayDriver.php`
+- Modify: `api/app/Services/Payments/PaymentManager.php` (add gateway resolution)
 - Create: `api/app/Http/Controllers/Api/V1/PaymentWebhookController.php`
-- Modify: `api/app/Services/Payments/PaymentManager.php` in Task 14 order flow
 - Test: `api/tests/Feature/PaymentWebhookTest.php`
 
 **Interfaces:**
@@ -1497,6 +1508,9 @@ Find active zone by governorate, matching weight band, apply free threshold. Ord
 import { test, expect } from '@playwright/test';
 
 test('shows shipping when governorate is selected', async ({ page }) => {
+  await page.goto('http://localhost:3000/en/shop');
+  await page.getByTestId('product-card').first().click();
+  await page.getByTestId('add-to-cart').click();
   await page.goto('http://localhost:3000/en/checkout');
   await page.getByLabel('Governorate').selectOption('Muscat');
   await expect(page.getByTestId('shipping-total')).toContainText('OMR');
@@ -1505,7 +1519,7 @@ test('shows shipping when governorate is selected', async ({ page }) => {
 
 - [ ] **Step 5: Implement checkout shipping display**
 
-Fetch rate when governorate changes; show shipping total and grand total. Disable place-order if no rate.
+Fetch rate when governorate changes; show shipping total (with `data-testid="shipping-total"`) and grand total. Disable place-order if no rate.
 
 - [ ] **Step 6: Run tests to verify they pass**
 
@@ -1634,9 +1648,12 @@ git commit -m "feat: add SEO metadata, sitemap and CMS pages"
 // web/e2e/rtl.spec.ts
 import { test, expect } from '@playwright/test';
 test('keeps OMR and phone readable in RTL', async ({ page }) => {
+  await page.goto('http://localhost:3000/ar/shop');
+  await page.getByTestId('product-card').first().click();
+  await page.getByTestId('add-to-cart').click();
   await page.goto('http://localhost:3000/ar/cart');
-  await expect(page.locator('[data-testid="cart-subtotal"]')).toContainText('ر.ع.');
-  await expect(page.locator('[data-testid="cart-subtotal"]')).toHaveCSS('direction', 'rtl');
+  await expect(page.locator('html')).toHaveAttribute('dir', 'rtl');
+  await expect(page.getByTestId('cart-subtotal')).toContainText('ر.ع.');
 });
 ```
 
