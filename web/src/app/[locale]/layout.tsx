@@ -1,8 +1,10 @@
 import type { Metadata } from 'next';
-import { Geist, Geist_Mono } from 'next/font/google';
+import { Geist, Geist_Mono, IBM_Plex_Sans_Arabic } from 'next/font/google';
 import { hasLocale, NextIntlClientProvider } from 'next-intl';
 import { setRequestLocale } from 'next-intl/server';
 import { notFound } from 'next/navigation';
+import Footer from '@/components/layout/Footer';
+import Header from '@/components/layout/Header';
 import { routing } from '@/i18n/routing';
 import '../globals.css';
 
@@ -14,6 +16,13 @@ const geistSans = Geist({
 const geistMono = Geist_Mono({
   variable: '--font-geist-mono',
   subsets: ['latin'],
+});
+
+const arabicSans = IBM_Plex_Sans_Arabic({
+  variable: '--font-ibm-plex-sans-arabic',
+  subsets: ['arabic'],
+  weight: ['400', '500', '600'],
+  display: 'swap',
 });
 
 export const metadata: Metadata = {
@@ -41,10 +50,20 @@ export default async function LocaleLayout({
     <html
       lang={locale}
       dir={locale === 'ar' ? 'rtl' : 'ltr'}
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${arabicSans.variable} h-full antialiased`}
     >
-      <body className="flex min-h-full flex-col">
-        <NextIntlClientProvider>{children}</NextIntlClientProvider>
+      <body
+        className={`${
+          locale === 'ar' ? 'font-arabic' : 'font-sans'
+        } flex min-h-full flex-col bg-background text-foreground`}
+      >
+        <NextIntlClientProvider>
+          <Header />
+          <main id="main-content" className="flex flex-1 flex-col">
+            {children}
+          </main>
+          <Footer />
+        </NextIntlClientProvider>
       </body>
     </html>
   );

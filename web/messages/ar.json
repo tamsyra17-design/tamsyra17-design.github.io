@@ -1,4 +1,27 @@
 {
+  "site": {
+    "name": "تراث عماني"
+  },
+  "nav": {
+    "mainLabel": "التنقل الرئيسي",
+    "home": "الرئيسية",
+    "shop": "المتجر",
+    "rental": "التأجير",
+    "cart": "السلة",
+    "account": "حسابي"
+  },
+  "localeSwitcher": {
+    "label": "اللغة",
+    "switchToArabic": "العربية",
+    "switchToEnglish": "English"
+  },
+  "a11y": {
+    "skipToContent": "تخطي إلى المحتوى"
+  },
+  "footer": {
+    "tagline": "قطع تراثية عمانية أصيلة للبيع والإيجار.",
+    "copyright": "© تراث عماني. جميع الحقوق محفوظة."
+  },
   "home": {
     "title": "تراث عماني",
     "subtitle": "بيع وتأجير القطع التراثية"

@@ -11,6 +11,11 @@ export default defineConfig({
   use: {
     baseURL,
     trace: 'on-first-retry',
+    launchOptions: {
+      // The GPU process cannot start in this Windows environment; headless
+      // Chromium still renders correctly with software rendering.
+      args: ['--disable-gpu'],
+    },
   },
   projects: [{ name: 'chromium', use: { ...devices['Desktop Chrome'] } }],
   webServer: {

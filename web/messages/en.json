@@ -1,4 +1,27 @@
 {
+  "site": {
+    "name": "Omani Heritage"
+  },
+  "nav": {
+    "mainLabel": "Main navigation",
+    "home": "Home",
+    "shop": "Shop",
+    "rental": "Rental",
+    "cart": "Cart",
+    "account": "Account"
+  },
+  "localeSwitcher": {
+    "label": "Language",
+    "switchToArabic": "العربية",
+    "switchToEnglish": "English"
+  },
+  "a11y": {
+    "skipToContent": "Skip to content"
+  },
+  "footer": {
+    "tagline": "Authentic Omani heritage pieces to buy and rent.",
+    "copyright": "© Omani Heritage. All rights reserved."
+  },
   "home": {
     "title": "Omani Heritage",
     "subtitle": "Buy and rent heritage pieces"
