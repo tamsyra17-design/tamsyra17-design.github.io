@@ -64,6 +64,9 @@ return [
         'weight_grams' => 'Weight (grams)',
         'is_rentable' => 'Rentable',
         'is_featured' => 'Featured',
+        'model_3d_url' => '3D model (GLB, meshopt-compressed)',
+        'model_3d_poster' => '3D model poster',
+        'model_3d_help' => 'Optional. Optimise the GLB with `npm run glb:optimize` first; files above 1.5 MB are refused.',
         'primary_image' => 'Image',
         'alt' => 'Alt text',
         'alt_ar' => 'Alt text (Arabic)',
@@ -128,6 +131,7 @@ return [
         'rates' => 'Rates',
     ],
     'sections' => [
+        'model_3d' => '3D model',
         'basic' => 'Basic information',
         'pricing' => 'Pricing',
         'flags' => 'Flags',

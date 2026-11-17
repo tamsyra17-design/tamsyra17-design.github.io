@@ -32,6 +32,8 @@ class ProductDetailResource extends JsonResource
             'is_featured' => $this->is_featured,
             'available_for_sale' => $this->isAvailableForSale(),
             'available_for_rental' => $this->isAvailableForRental(),
+            'model_3d_url' => ProductResource::publicUrl($this->model_3d_url),
+            'model_3d_poster' => ProductResource::publicUrl($this->model_3d_poster),
             'category' => $this->category ? new CategoryResource($this->category) : null,
             'images' => $this->imagesPayload(),
             'variants' => $this->variantsPayload(),

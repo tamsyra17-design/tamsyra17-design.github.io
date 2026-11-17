@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\ProductResource\Schemas;
 
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
@@ -100,6 +101,28 @@ class ProductForm
                         Toggle::make('is_featured')
                             ->label(__('admin.fields.is_featured'))
                             ->default(false),
+                    ]),
+                Section::make(__('admin.sections.model_3d'))
+                    ->description(__('admin.fields.model_3d_help'))
+                    ->columns(2)
+                    ->collapsible()
+                    ->schema([
+                        // .glb is often reported as application/octet-stream by the
+                        // browser and by finfo, so accept both; the extension map
+                        // keeps the picker filtered to GLB files.
+                        FileUpload::make('model_3d_url')
+                            ->label(__('admin.fields.model_3d_url'))
+                            ->disk('public')
+                            ->directory('models')
+                            ->acceptedFileTypes(['model/gltf-binary', 'application/octet-stream'])
+                            ->mimeTypeMap(['glb' => 'model/gltf-binary'])
+                            ->maxSize(1536),
+                        FileUpload::make('model_3d_poster')
+                            ->label(__('admin.fields.model_3d_poster'))
+                            ->disk('public')
+                            ->directory('models')
+                            ->image()
+                            ->maxSize(512),
                     ]),
             ]);
     }

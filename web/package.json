@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "eslint",
     "test:e2e": "playwright test",
-    "budget": "node scripts/budget.mjs"
+    "budget": "node scripts/budget.mjs",
+    "glb:optimize": "node scripts/optimize-glb.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^7.0.6",
@@ -25,6 +26,7 @@
     "zustand": "^5.1.0"
   },
   "devDependencies": {
+    "@gltf-transform/cli": "^4.5.1",
     "@playwright/test": "^1.65.1",
     "@tailwindcss/turbopack": "4.3.3",
     "@types/node": "^24.19.2",

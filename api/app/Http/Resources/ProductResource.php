@@ -5,6 +5,8 @@ namespace App\Http\Resources;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 /**
  * List shape: enough for a product card.
@@ -30,7 +32,26 @@ class ProductResource extends JsonResource
             'is_featured' => $this->is_featured,
             'available_for_sale' => $this->isAvailableForSale(),
             'available_for_rental' => $this->isAvailableForRental(),
+            'model_3d_url' => self::publicUrl($this->model_3d_url),
+            'model_3d_poster' => self::publicUrl($this->model_3d_poster),
         ];
+    }
+
+    /**
+     * Admin uploads store a public-disk path; seeded or external values may
+     * already be absolute. Clients always receive an absolute URL or null.
+     */
+    public static function publicUrl(?string $value): ?string
+    {
+        if ($value === null || trim($value) === '') {
+            return null;
+        }
+
+        if (Str::startsWith($value, ['http://', 'https://', '//'])) {
+            return $value;
+        }
+
+        return Storage::disk('public')->url($value);
     }
 
     /**

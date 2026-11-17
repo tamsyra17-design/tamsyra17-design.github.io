@@ -34,6 +34,8 @@ class Product extends Model
         'is_rentable',
         'is_featured',
         'weight_grams',
+        'model_3d_url',
+        'model_3d_poster',
     ];
 
     /**
