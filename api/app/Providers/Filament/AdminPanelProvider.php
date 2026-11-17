@@ -32,7 +32,8 @@ class AdminPanelProvider extends PanelProvider
             ->login()
             ->authGuard('web')
             ->colors([
-                'primary' => Color::Amber,
+                // Matches the storefront's --brand-green token.
+                'primary' => Color::hex('#0e4f3c'),
             ])
             ->userMenuItems([
                 'locale.ar' => Action::make('locale.ar')

@@ -49,6 +49,34 @@ it('lets a super admin manage users', function () {
     $this->actingAs($admin)->get('/admin/users')->assertOk();
 });
 
+it('localizes the user resource labels', function () {
+    $admin = User::factory()->create();
+    $admin->assignRole('super_admin');
+
+    $this->actingAs($admin)
+        ->get('/admin/users')
+        ->assertOk()
+        ->assertSee('المستخدمون')
+        ->assertSee('البريد الإلكتروني');
+
+    $this->actingAs($admin)
+        ->get('/admin/users?locale=en')
+        ->assertOk()
+        ->assertSee('Users')
+        ->assertSee('Email address');
+});
+
+it('stops a super admin from deleting their own account', function () {
+    $admin = User::factory()->create();
+    $admin->assignRole('super_admin');
+
+    $other = User::factory()->create();
+    $other->assignRole('super_admin');
+
+    expect($admin->can('delete', $admin))->toBeFalse()
+        ->and($admin->can('delete', $other))->toBeTrue();
+});
+
 it('forbids non-super staff from the user resource', function (string $role) {
     $staff = User::factory()->create();
     $staff->assignRole($role);

@@ -13,19 +13,22 @@ class UserForm
         return $schema
             ->components([
                 TextInput::make('name')
+                    ->label(__('admin.fields.name'))
                     ->required()
                     ->maxLength(255),
                 TextInput::make('email')
-                    ->label('Email address')
+                    ->label(__('admin.fields.email'))
                     ->email()
                     ->required()
                     ->maxLength(255)
                     ->unique(ignoreRecord: true),
                 TextInput::make('phone')
+                    ->label(__('admin.fields.phone'))
                     ->tel()
                     ->maxLength(32)
                     ->unique(ignoreRecord: true),
                 TextInput::make('password')
+                    ->label(__('admin.fields.password'))
                     ->password()
                     ->revealable()
                     ->required(fn (string $operation): bool => $operation === 'create')
@@ -33,6 +36,7 @@ class UserForm
                     ->minLength(8)
                     ->maxLength(255),
                 Select::make('roles')
+                    ->label(__('admin.fields.roles'))
                     ->relationship('roles', 'name')
                     ->multiple()
                     ->preload()
