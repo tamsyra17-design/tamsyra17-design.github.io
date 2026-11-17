@@ -8,7 +8,8 @@
     "shop": "Shop",
     "rental": "Rental",
     "cart": "Cart",
-    "account": "Account"
+    "account": "Account",
+    "track": "Track order"
   },
   "localeSwitcher": {
     "label": "Language",
@@ -71,16 +72,88 @@
   },
   "checkout": {
     "title": "Checkout",
-    "address": "Shipping address",
     "fullName": "Full name",
     "phone": "Phone",
     "governorate": "Governorate",
     "addressLine": "Address",
     "payment": "Payment",
-    "paymentPlaceholder": "Payment options will be available soon.",
-    "comingSoon": "Checkout is not open yet.",
     "placeOrder": "Place order",
     "backToCart": "Back to cart",
-    "redirecting": "Your cart is empty. Returning to the cart…"
+    "redirecting": "Your cart is empty. Returning to the cart…",
+    "delivery": "Delivery details",
+    "email": "Email (optional)",
+    "selectGovernorate": "Select a governorate",
+    "wilayat": "Wilayat",
+    "placing": "Placing your order…",
+    "shippingNote": "Shipping is calculated from your governorate and shown on the confirmation.",
+    "methods": {
+      "cod": {
+        "label": "Cash on delivery",
+        "hint": "Pay in cash when your order arrives."
+      },
+      "bank_transfer": {
+        "label": "Bank transfer",
+        "hint": "Transfer the total to our bank account; details follow on the confirmation."
+      }
+    },
+    "errors": {
+      "required": "This field is required.",
+      "phone": "Enter a valid phone number, e.g. +968 9123 4567.",
+      "email": "Enter a valid email or leave it blank.",
+      "governorate": "Select a governorate.",
+      "invalid": "Please check the highlighted fields.",
+      "network": "We could not place your order. Check your connection and try again.",
+      "unorderable": "These items can no longer be ordered. Remove them from your cart: {names}"
+    }
+  },
+  "order": {
+    "title": "Your order",
+    "thanks": "Thank you! Your order has been received.",
+    "verify": "Enter the phone number used at checkout to view this order.",
+    "number": "Order number",
+    "placedAt": "Placed {date}",
+    "timeline": "Order progress",
+    "statusLabel": "Status",
+    "status": {
+      "pending": "Received",
+      "processing": "Processing",
+      "shipped": "Shipped",
+      "delivered": "Delivered",
+      "cancelled": "Cancelled"
+    },
+    "paymentStatus": {
+      "pending": "Awaiting payment",
+      "paid": "Paid",
+      "failed": "Failed",
+      "refunded": "Refunded"
+    },
+    "items": "Items",
+    "subtotal": "Subtotal",
+    "shipping": "Shipping",
+    "total": "Total",
+    "shippingAddress": "Delivery to",
+    "place": "{wilayat}, {governorate}",
+    "payment": "Payment",
+    "bank": {
+      "bank_name": "Bank",
+      "account_name": "Account name",
+      "account_number": "Account number",
+      "iban": "IBAN",
+      "swift": "SWIFT",
+      "reference": "Reference"
+    }
+  },
+  "track": {
+    "title": "Track your order",
+    "intro": "Enter your order number and the phone number used at checkout.",
+    "number": "Order number",
+    "phone": "Phone",
+    "submit": "Find order",
+    "notFound": "No order matches that number and phone.",
+    "failed": "We could not look up your order. Please try again.",
+    "errors": {
+      "number": "Enter your order number.",
+      "phone": "Enter a valid phone number."
+    }
   }
 }

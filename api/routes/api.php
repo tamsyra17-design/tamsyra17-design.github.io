@@ -25,6 +25,9 @@ Route::get('/v1/pages/{slug}', [PageController::class, 'show']);
 // its own throttle bucket to blunt scripted stock-hoarding.
 Route::post('/v1/orders', [OrderController::class, 'store'])->middleware('throttle:10,1,orders-store');
 
+// Guest tracking: number + phone. Throttled to slow number/phone guessing.
+Route::get('/v1/orders/{number}', [OrderController::class, 'show'])->middleware('throttle:30,1,orders-show');
+
 Route::prefix('v1/auth')->group(function () {
     // Both endpoints are unauthenticated writes, so each gets its own named
     // throttle bucket: registration is looser (shared NATs) than login, which

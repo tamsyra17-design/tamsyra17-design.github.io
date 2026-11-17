@@ -150,3 +150,36 @@ it('throws when no weight band matches', function () {
 
     (new ShippingCalculator)->rateFor('Muscat', 1001, 0);
 })->throws(ShippingUnavailableException::class);
+
+it('shows an order to a guest with the matching phone', function () {
+    $v = orderFixture();
+    $number = $this->postJson('/api/v1/orders', orderPayload($v, 1))->json('data.number');
+
+    $this->getJson("/api/v1/orders/{$number}?phone=".urlencode('+968 9000 0000'))
+        ->assertOk()
+        ->assertJsonPath('data.number', $number)
+        ->assertJsonPath('data.address.line1', 'Al Khuwair')
+        ->assertJsonPath('data.customer.email', 's@example.com')
+        ->assertJsonPath('data.items.0.qty', 1);
+});
+
+it('hides an order behind a 404 without the matching phone', function (?string $phone) {
+    $v = orderFixture();
+    $number = $this->postJson('/api/v1/orders', orderPayload($v, 1))->json('data.number');
+
+    $url = "/api/v1/orders/{$number}".($phone === null ? '' : '?phone='.urlencode($phone));
+
+    $response = $this->getJson($url)->assertNotFound();
+
+    expect($response->getContent())
+        ->not->toContain('Al Khuwair')
+        ->not->toContain('s@example.com');
+})->with([
+    'missing phone' => [null],
+    'empty phone' => [''],
+    'wrong phone' => ['+96899999999'],
+]);
+
+it('returns 404 for an unknown order number', function () {
+    $this->getJson('/api/v1/orders/ORD-000000-XXXXXX?phone=96890000000')->assertNotFound();
+});

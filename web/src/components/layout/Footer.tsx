@@ -1,8 +1,10 @@
 import { useTranslations } from 'next-intl';
+import { Link } from '@/i18n/navigation';
 
 export default function Footer() {
   const t = useTranslations('footer');
   const tSite = useTranslations('site');
+  const tNav = useTranslations('nav');
 
   return (
     <footer className="bg-brand-green text-brand-sand">
@@ -11,6 +13,12 @@ export default function Footer() {
           {tSite('name')}
         </p>
         <p className="max-w-sm text-sm text-brand-sand/80">{t('tagline')}</p>
+        <Link
+          href="/track"
+          className="w-fit text-sm text-white underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-brand-gold"
+        >
+          {tNav('track')}
+        </Link>
       </div>
 
       <div className="border-t border-white/15">
