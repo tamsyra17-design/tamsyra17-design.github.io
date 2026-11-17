@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\V1\OrderController;
 use App\Http\Controllers\Api\V1\PageController;
 use App\Http\Controllers\Api\V1\ProductController;
 use App\Http\Controllers\Api\V1\RentalAvailabilityController;
+use App\Http\Controllers\Api\V1\RentalQuoteController;
 use App\Http\Controllers\Api\V1\SettingController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -30,6 +31,8 @@ Route::post('/v1/orders', [OrderController::class, 'store'])->middleware('thrott
 
 // Guest tracking: number + phone. Throttled to slow number/phone guessing.
 Route::get('/v1/orders/{number}', [OrderController::class, 'show'])->middleware('throttle:30,1,orders-show');
+
+Route::post('/v1/rental/quote', [RentalQuoteController::class, 'store']);
 
 Route::prefix('v1/auth')->group(function () {
     // Both endpoints are unauthenticated writes, so each gets its own named
