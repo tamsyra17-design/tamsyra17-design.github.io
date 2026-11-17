@@ -18,6 +18,8 @@ import {
 } from '@/lib/orders';
 import { useCartStore } from '@/stores/cart';
 import { useCartHydrated } from '@/stores/useCartHydrated';
+import { apiGet } from '@/lib/api';
+import { formatOmr } from '@/lib/money';
 import { lineName } from './CartLine';
 import CartSummary from './CartSummary';
 import { CartSkeleton } from './CartView';
@@ -55,6 +57,8 @@ export default function CheckoutView({ locale, paymentMethods }: CheckoutViewPro
   // Set once the order exists. The cart is cleared only after this commits,
   // so the empty-cart redirect below never races the confirmation redirect.
   const [placedNumber, setPlacedNumber] = useState<string | null>(null);
+  const [shippingRate, setShippingRate] = useState<number | null>(null);
+  const [shippingFree, setShippingFree] = useState(false);
 
   const schema = useMemo(() => checkoutSchema(t), [t]);
   const form = useForm<CheckoutValues>({
@@ -69,6 +73,37 @@ export default function CheckoutView({ locale, paymentMethods }: CheckoutViewPro
       paymentMethod: paymentMethods[0] ?? 'cod',
     },
   });
+
+  const governorate = form.watch('governorate');
+  const subtotalBaisa = items.reduce((sum, item) => sum + item.priceBaisa * item.qty, 0);
+
+  useEffect(() => {
+    if (!governorate) {
+      setShippingRate(null);
+      setShippingFree(false);
+      return;
+    }
+    let cancelled = false;
+    apiGet<{ data: { rate_baisa: number; free: boolean } }>(
+      '/api/v1/shipping/rates',
+      { governorate, weight_grams: 0, subtotal_baisa: subtotalBaisa },
+    )
+      .then((res) => {
+        if (!cancelled) {
+          setShippingRate(res.data.rate_baisa);
+          setShippingFree(res.data.free);
+        }
+      })
+      .catch(() => {
+        if (!cancelled) {
+          setShippingRate(null);
+          setShippingFree(false);
+        }
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [governorate, subtotalBaisa]);
 
   const isEmpty = hydrated && items.length === 0;
   // Lines saved before the product had a sellable variant cannot be ordered.
@@ -187,6 +222,13 @@ export default function CheckoutView({ locale, paymentMethods }: CheckoutViewPro
           {formError && (
             <p role="alert" data-testid="checkout-error" className="text-sm text-red-700 dark:text-red-400">
               {formError}
+            </p>
+          )}
+
+          {shippingRate !== null && (
+            <p data-testid="shipping-total" className="text-sm text-zinc-600 dark:text-zinc-400">
+              {t('shipping')}: {formatOmr(shippingRate, locale)}
+              {shippingFree ? ` (${t('freeShipping')})` : ''}
             </p>
           )}
 

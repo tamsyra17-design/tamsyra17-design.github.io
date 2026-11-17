@@ -104,7 +104,9 @@
       "invalid": "Please check the highlighted fields.",
       "network": "We could not place your order. Check your connection and try again.",
       "unorderable": "These items can no longer be ordered. Remove them from your cart: {names}"
-    }
+    },
+    "shipping": "Shipping",
+    "freeShipping": "Free shipping"
   },
   "order": {
     "title": "Your order",
