@@ -25,5 +25,13 @@
   "home": {
     "title": "تراث عماني",
     "subtitle": "بيع وتأجير القطع التراثية"
+  },
+  "catalog": {
+    "shopTitle": "المتجر",
+    "categoriesLabel": "الفئات",
+    "all": "الكل",
+    "rentable": "للإيجار",
+    "outOfStock": "غير متوفر",
+    "empty": "لا توجد منتجات."
   }
 }

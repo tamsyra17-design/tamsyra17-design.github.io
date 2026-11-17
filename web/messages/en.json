@@ -25,5 +25,13 @@
   "home": {
     "title": "Omani Heritage",
     "subtitle": "Buy and rent heritage pieces"
+  },
+  "catalog": {
+    "shopTitle": "Shop",
+    "categoriesLabel": "Categories",
+    "all": "All",
+    "rentable": "For rent",
+    "outOfStock": "Out of stock",
+    "empty": "No products found."
   }
 }

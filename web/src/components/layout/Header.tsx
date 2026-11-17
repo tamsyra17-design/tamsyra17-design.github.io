@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
 import LocaleSwitcher from './LocaleSwitcher';
@@ -45,7 +46,9 @@ export default function Header() {
             </ul>
           </nav>
 
-          <LocaleSwitcher />
+          <Suspense fallback={null}>
+            <LocaleSwitcher />
+          </Suspense>
         </div>
       </div>
     </header>
