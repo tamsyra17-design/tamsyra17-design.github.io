@@ -49,3 +49,29 @@ export async function apiGet<T>(
 
   return (await response.json()) as T;
 }
+
+/** Typed POST against the Laravel API. */
+export async function apiPost<T>(
+  path: string,
+  body?: unknown,
+  init?: RequestInit,
+): Promise<T> {
+  const url = apiUrl(path);
+  const response = await fetch(url, {
+    method: 'POST',
+    cache: 'no-store',
+    ...init,
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      ...init?.headers,
+    },
+    body: body === undefined ? undefined : JSON.stringify(body),
+  });
+
+  if (!response.ok) {
+    throw new ApiError(response.status, url);
+  }
+
+  return (await response.json()) as T;
+}

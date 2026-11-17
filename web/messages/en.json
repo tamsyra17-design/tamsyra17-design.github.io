@@ -155,5 +155,22 @@
       "number": "Enter your order number.",
       "phone": "Enter a valid phone number."
     }
+  },
+  "rental": {
+    "title": "Rental",
+    "empty": "No rental items.",
+    "detailTitle": "Rental details",
+    "forRent": "For rent",
+    "from": "From",
+    "to": "To",
+    "available": "{count} units available",
+    "unavailable": "Unavailable",
+    "days": "Days",
+    "baseFee": "Base fee",
+    "extraDays": "Extra days",
+    "deposit": "Deposit",
+    "total": "Total",
+    "bookRental": "Book rental",
+    "quoteError": "Could not calculate quote"
   }
 }
