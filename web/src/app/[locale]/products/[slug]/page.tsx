@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import { hasLocale } from 'next-intl';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { notFound } from 'next/navigation';
@@ -11,6 +12,19 @@ import { ApiError, apiGet } from '@/lib/api';
 import { translate, type ProductDetail, type Resource } from '@/lib/types';
 
 type ProductPageProps = PageProps<'/[locale]/products/[slug]'>;
+
+export async function generateMetadata({ params }: ProductPageProps): Promise<Metadata> {
+  const { slug } = await params;
+  return {
+    title: `${slug} — Omani Heritage Shop`,
+    alternates: {
+      languages: {
+        ar: `/ar/products/${slug}`,
+        en: `/en/products/${slug}`,
+      },
+    },
+  };
+}
 
 export default function ProductPage({ params }: ProductPageProps) {
   // The slug is only known at request time, so the whole body streams.

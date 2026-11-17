@@ -26,8 +26,15 @@ const arabicSans = IBM_Plex_Sans_Arabic({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000'),
   title: 'Omani Heritage Shop',
   description: 'Buy and rent Omani heritage pieces.',
+  alternates: {
+    languages: {
+      ar: '/ar',
+      en: '/en',
+    },
+  },
 };
 
 export function generateStaticParams() {
