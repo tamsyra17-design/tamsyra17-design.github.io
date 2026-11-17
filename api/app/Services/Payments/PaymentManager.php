@@ -28,6 +28,14 @@ class PaymentManager
     }
 
     /**
+     * Resolve a gateway adapter by its gateway name (used by webhooks).
+     */
+    public function gateway(string $name): PaymentDriver
+    {
+        return $this->container->make(GatewayDriver::class, ['gateway' => $name]);
+    }
+
+    /**
      * @return list<string>
      */
     public static function methods(): array

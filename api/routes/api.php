@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\V1\CategoryController;
 use App\Http\Controllers\Api\V1\HealthController;
 use App\Http\Controllers\Api\V1\OrderController;
 use App\Http\Controllers\Api\V1\PageController;
+use App\Http\Controllers\Api\V1\PaymentWebhookController;
 use App\Http\Controllers\Api\V1\ProductController;
 use App\Http\Controllers\Api\V1\RentalAvailabilityController;
 use App\Http\Controllers\Api\V1\RentalController;
@@ -34,6 +35,7 @@ Route::post('/v1/orders', [OrderController::class, 'store'])->middleware('thrott
 Route::get('/v1/orders/{number}', [OrderController::class, 'show'])->middleware('throttle:30,1,orders-show');
 
 Route::post('/v1/rental/quote', [RentalQuoteController::class, 'store']);
+Route::post('/v1/payments/webhook/{gateway}', [PaymentWebhookController::class, 'handle']);
 Route::post('/v1/rentals', [RentalController::class, 'store']);
 Route::get('/v1/rentals/{number}', [RentalController::class, 'show']);
 
