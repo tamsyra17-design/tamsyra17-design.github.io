@@ -10,8 +10,11 @@ return [
             'label' => 'Categories',
             'singular' => 'Category',
         ],
+        'products' => [
+            'label' => 'Products',
+            'singular' => 'Product',
+        ],
     ],
-
     'fields' => [
         'name' => 'Name',
         'email' => 'Email address',
@@ -32,5 +35,24 @@ return [
         'sort_order' => 'Sort order',
         'is_active' => 'Active',
         'is_rental_only' => 'Rental only',
+        'sku' => 'SKU',
+        'category' => 'Category',
+        'short_description' => 'Short description',
+        'price_baisa' => 'Price (baisa)',
+        'price_help' => '1 OMR = 1000 baisa. Leave empty if not for sale.',
+        'price' => 'Price',
+        'weight_grams' => 'Weight (grams)',
+        'is_rentable' => 'Rentable',
+        'is_featured' => 'Featured',
+        'primary_image' => 'Image',
+    ],
+    'sections' => [
+        'basic' => 'Basic information',
+        'pricing' => 'Pricing',
+        'flags' => 'Flags',
+    ],
+    'actions' => [
+        'duplicate' => 'Duplicate',
+        'duplicated' => 'Product duplicated as an inactive draft',
     ],
 ];

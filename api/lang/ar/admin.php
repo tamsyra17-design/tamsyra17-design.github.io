@@ -10,8 +10,11 @@ return [
             'label' => 'التصنيفات',
             'singular' => 'تصنيف',
         ],
+        'products' => [
+            'label' => 'المنتجات',
+            'singular' => 'منتج',
+        ],
     ],
-
     'fields' => [
         'name' => 'الاسم',
         'email' => 'البريد الإلكتروني',
@@ -32,5 +35,24 @@ return [
         'sort_order' => 'ترتيب العرض',
         'is_active' => 'نشط',
         'is_rental_only' => 'للإيجار فقط',
+        'sku' => 'رمز المنتج',
+        'category' => 'التصنيف',
+        'short_description' => 'وصف مختصر',
+        'price_baisa' => 'السعر (بيسة)',
+        'price_help' => '1 ريال عماني = 1000 بيسة. اتركه فارغاً إذا لم يكن للبيع.',
+        'price' => 'السعر',
+        'weight_grams' => 'الوزن (غرام)',
+        'is_rentable' => 'متاح للإيجار',
+        'is_featured' => 'مميز',
+        'primary_image' => 'الصورة',
+    ],
+    'sections' => [
+        'basic' => 'المعلومات الأساسية',
+        'pricing' => 'التسعير',
+        'flags' => 'الخيارات',
+    ],
+    'actions' => [
+        'duplicate' => 'نسخ',
+        'duplicated' => 'تم نسخ المنتج كمسودة غير نشطة',
     ],
 ];
