@@ -1,8 +1,9 @@
 import { hasLocale } from 'next-intl';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { notFound } from 'next/navigation';
+import { Suspense } from 'react';
 import CheckoutView from '@/components/cart/CheckoutView';
-import { routing } from '@/i18n/routing';
+import { routing, type Locale } from '@/i18n/routing';
 import { apiGet } from '@/lib/api';
 import { isPaymentMethod, type PaymentMethod } from '@/lib/orders';
 
@@ -28,15 +29,22 @@ export default async function CheckoutPage({ params }: PageProps<'/[locale]/chec
 
   setRequestLocale(locale);
   const t = await getTranslations('checkout');
-  const methods = await paymentMethods();
 
   return (
     <section className="mx-auto flex w-full max-w-6xl flex-col gap-6 px-4 py-10 sm:px-6">
       <h1 className="text-3xl font-bold tracking-tight text-brand-green dark:text-brand-sand">
         {t('title')}
       </h1>
-      {/* The cart lives in localStorage, so its contents render client-side. */}
-      <CheckoutView locale={locale} paymentMethods={methods} />
+      {/* Payment methods are read live from settings, so the form streams. */}
+      <Suspense fallback={<div aria-hidden="true" className="h-64 w-full animate-pulse rounded-lg bg-brand-sand/60" />}>
+        <CheckoutBody locale={locale} />
+      </Suspense>
     </section>
   );
+}
+
+async function CheckoutBody({ locale }: { locale: Locale }) {
+  const methods = await paymentMethods();
+  // The cart lives in localStorage, so its contents render client-side.
+  return <CheckoutView locale={locale} paymentMethods={methods} />;
 }

@@ -7,7 +7,18 @@ import { routing } from '@/i18n/routing';
 
 type RentalPageProps = PageProps<'/[locale]/rentals/[number]'>;
 
-export default async function RentalConfirmationPage({ params }: RentalPageProps) {
+export default function RentalConfirmationPage({ params }: RentalPageProps) {
+  // The rental number is only known at request time, so the body streams.
+  return (
+    <section className="mx-auto flex w-full max-w-3xl flex-col gap-6 px-4 py-10 sm:px-6">
+      <Suspense fallback={null}>
+        <RentalConfirmationView params={params} />
+      </Suspense>
+    </section>
+  );
+}
+
+async function RentalConfirmationView({ params }: Pick<RentalPageProps, 'params'>) {
   const { locale, number } = await params;
 
   if (!hasLocale(routing.locales, locale)) {
@@ -18,13 +29,11 @@ export default async function RentalConfirmationPage({ params }: RentalPageProps
   const t = await getTranslations('rental');
 
   return (
-    <section className="mx-auto flex w-full max-w-3xl flex-col gap-6 px-4 py-10 sm:px-6">
+    <>
       <h1 className="text-3xl font-bold tracking-tight text-brand-green dark:text-brand-sand">
         {t('confirmationTitle')}
       </h1>
-      <Suspense fallback={null}>
-        <RentalConfirmation number={decodeURIComponent(number)} locale={locale} />
-      </Suspense>
-    </section>
+      <RentalConfirmation number={decodeURIComponent(number)} locale={locale} />
+    </>
   );
 }
