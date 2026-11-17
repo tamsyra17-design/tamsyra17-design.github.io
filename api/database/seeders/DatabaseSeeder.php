@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             SettingSeeder::class,
             ShippingZoneSeeder::class,
             RentalPolicySeeder::class,
+            DemoCatalogSeeder::class,
         ]);
     }
 }
