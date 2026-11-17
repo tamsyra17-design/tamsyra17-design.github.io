@@ -117,6 +117,7 @@ async function ProductDetailView({
             productId={product.id}
             slug={product.slug}
             name={name}
+            nameTranslations={product.name}
             priceBaisa={product.price_baisa}
             variants={product.variants}
             inStock={inStock}

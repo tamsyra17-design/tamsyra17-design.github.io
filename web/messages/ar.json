@@ -51,6 +51,36 @@
     "grams": "{grams} غ"
   },
   "cart": {
-    "countLabel": "{count, plural, =0 {السلة فارغة} one {قطعة واحدة في السلة} two {قطعتان في السلة} few {# قطع في السلة} other {# قطعة في السلة}}"
+    "countLabel": "{count, plural, =0 {السلة فارغة} one {قطعة واحدة في السلة} two {قطعتان في السلة} few {# قطع في السلة} other {# قطعة في السلة}}",
+    "title": "سلة التسوق",
+    "empty": "سلتك فارغة.",
+    "continueShopping": "تابع التسوق",
+    "loading": "جارٍ تحميل السلة…",
+    "unitPrice": "سعر الوحدة",
+    "quantity": "الكمية",
+    "increase": "زيادة كمية {name}",
+    "decrease": "إنقاص كمية {name}",
+    "lineTotal": "الإجمالي",
+    "remove": "إزالة",
+    "removeLabel": "إزالة {name} من السلة",
+    "summary": "ملخص الطلب",
+    "subtotal": "المجموع الفرعي",
+    "shipping": "الشحن",
+    "shippingAtCheckout": "يُحتسب عند إتمام الطلب",
+    "checkout": "إتمام الطلب"
+  },
+  "checkout": {
+    "title": "إتمام الطلب",
+    "address": "عنوان الشحن",
+    "fullName": "الاسم الكامل",
+    "phone": "رقم الهاتف",
+    "governorate": "المحافظة",
+    "addressLine": "العنوان",
+    "payment": "الدفع",
+    "paymentPlaceholder": "ستتوفر خيارات الدفع قريبًا.",
+    "comingSoon": "إتمام الطلب غير متاح بعد.",
+    "placeOrder": "تأكيد الطلب",
+    "backToCart": "العودة إلى السلة",
+    "redirecting": "سلتك فارغة. جارٍ العودة إلى السلة…"
   }
 }

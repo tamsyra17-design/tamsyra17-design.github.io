@@ -3,7 +3,11 @@
 import { useTranslations } from 'next-intl';
 import { useId, useState } from 'react';
 import type { Locale } from '@/i18n/routing';
-import { translate, type ProductVariant } from '@/lib/types';
+import {
+  translate,
+  type ProductVariant,
+  type Translations,
+} from '@/lib/types';
 import { useCartStore } from '@/stores/cart';
 import { useCartHydrated } from '@/stores/useCartHydrated';
 import Price from './Price';
@@ -12,6 +16,8 @@ interface AddToCartButtonProps {
   productId: number;
   slug: string;
   name: string;
+  /** Both-language product name, stored on the cart line. */
+  nameTranslations: Translations;
   priceBaisa: number;
   variants: ProductVariant[];
   inStock: boolean;
@@ -22,6 +28,7 @@ export default function AddToCartButton({
   productId,
   slug,
   name,
+  nameTranslations,
   priceBaisa,
   variants,
   inStock,
@@ -41,6 +48,13 @@ export default function AddToCartButton({
   const variantName = variant ? translate(variant.name, locale) : '';
 
   const handleAdd = () => {
+    const names: Translations = { ar: null, en: null };
+    for (const lang of ['ar', 'en'] as const) {
+      const base = translate(nameTranslations, lang);
+      const option = variant ? translate(variant.name, lang) : '';
+      names[lang] = option ? `${base} — ${option}` : base;
+    }
+
     addItem({
       productId,
       variantId: variant?.id ?? null,
@@ -48,6 +62,7 @@ export default function AddToCartButton({
       priceBaisa: linePrice,
       qty: 1,
       slug,
+      names,
     });
     setAdded(true);
   };

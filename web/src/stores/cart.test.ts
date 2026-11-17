@@ -46,4 +46,18 @@ describe('cart store', () => {
       expect.objectContaining({ productId: 3, qty: 2, priceBaisa: 500 }),
     ]);
   });
+
+  it('sets a line quantity, clamped to 1..99', () => {
+    const { addItem, setQty } = useCartStore.getState();
+    addItem({ productId: 4, variantId: null, name: 'd', priceBaisa: 1500, qty: 1 });
+
+    setQty(4, null, 3);
+    expect(useCartStore.getState().subtotalBaisa()).toBe(4500);
+
+    setQty(4, null, 0);
+    expect(useCartStore.getState().items[0].qty).toBe(1);
+
+    setQty(4, null, 500);
+    expect(useCartStore.getState().items[0].qty).toBe(99);
+  });
 });

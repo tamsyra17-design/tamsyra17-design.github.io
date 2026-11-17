@@ -51,6 +51,36 @@
     "grams": "{grams} g"
   },
   "cart": {
-    "countLabel": "{count, plural, =0 {Cart is empty} one {# item in cart} other {# items in cart}}"
+    "countLabel": "{count, plural, =0 {Cart is empty} one {# item in cart} other {# items in cart}}",
+    "title": "Your cart",
+    "empty": "Your cart is empty.",
+    "continueShopping": "Continue shopping",
+    "loading": "Loading your cart…",
+    "unitPrice": "Unit price",
+    "quantity": "Quantity",
+    "increase": "Increase quantity of {name}",
+    "decrease": "Decrease quantity of {name}",
+    "lineTotal": "Total",
+    "remove": "Remove",
+    "removeLabel": "Remove {name} from cart",
+    "summary": "Order summary",
+    "subtotal": "Subtotal",
+    "shipping": "Shipping",
+    "shippingAtCheckout": "Calculated at checkout",
+    "checkout": "Proceed to checkout"
+  },
+  "checkout": {
+    "title": "Checkout",
+    "address": "Shipping address",
+    "fullName": "Full name",
+    "phone": "Phone",
+    "governorate": "Governorate",
+    "addressLine": "Address",
+    "payment": "Payment",
+    "paymentPlaceholder": "Payment options will be available soon.",
+    "comingSoon": "Checkout is not open yet.",
+    "placeOrder": "Place order",
+    "backToCart": "Back to cart",
+    "redirecting": "Your cart is empty. Returning to the cart…"
   }
 }
