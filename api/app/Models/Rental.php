@@ -24,6 +24,10 @@ class Rental extends Model
 
     public const STATUS_CANCELLED = 'cancelled';
 
+    public const STATUS_PICKED_UP = 'picked_up';
+
+    public const STATUS_COMPLETED = 'completed';
+
     public const PAYMENT_PENDING = 'pending';
 
     public const PAYMENT_PAID = 'paid';
