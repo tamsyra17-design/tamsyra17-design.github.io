@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Observers\ProductObserver;
+use App\Support\ArabicNormalizer;
 use Database\Factories\ProductFactory;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -64,22 +66,34 @@ class Product extends Model
 
     protected static function booted(): void
     {
-        static::saving(function (Product $product): void {
-            $product->search_text = $product->buildSearchText();
-        });
+        static::observe(ProductObserver::class);
     }
 
+    /**
+     * Normalized, lower-cased name.ar + name.en + sku + description.ar.
+     */
     public function buildSearchText(): string
     {
-        $strings = fn (mixed $value): array => array_values(array_filter((array) ($value ?? []), 'is_string'));
+        $localized = fn (mixed $value, string $locale): ?string => is_array($value) && is_string($value[$locale] ?? null)
+            ? $value[$locale]
+            : null;
 
         $parts = array_filter([
+            $localized($this->name, 'ar'),
+            $localized($this->name, 'en'),
             $this->sku,
-            ...$strings($this->name),
-            ...$strings($this->short_description),
-        ]);
+            $localized($this->description, 'ar'),
+        ], fn (?string $part): bool => $part !== null && trim($part) !== '');
 
-        return Str::lower(trim(implode(' ', $parts)));
+        return static::normalizeForSearch(implode(' ', $parts));
+    }
+
+    /**
+     * The folding applied to both search_text and incoming search terms.
+     */
+    public static function normalizeForSearch(string $text): string
+    {
+        return Str::lower(trim(ArabicNormalizer::normalize($text)));
     }
 
     /**
@@ -170,14 +184,14 @@ class Product extends Model
     }
 
     /**
-     * Case-insensitive substring search over search_text, with LIKE
-     * wildcards in the term escaped so they match literally.
+     * Case-insensitive, Arabic-tolerant substring search over search_text,
+     * with LIKE wildcards in the term escaped so they match literally.
      *
      * @param  Builder<Product>  $query
      */
     public function scopeSearch(Builder $query, string $term): void
     {
-        $term = Str::lower(trim($term));
+        $term = static::normalizeForSearch($term);
 
         if ($term === '') {
             return;
