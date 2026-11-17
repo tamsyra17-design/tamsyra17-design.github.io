@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Support\Roles;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\PermissionRegistrar;
@@ -13,14 +14,7 @@ class RoleSeeder extends Seeder
      *
      * @var list<string>
      */
-    public const ROLES = [
-        'super_admin',
-        'catalog_manager',
-        'order_manager',
-        'rental_manager',
-        'content_manager',
-        'support',
-    ];
+    public const ROLES = Roles::ALL;
 
     /**
      * Seed the staff roles. Safe to run more than once.
