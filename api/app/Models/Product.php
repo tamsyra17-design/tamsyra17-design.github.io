@@ -91,19 +91,37 @@ class Product extends Model
     }
 
     /**
-     * ProductImage arrives in Task 8. Guard calls with hasImagesRelation().
+     * @return HasMany<ProductImage, $this>
      */
     public function images(): HasMany
     {
-        return $this->hasMany(ProductImage::class)->orderBy('sort_order');
+        return $this->hasMany(ProductImage::class)->orderBy('sort_order')->orderBy('id');
     }
 
     /**
-     * ProductVariant arrives in Task 8. Guard calls with hasVariantsRelation().
+     * @return HasMany<ProductVariant, $this>
      */
     public function variants(): HasMany
     {
         return $this->hasMany(ProductVariant::class);
+    }
+
+    /**
+     * Units available for sale, summed over active variants. Uses the loaded
+     * relation when present to avoid an extra query.
+     */
+    public function saleStock(): int
+    {
+        if ($this->relationLoaded('variants')) {
+            return (int) $this->variants->where('is_active', true)->sum('sale_stock');
+        }
+
+        return (int) $this->variants()->where('is_active', true)->sum('sale_stock');
+    }
+
+    public function inStock(): bool
+    {
+        return $this->saleStock() > 0;
     }
 
     public static function hasImagesRelation(): bool

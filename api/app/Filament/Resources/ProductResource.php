@@ -5,6 +5,8 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\ProductResource\Pages\CreateProduct;
 use App\Filament\Resources\ProductResource\Pages\EditProduct;
 use App\Filament\Resources\ProductResource\Pages\ListProducts;
+use App\Filament\Resources\ProductResource\RelationManagers\ImagesRelationManager;
+use App\Filament\Resources\ProductResource\RelationManagers\VariantsRelationManager;
 use App\Filament\Resources\ProductResource\Schemas\ProductForm;
 use App\Filament\Resources\ProductResource\Tables\ProductsTable;
 use App\Models\Product;
@@ -45,6 +47,14 @@ class ProductResource extends Resource
     public static function table(Table $table): Table
     {
         return ProductsTable::configure($table);
+    }
+
+    public static function getRelations(): array
+    {
+        return [
+            ImagesRelationManager::class,
+            VariantsRelationManager::class,
+        ];
     }
 
     public static function getPages(): array

@@ -45,6 +45,17 @@ return [
         'is_rentable' => 'Rentable',
         'is_featured' => 'Featured',
         'primary_image' => 'Image',
+        'alt' => 'Alt text',
+        'alt_ar' => 'Alt text (Arabic)',
+        'alt_en' => 'Alt text (English)',
+        'is_primary' => 'Primary',
+        'sale_stock' => 'Stock for sale',
+        'attributes' => 'Attributes',
+        'variant_price_help' => '1 OMR = 1000 baisa. Leave empty to use the product price.',
+    ],
+    'relations' => [
+        'images' => 'Images',
+        'variants' => 'Variants',
     ],
     'sections' => [
         'basic' => 'Basic information',
