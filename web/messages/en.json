@@ -25,7 +25,10 @@
   },
   "home": {
     "title": "Omani Heritage",
-    "subtitle": "Buy and rent heritage pieces"
+    "subtitle": "Buy and rent heritage pieces",
+    "hero": "Omani Heritage",
+    "featured": "Featured pieces",
+    "story": "The heritage story"
   },
   "catalog": {
     "shopTitle": "Shop",
@@ -186,5 +189,11 @@
     "trackTitle": "Track rental",
     "rentalNumber": "Rental number",
     "track": "Track"
+  },
+  "three": {
+    "viewIn3D": "View in 3D",
+    "rotateHint": "Drag to rotate",
+    "resetHint": "Press R to reset",
+    "loadModel": "Load 3D model"
   }
 }
