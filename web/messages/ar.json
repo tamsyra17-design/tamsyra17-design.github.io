@@ -171,6 +171,18 @@
     "deposit": "الوديعة",
     "total": "الإجمالي",
     "bookRental": "احجز للإيجار",
-    "quoteError": "تعذر حساب التكلفة"
+    "quoteError": "تعذر حساب التكلفة",
+    "confirmationTitle": "تأكيد الحجز",
+    "name": "الاسم",
+    "phone": "الهاتف",
+    "email": "البريد الإلكتروني",
+    "status": "الحالة",
+    "notFound": "لم يتم العثور على الحجز",
+    "needPhone": "أدخل رقم الحجز والهاتف",
+    "loading": "جارٍ التحميل...",
+    "bookError": "تعذر إتمام الحجز",
+    "trackTitle": "تتبع الحجز",
+    "rentalNumber": "رقم الحجز",
+    "track": "تتبع"
   }
 }

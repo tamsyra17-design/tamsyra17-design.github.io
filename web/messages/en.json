@@ -171,6 +171,18 @@
     "deposit": "Deposit",
     "total": "Total",
     "bookRental": "Book rental",
-    "quoteError": "Could not calculate quote"
+    "quoteError": "Could not calculate quote",
+    "confirmationTitle": "Booking confirmation",
+    "name": "Name",
+    "phone": "Phone",
+    "email": "Email",
+    "status": "Status",
+    "notFound": "Rental not found",
+    "needPhone": "Enter rental number and phone",
+    "loading": "Loading...",
+    "bookError": "Could not complete booking",
+    "trackTitle": "Track rental",
+    "rentalNumber": "Rental number",
+    "track": "Track"
   }
 }

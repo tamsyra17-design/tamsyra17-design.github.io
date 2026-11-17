@@ -6,6 +6,7 @@ import type { Locale } from '@/i18n/routing';
 import { apiGet, apiPost } from '@/lib/api';
 import { formatOmr } from '@/lib/money';
 import { translate, type Product, type Resource } from '@/lib/types';
+import RentalCheckoutForm from './RentalCheckoutForm';
 
 interface RentalDetailProps {
   slug: string;
@@ -28,7 +29,6 @@ export default function RentalDetail({ slug, locale }: RentalDetailProps) {
   const [product, setProduct] = useState<Product | null>(null);
   const [quote, setQuote] = useState<RentalQuote | null>(null);
   const [availability, setAvailability] = useState<number | null>(null);
-  const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -47,7 +47,6 @@ export default function RentalDetail({ slug, locale }: RentalDetailProps) {
       setAvailability(null);
       return;
     }
-    setLoading(true);
     setError(null);
     try {
       const [avail, q] = await Promise.all([
@@ -66,8 +65,6 @@ export default function RentalDetail({ slug, locale }: RentalDetailProps) {
     } catch {
       setError(t('quoteError'));
       setQuote(null);
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -139,14 +136,12 @@ export default function RentalDetail({ slug, locale }: RentalDetailProps) {
         </div>
       )}
 
-      <button
-        type="button"
-        data-testid="book-rental"
-        disabled={!quote || (availability ?? 0) < 1 || loading}
-        className="self-start rounded-md bg-brand-green px-6 py-3 font-semibold text-white disabled:opacity-50"
-      >
-        {t('bookRental')}
-      </button>
+      <RentalCheckoutForm
+        slug={slug}
+        from={from}
+        to={to}
+        locale={locale}
+      />
     </div>
   );
 }
