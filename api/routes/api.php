@@ -8,11 +8,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('/v1/health', HealthController::class);
 
 Route::prefix('v1/auth')->group(function () {
-    // Both endpoints are unauthenticated writes, so they are throttled by IP:
-    // registration is looser (shared NATs) than login, which is the endpoint
-    // credential stuffing would attack.
-    Route::post('/register', [AuthController::class, 'register'])->middleware('throttle:10,1');
-    Route::post('/login', [AuthController::class, 'login'])->middleware('throttle:6,1');
+    // Both endpoints are unauthenticated writes, so each gets its own named
+    // throttle bucket: registration is looser (shared NATs) than login, which
+    // is what credential stuffing attacks. Without the name both routes hash to
+    // the same sha1(domain|ip) key and one endpoint's traffic 429s the other.
+    Route::post('/register', [AuthController::class, 'register'])->middleware('throttle:10,1,auth-register');
+    Route::post('/login', [AuthController::class, 'login'])->middleware('throttle:6,1,auth-login');
     Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
 });
 

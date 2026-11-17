@@ -25,6 +25,11 @@ class AdminUserSeeder extends Seeder
             return;
         }
 
+        // Create the role before any user row exists: if permission tables are
+        // missing in an environment, this throws while the database is still
+        // untouched, instead of leaving a role-less admin that later seeds skip.
+        Role::findOrCreate('super_admin', 'web');
+
         $admin = User::firstOrCreate(
             ['email' => mb_strtolower(trim($email))],
             [
@@ -41,8 +46,6 @@ class AdminUserSeeder extends Seeder
 
             return;
         }
-
-        Role::findOrCreate('super_admin', 'web');
 
         $admin->assignRole('super_admin');
     }

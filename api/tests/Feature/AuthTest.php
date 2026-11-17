@@ -123,6 +123,30 @@ it('throttles repeated failed logins', function () {
     ])->assertStatus(429);
 });
 
+it('keeps the login and registration buckets independent', function () {
+    $user = User::factory()->create(['password' => bcrypt('secret123')]);
+
+    for ($attempt = 1; $attempt <= 6; $attempt++) {
+        $this->postJson('/api/v1/auth/login', [
+            'email' => $user->email,
+            'password' => 'wrong',
+        ])->assertUnprocessable();
+    }
+
+    // Login is now exhausted for this minute, but registration has its own bucket.
+    $this->postJson('/api/v1/auth/login', [
+        'email' => $user->email,
+        'password' => 'wrong',
+    ])->assertStatus(429);
+
+    $this->postJson('/api/v1/auth/register', [
+        'name' => 'Still Allowed',
+        'email' => 'allowed@example.com',
+        'phone' => '+96890009999',
+        'password' => 'secret123',
+    ])->assertCreated();
+});
+
 it('throttles repeated registrations', function () {
     for ($attempt = 1; $attempt <= 10; $attempt++) {
         $this->postJson('/api/v1/auth/register', [

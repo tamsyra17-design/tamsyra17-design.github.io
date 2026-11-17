@@ -59,3 +59,31 @@ it('gives customers no staff role on registration', function () {
 
     expect($customer->roles)->toBeEmpty();
 });
+
+it('never promotes a pre-existing customer who owns ADMIN_EMAIL', function () {
+    $this->seed(RoleSeeder::class);
+
+    $customer = User::factory()->create(['email' => env('ADMIN_EMAIL')]);
+    expect($customer->hasRole('super_admin'))->toBeFalse();
+
+    $this->seed(AdminUserSeeder::class);
+
+    expect($customer->fresh()->hasRole('super_admin'))->toBeFalse();
+});
+
+it('creates no admin account when ADMIN_PASSWORD is blank', function () {
+    $this->seed(RoleSeeder::class);
+
+    $original = $_ENV['ADMIN_PASSWORD'] ?? null;
+    $_ENV['ADMIN_PASSWORD'] = '';
+    $_SERVER['ADMIN_PASSWORD'] = '';
+
+    try {
+        $this->seed(AdminUserSeeder::class);
+
+        expect(User::where('email', env('ADMIN_EMAIL'))->exists())->toBeFalse();
+    } finally {
+        $_ENV['ADMIN_PASSWORD'] = $original;
+        $_SERVER['ADMIN_PASSWORD'] = $original;
+    }
+});
