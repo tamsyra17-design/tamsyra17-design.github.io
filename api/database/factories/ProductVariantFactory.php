@@ -23,7 +23,8 @@ class ProductVariantFactory extends Factory
             'product_id' => Product::factory(),
             'sku' => 'VAR-'.Str::upper(Str::random(10)),
             'name' => ['ar' => 'مقاس '.$size, 'en' => 'Size '.$size],
-            'price_baisa' => fake()->numberBetween(1, 500) * 500,
+            // Null inherits the product price, the common case for size variants.
+            'price_baisa' => null,
             'sale_stock' => fake()->numberBetween(0, 20),
             'attributes' => ['size' => $size],
             'is_active' => true,
