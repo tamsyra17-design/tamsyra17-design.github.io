@@ -30,6 +30,10 @@ return [
             'label' => 'Rental policies',
             'singular' => 'Rental policy',
         ],
+        'rental_units' => [
+            'label' => 'Rental units',
+            'singular' => 'Rental unit',
+        ],
     ],
     'fields' => [
         'name' => 'Name',
@@ -109,6 +113,14 @@ return [
         'require_id' => 'Require ID',
         'require_contract' => 'Require signed contract',
         'damage_fee_notes' => 'Damage fee notes',
+        'product' => 'Product',
+        'unit_code' => 'Unit code',
+        'unit_code_help' => 'Tag or label on the physical piece. Unique per product.',
+        'status' => 'Status',
+        'notes' => 'Notes',
+        'block_start_date' => 'Blocked from',
+        'block_end_date' => 'Back in service on',
+        'block_end_date_help' => 'The unit can be rented again from this date plus the policy buffer days.',
     ],
     'relations' => [
         'images' => 'Images',
@@ -125,6 +137,8 @@ return [
     'actions' => [
         'duplicate' => 'Duplicate',
         'duplicated' => 'Product duplicated as an inactive draft',
+        'block_dates' => 'Block dates',
+        'dates_blocked' => 'Dates blocked',
     ],
     'setting_groups' => [
         'all' => 'All',
@@ -140,5 +154,10 @@ return [
         'charge' => 'Charge with order',
         'cash' => 'Cash on pickup',
         'bank_transfer' => 'Bank transfer',
+    ],
+    'unit_statuses' => [
+        'available' => 'Available',
+        'maintenance' => 'Maintenance',
+        'retired' => 'Retired',
     ],
 ];

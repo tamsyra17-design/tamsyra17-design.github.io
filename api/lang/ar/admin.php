@@ -30,6 +30,10 @@ return [
             'label' => 'سياسات التأجير',
             'singular' => 'سياسة تأجير',
         ],
+        'rental_units' => [
+            'label' => 'وحدات التأجير',
+            'singular' => 'وحدة تأجير',
+        ],
     ],
     'fields' => [
         'name' => 'الاسم',
@@ -109,6 +113,14 @@ return [
         'require_id' => 'يتطلب بطاقة هوية',
         'require_contract' => 'يتطلب عقداً موقعاً',
         'damage_fee_notes' => 'ملاحظات رسوم الأضرار',
+        'product' => 'المنتج',
+        'unit_code' => 'رمز الوحدة',
+        'unit_code_help' => 'الرقم أو الملصق على القطعة نفسها. لا يتكرر داخل المنتج الواحد.',
+        'status' => 'الحالة',
+        'notes' => 'ملاحظات',
+        'block_start_date' => 'محجوزة من',
+        'block_end_date' => 'تعود للخدمة في',
+        'block_end_date_help' => 'يمكن تأجير الوحدة مجدداً من هذا التاريخ بعد إضافة أيام الفاصل في السياسة.',
     ],
     'relations' => [
         'images' => 'الصور',
@@ -125,6 +137,8 @@ return [
     'actions' => [
         'duplicate' => 'نسخ',
         'duplicated' => 'تم نسخ المنتج كمسودة غير نشطة',
+        'block_dates' => 'حجب تواريخ',
+        'dates_blocked' => 'تم حجب التواريخ',
     ],
     'setting_groups' => [
         'all' => 'الكل',
@@ -140,5 +154,10 @@ return [
         'charge' => 'يُدفع مع الطلب',
         'cash' => 'نقداً عند الاستلام',
         'bank_transfer' => 'تحويل بنكي',
+    ],
+    'unit_statuses' => [
+        'available' => 'متاحة',
+        'maintenance' => 'في الصيانة',
+        'retired' => 'خارج الخدمة',
     ],
 ];

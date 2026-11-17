@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\V1\HealthController;
 use App\Http\Controllers\Api\V1\OrderController;
 use App\Http\Controllers\Api\V1\PageController;
 use App\Http\Controllers\Api\V1\ProductController;
+use App\Http\Controllers\Api\V1\RentalAvailabilityController;
 use App\Http\Controllers\Api\V1\SettingController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -16,6 +17,8 @@ Route::get('/v1/categories', [CategoryController::class, 'index']);
 
 Route::get('/v1/products', [ProductController::class, 'index']);
 Route::get('/v1/products/{slug}', [ProductController::class, 'show']);
+
+Route::get('/v1/rental/products/{slug}/availability', [RentalAvailabilityController::class, 'show']);
 
 Route::get('/v1/settings/public', [SettingController::class, 'public']);
 

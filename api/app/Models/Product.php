@@ -121,6 +121,14 @@ class Product extends Model
     }
 
     /**
+     * @return HasMany<RentalUnit, $this>
+     */
+    public function rentalUnits(): HasMany
+    {
+        return $this->hasMany(RentalUnit::class);
+    }
+
+    /**
      * Units available for sale, summed over active variants. Uses the loaded
      * relation when present to avoid an extra query.
      */
