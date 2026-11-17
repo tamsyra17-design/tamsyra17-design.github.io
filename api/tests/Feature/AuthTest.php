@@ -106,3 +106,37 @@ it('returns a json 401 for unauthenticated api requests without an accept header
         ->assertUnauthorized()
         ->assertJsonPath('message', 'Unauthenticated.');
 });
+
+it('throttles repeated failed logins', function () {
+    $user = User::factory()->create(['password' => bcrypt('secret123')]);
+
+    for ($attempt = 1; $attempt <= 6; $attempt++) {
+        $this->postJson('/api/v1/auth/login', [
+            'email' => $user->email,
+            'password' => 'wrong',
+        ])->assertUnprocessable();
+    }
+
+    $this->postJson('/api/v1/auth/login', [
+        'email' => $user->email,
+        'password' => 'wrong',
+    ])->assertStatus(429);
+});
+
+it('throttles repeated registrations', function () {
+    for ($attempt = 1; $attempt <= 10; $attempt++) {
+        $this->postJson('/api/v1/auth/register', [
+            'name' => 'Spam '.$attempt,
+            'email' => "spam{$attempt}@example.com",
+            'phone' => '+9689000'.str_pad((string) $attempt, 4, '0', STR_PAD_LEFT),
+            'password' => 'secret123',
+        ])->assertCreated();
+    }
+
+    $this->postJson('/api/v1/auth/register', [
+        'name' => 'Spam 11',
+        'email' => 'spam11@example.com',
+        'phone' => '+96890000011',
+        'password' => 'secret123',
+    ])->assertStatus(429);
+});

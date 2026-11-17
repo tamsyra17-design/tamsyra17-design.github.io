@@ -8,8 +8,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/v1/health', HealthController::class);
 
 Route::prefix('v1/auth')->group(function () {
-    Route::post('/register', [AuthController::class, 'register']);
-    Route::post('/login', [AuthController::class, 'login']);
+    // Both endpoints are unauthenticated writes, so they are throttled by IP:
+    // registration is looser (shared NATs) than login, which is the endpoint
+    // credential stuffing would attack.
+    Route::post('/register', [AuthController::class, 'register'])->middleware('throttle:10,1');
+    Route::post('/login', [AuthController::class, 'login'])->middleware('throttle:6,1');
     Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
 });
 

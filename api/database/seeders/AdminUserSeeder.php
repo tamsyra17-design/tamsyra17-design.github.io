@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Spatie\Permission\Models\Role;
 
 class AdminUserSeeder extends Seeder
 {
@@ -31,6 +32,17 @@ class AdminUserSeeder extends Seeder
                 'password' => $password,
             ]
         );
+
+        // Only promote an account this seeder just created. Re-seeding must not
+        // silently grant super_admin to a pre-existing customer who happens to
+        // own the configured address.
+        if (! $admin->wasRecentlyCreated) {
+            $this->command?->warn('A user already exists for ADMIN_EMAIL; leaving its roles untouched.');
+
+            return;
+        }
+
+        Role::findOrCreate('super_admin', 'web');
 
         $admin->assignRole('super_admin');
     }
