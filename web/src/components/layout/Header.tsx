@@ -1,6 +1,7 @@
 import { Suspense } from 'react';
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
+import CartCount from '@/components/cart/CartCount';
 import LocaleSwitcher from './LocaleSwitcher';
 
 const navItems = [
@@ -37,9 +38,10 @@ export default function Header() {
                 <li key={item.key}>
                   <Link
                     href={item.href}
-                    className="rounded-sm text-foreground/80 transition-colors hover:text-brand-green dark:hover:text-brand-gold"
+                    className="inline-flex items-center rounded-sm text-foreground/80 transition-colors hover:text-brand-green dark:hover:text-brand-gold"
                   >
                     {t(item.key)}
+                    {item.key === 'cart' && <CartCount />}
                   </Link>
                 </li>
               ))}

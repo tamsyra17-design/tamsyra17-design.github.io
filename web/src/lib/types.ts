@@ -48,3 +48,33 @@ export interface Collection<T> {
 export function translate(value: Translations, locale: Locale): string {
   return value[locale] ?? value[locale === 'ar' ? 'en' : 'ar'] ?? '';
 }
+
+export interface ProductImage {
+  id: number;
+  /** Path on the API's public storage disk, e.g. `products/abc.jpg`. */
+  path: string;
+  alt: Translations;
+  is_primary: boolean;
+}
+
+export interface ProductVariant {
+  id: number;
+  sku: string;
+  name: Translations;
+  /** `null` means the variant sells at the product price. */
+  price_baisa: number | null;
+  attributes: Record<string, string>;
+}
+
+/** Detail shape from `GET /api/v1/products/{slug}` (ProductDetailResource). */
+export interface ProductDetail extends Omit<Product, 'category_id'> {
+  description: Translations;
+  weight_grams: number | null;
+  category: Category | null;
+  images: ProductImage[];
+  variants: ProductVariant[];
+}
+
+export interface Resource<T> {
+  data: T;
+}

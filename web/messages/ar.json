@@ -33,5 +33,24 @@
     "rentable": "للإيجار",
     "outOfStock": "غير متوفر",
     "empty": "لا توجد منتجات."
+  },
+  "product": {
+    "breadcrumbLabel": "مسار التنقل",
+    "galleryLabel": "صور المنتج",
+    "showImage": "عرض الصورة {index}",
+    "inStock": "متوفر",
+    "outOfStock": "غير متوفر",
+    "addToCart": "أضف إلى السلة",
+    "added": "تمت الإضافة إلى السلة",
+    "variant": "الخيار",
+    "sku": "رمز المنتج",
+    "description": "الوصف",
+    "rentCta": "استأجر هذه القطعة",
+    "rentHint": "متاحة للإيجار لمناسبتك.",
+    "weight": "الوزن",
+    "grams": "{grams} غ"
+  },
+  "cart": {
+    "countLabel": "{count, plural, =0 {السلة فارغة} one {قطعة واحدة في السلة} two {قطعتان في السلة} few {# قطع في السلة} other {# قطعة في السلة}}"
   }
 }
