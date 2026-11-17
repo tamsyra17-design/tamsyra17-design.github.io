@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             AdminUserSeeder::class,
             SettingSeeder::class,
             ShippingZoneSeeder::class,
+            RentalPolicySeeder::class,
         ]);
     }
 }
