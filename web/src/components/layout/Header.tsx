@@ -1,7 +1,6 @@
 import { Suspense } from 'react';
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
-import CartCount from '@/components/cart/CartCount';
 import LocaleSwitcher from './LocaleSwitcher';
 
 const navItems = [
@@ -18,30 +17,32 @@ export default function Header() {
   const tSite = useTranslations('site');
 
   return (
-    <header className="sticky top-0 z-50 border-b border-brand-sand bg-background/95 backdrop-blur">
+    <header className="sticky top-0 z-50 border-b border-brand-border bg-background/90 backdrop-blur-md">
       <a href="#main-content" className="skip-link">
         {tA11y('skipToContent')}
       </a>
 
-      <div className="mx-auto flex w-full max-w-6xl flex-wrap items-center justify-between gap-x-6 gap-y-3 px-4 py-3 sm:px-6">
+      <div className="mx-auto flex w-full max-w-7xl items-center justify-between gap-4 px-4 py-3 sm:px-6 lg:px-8">
         <Link
           href="/"
-          className="text-lg font-semibold tracking-tight text-brand-green dark:text-brand-sand"
+          className="flex items-center gap-2 text-xl font-bold tracking-tight text-brand-green dark:text-brand-sand"
         >
+          <span className="inline-block size-8 rounded-full bg-brand-green text-center text-sm leading-8 text-white">
+            ت
+          </span>
           {tSite('name')}
         </Link>
 
-        <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
-          <nav aria-label={t('mainLabel')}>
-            <ul className="flex flex-wrap items-center gap-x-5 gap-y-1 text-sm font-medium">
+        <div className="flex items-center gap-6">
+          <nav aria-label={t('mainLabel')} className="hidden md:block">
+            <ul className="flex items-center gap-1">
               {navItems.map((item) => (
                 <li key={item.key}>
                   <Link
                     href={item.href}
-                    className="inline-flex items-center rounded-sm text-foreground/80 transition-colors hover:text-brand-green dark:hover:text-brand-gold"
+                    className="rounded-md px-3 py-2 text-sm font-medium text-foreground/80 transition-colors hover:bg-brand-sand/60 hover:text-brand-green dark:hover:text-brand-gold"
                   >
                     {t(item.key)}
-                    {item.key === 'cart' && <CartCount />}
                   </Link>
                 </li>
               ))}
@@ -53,6 +54,22 @@ export default function Header() {
           </Suspense>
         </div>
       </div>
+
+      {/* Mobile nav */}
+      <nav aria-label={t('mainLabel')} className="border-t border-brand-border px-4 py-2 md:hidden">
+        <ul className="flex items-center justify-around gap-1 text-xs font-medium">
+          {navItems.map((item) => (
+            <li key={item.key}>
+              <Link
+                href={item.href}
+                className="rounded-md px-2 py-1.5 text-foreground/70 transition-colors hover:text-brand-green dark:hover:text-brand-gold"
+              >
+                {t(item.key)}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </nav>
     </header>
   );
 }

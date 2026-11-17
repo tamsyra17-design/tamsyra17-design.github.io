@@ -1,14 +1,20 @@
 @import "tailwindcss";
 
 :root {
-  --background: #fbf8f3;
-  --foreground: #1c1917;
+  --background: #f7f3ec;
+  --foreground: #1a1612;
 
-  --brand-green: #0e4f3c;
-  --brand-green-dark: #0a3b2d;
-  --brand-gold: #a8791f;
-  --brand-sand: #f1e8d8;
-  --brand-ink: #1c1917;
+  --brand-green: #1a3a2f;
+  --brand-green-dark: #0f261e;
+  --brand-green-light: #2d5a47;
+  --brand-gold: #b8860b;
+  --brand-gold-light: #d4a017;
+  --brand-sand: #ece4d4;
+  --brand-sand-dark: #ddd2bc;
+  --brand-ink: #1a1612;
+  --brand-muted: #6b6560;
+  --brand-border: #e0d8c8;
+  --brand-surface: #ffffff;
 }
 
 @theme inline {
@@ -16,20 +22,32 @@
   --color-foreground: var(--foreground);
   --color-brand-green: var(--brand-green);
   --color-brand-green-dark: var(--brand-green-dark);
+  --color-brand-green-light: var(--brand-green-light);
   --color-brand-gold: var(--brand-gold);
+  --color-brand-gold-light: var(--brand-gold-light);
   --color-brand-sand: var(--brand-sand);
+  --color-brand-sand-dark: var(--brand-sand-dark);
   --color-brand-ink: var(--brand-ink);
+  --color-brand-muted: var(--brand-muted);
+  --color-brand-border: var(--brand-border);
+  --color-brand-surface: var(--brand-surface);
 
   --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, monospace;
   --font-arabic: var(--font-ibm-plex-sans-arabic), "IBM Plex Sans Arabic",
     "Noto Sans Arabic", ui-sans-serif, sans-serif;
+  --font-display: "Playfair Display", "Noto Serif", Georgia, serif;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0c0a09;
-    --foreground: #f5f0e8;
+    --background: #0f0e0c;
+    --foreground: #f0ebe2;
+    --brand-sand: #1e1c18;
+    --brand-sand-dark: #2a2722;
+    --brand-border: #2a2722;
+    --brand-surface: #1a1816;
+    --brand-muted: #9a948c;
   }
 }
 
@@ -41,6 +59,7 @@ body {
 :focus-visible {
   outline: 2px solid var(--brand-gold);
   outline-offset: 2px;
+  border-radius: 0.25rem;
 }
 
 .skip-link {
@@ -58,4 +77,19 @@ body {
 
 .skip-link:focus {
   top: 0.75rem;
+}
+
+/* Smooth transitions for interactive elements */
+* {
+  transition-property: color, background-color, border-color, box-shadow, opacity, transform;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition-duration: 0ms !important;
+    animation-duration: 0ms !important;
+  }
 }
