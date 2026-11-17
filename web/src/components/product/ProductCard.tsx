@@ -3,6 +3,7 @@ import { Link } from '@/i18n/navigation';
 import type { Locale } from '@/i18n/routing';
 import { translate, type Product } from '@/lib/types';
 import Price from './Price';
+import TiltCard from './TiltCard';
 
 interface ProductCardProps {
   product: Product;
@@ -15,10 +16,7 @@ export default function ProductCard({ product, locale }: ProductCardProps) {
   const summary = translate(product.short_description, locale);
 
   return (
-    <article
-      data-testid="product-card"
-      className="group flex w-full flex-col overflow-hidden rounded-lg border border-brand-sand bg-white/60 transition-shadow hover:shadow-md dark:bg-white/5"
-    >
+    <TiltCard data-testid="product-card" className="group flex w-full flex-col overflow-hidden rounded-lg border border-brand-sand bg-white/60 transition-shadow hover:shadow-md dark:bg-white/5">
       <Link
         href={`/products/${product.slug}`}
         className="flex flex-1 flex-col focus-visible:outline-2 focus-visible:outline-brand-gold"
@@ -53,6 +51,6 @@ export default function ProductCard({ product, locale }: ProductCardProps) {
           </div>
         </div>
       </Link>
-    </article>
+    </TiltCard>
   );
 }
