@@ -6,7 +6,8 @@ import { useTranslations } from 'next-intl';
 import { useEffect, useRef, useState } from 'react';
 import type { ReactNode } from 'react';
 import { hasWebGL2 } from '@/lib/three/webgl';
-import { chooseTier, readTier, writeTier, type QualityTier } from '@/lib/three/quality';
+import type { QualityTier } from '@/lib/three/quality';
+import { useQualityTier } from '@/lib/three/use-quality-tier';
 
 interface SceneRootProps {
   poster: { light: string; dark: string };
@@ -16,16 +17,24 @@ interface SceneRootProps {
 
 /**
  * Owns the only WebGL canvas a page may have. Renders a designed poster
- * until the wrapper is on screen, WebGL2 exists, and the user has not asked
- * for reduced motion. Pauses when off-screen or hidden.
+ * until the wrapper is on screen and WebGL2 exists. Under reduced motion it
+ * never mounts on its own: the visitor opts in with "View in 3D", and the
+ * canvas then renders on demand only (no autonomous frames). Pauses when
+ * off-screen or the tab is hidden.
  */
 export default function SceneRoot({ poster, ariaLabel, children }: SceneRootProps) {
   const t = useTranslations('three');
   const wrapperRef = useRef<HTMLDivElement>(null);
+  const tier = useQualityTier();
+  const [webgl, setWebgl] = useState(false);
   const [mounted, setMounted] = useState(false);
-  const [tier, setTier] = useState<QualityTier>('medium');
   const [reducedMotion, setReducedMotion] = useState(false);
   const [inView, setInView] = useState(false);
+  const [pageVisible, setPageVisible] = useState(true);
+
+  useEffect(() => {
+    setWebgl(hasWebGL2());
+  }, []);
 
   useEffect(() => {
     const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -36,16 +45,10 @@ export default function SceneRoot({ poster, ariaLabel, children }: SceneRootProp
   }, []);
 
   useEffect(() => {
-    const stored = readTier();
-    const chosen =
-      stored ??
-      chooseTier({
-        deviceMemory: (navigator as { deviceMemory?: number }).deviceMemory,
-        hardwareConcurrency: navigator.hardwareConcurrency,
-        dpr: window.devicePixelRatio,
-      });
-    setTier(chosen);
-    writeTier(chosen);
+    const update = () => setPageVisible(document.visibilityState !== 'hidden');
+    update();
+    document.addEventListener('visibilitychange', update);
+    return () => document.removeEventListener('visibilitychange', update);
   }, []);
 
   useEffect(() => {
@@ -61,18 +64,14 @@ export default function SceneRoot({ poster, ariaLabel, children }: SceneRootProp
     return () => observer.disconnect();
   }, []);
 
-  useEffect(() => {
-    if (reducedMotion) return;
-    if (!hasWebGL2()) return;
-    if (!inView) return;
-    setMounted(true);
-  }, [reducedMotion, inView]);
-
+  // Automatic mount only with motion allowed; leaving the viewport unmounts.
   useEffect(() => {
     if (!inView) setMounted(false);
-  }, [inView]);
+    else if (webgl && !reducedMotion) setMounted(true);
+  }, [inView, webgl, reducedMotion]);
 
-  const showCanvas = mounted && !reducedMotion && hasWebGL2();
+  const showCanvas = mounted && webgl;
+  const frameloop = !inView || !pageVisible ? 'never' : reducedMotion ? 'demand' : 'always';
 
   return (
     <div
@@ -80,28 +79,29 @@ export default function SceneRoot({ poster, ariaLabel, children }: SceneRootProp
       data-testid="scene-root"
       className="relative w-full"
       style={{ aspectRatio: '16 / 9' }}
-      aria-hidden="true"
     >
-      {showCanvas ? (
-        <Canvas
-          dpr={[1, tier === 'high' ? 1.5 : 1]}
-          frameloop={inView ? 'always' : 'never'}
-          gl={{ antialias: tier !== 'low' }}
-        >
-          {children(tier)}
-        </Canvas>
-      ) : (
-        <picture>
-          <source media="(prefers-color-scheme: dark)" srcSet={poster.dark} />
-          <img
-            src={poster.light}
-            alt={ariaLabel}
-            className="h-full w-full object-cover"
-            loading="lazy"
-          />
-        </picture>
-      )}
-      {reducedMotion && (
+      <div aria-hidden="true" className="absolute inset-0">
+        {showCanvas ? (
+          <Canvas
+            dpr={[1, tier === 'high' ? 1.5 : 1]}
+            frameloop={frameloop}
+            gl={{ antialias: tier !== 'low' }}
+          >
+            {children(tier)}
+          </Canvas>
+        ) : (
+          <picture>
+            <source media="(prefers-color-scheme: dark)" srcSet={poster.dark} />
+            <img
+              src={poster.light}
+              alt={ariaLabel}
+              className="h-full w-full object-cover"
+              loading="lazy"
+            />
+          </picture>
+        )}
+      </div>
+      {reducedMotion && webgl && !showCanvas && (
         <button
           type="button"
           onClick={() => setMounted(true)}

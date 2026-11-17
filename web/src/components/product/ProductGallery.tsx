@@ -3,7 +3,7 @@
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 import type { Locale } from '@/i18n/routing';
-import { API_URL } from '@/lib/api';
+import { storageUrl } from '@/lib/api';
 import { translate, type ProductImage } from '@/lib/types';
 
 interface ProductGalleryProps {
@@ -13,10 +13,7 @@ interface ProductGalleryProps {
 }
 
 /** Images live on the API's public storage disk. */
-const imageUrl = (path: string): string =>
-  /^https?:\/\//.test(path)
-    ? path
-    : `${API_URL}/storage/${path.replace(/^\/+/, '')}`;
+const imageUrl = storageUrl;
 
 export default function ProductGallery({
   images,

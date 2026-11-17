@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <pattern id="weave" width="9" height="9" patternUnits="userSpaceOnUse">
+      <rect width="9" height="9" fill="#e8dcc4"/>
+      <path d="M0 8.5H9M8.5 0V9" stroke="#b89f74" stroke-width="1" opacity=".35"/>
+    </pattern>
+    <linearGradient id="drape" x1="0" x2="1">
+      <stop offset="0" stop-color="#000" stop-opacity=".10"/>
+      <stop offset=".25" stop-color="#fff" stop-opacity=".08"/>
+      <stop offset=".5" stop-color="#000" stop-opacity=".10"/>
+      <stop offset=".75" stop-color="#fff" stop-opacity=".08"/>
+      <stop offset="1" stop-color="#000" stop-opacity=".10"/>
+    </linearGradient>
+    <radialGradient id="sheen" cx=".72" cy=".2" r=".7">
+      <stop offset="0" stop-color="#c9a227" stop-opacity=".35"/>
+      <stop offset="1" stop-color="#c9a227" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1600" height="900" fill="url(#weave)"/>
+  <rect width="1600" height="900" fill="url(#drape)"/>
+  <rect width="1600" height="900" fill="url(#sheen)"/>
+</svg>

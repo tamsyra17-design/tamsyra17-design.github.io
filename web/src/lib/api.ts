@@ -2,6 +2,11 @@ export const API_URL = (
   process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:8000'
 ).replace(/\/+$/, '');
 
+/** Files on the API's public storage disk; absolute URLs pass through. */
+export function storageUrl(path: string): string {
+  return /^https?:\/\//.test(path) ? path : `${API_URL}/storage/${path.replace(/^\/+/, '')}`;
+}
+
 export type QueryParams = Record<
   string,
   string | number | boolean | null | undefined

@@ -24,6 +24,9 @@ export interface Product {
   is_featured: boolean;
   available_for_sale: boolean;
   available_for_rental: boolean;
+  /** Absolute URL of a meshopt-compressed GLB, or null (the viewer shows a silhouette). */
+  model_3d_url?: string | null;
+  model_3d_poster?: string | null;
 }
 
 export interface PaginationMeta {

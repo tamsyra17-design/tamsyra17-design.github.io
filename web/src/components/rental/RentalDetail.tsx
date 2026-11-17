@@ -1,12 +1,33 @@
 'use client';
 
+import dynamic from 'next/dynamic';
 import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
 import type { Locale } from '@/i18n/routing';
-import { apiGet, apiPost } from '@/lib/api';
+import { apiGet, apiPost, storageUrl } from '@/lib/api';
 import { formatOmr } from '@/lib/money';
-import { translate, type Product, type Resource } from '@/lib/types';
+import { translate, type ProductDetail, type Resource } from '@/lib/types';
 import RentalCheckoutForm from './RentalCheckoutForm';
+
+const FABRIC_POSTER = { light: '/posters/fabric-light.svg', dark: '/posters/fabric-dark.svg' };
+
+function FabricPoster() {
+  return (
+    <div aria-hidden="true" className="aspect-video overflow-hidden rounded-lg">
+      <picture>
+        <source media="(prefers-color-scheme: dark)" srcSet={FABRIC_POSTER.dark} />
+        <img src={FABRIC_POSTER.light} alt="" className="h-full w-full object-cover" />
+      </picture>
+    </div>
+  );
+}
+
+// three.js loads in its own chunk: if it is slow or blocked, the poster
+// stays and the booking form below keeps working.
+const FabricPlane = dynamic(() => import('@/components/three/FabricPlane'), {
+  ssr: false,
+  loading: () => <FabricPoster />,
+});
 
 interface RentalDetailProps {
   slug: string;
@@ -26,14 +47,14 @@ export default function RentalDetail({ slug, locale }: RentalDetailProps) {
   const t = useTranslations('rental');
   const [from, setFrom] = useState('');
   const [to, setTo] = useState('');
-  const [product, setProduct] = useState<Product | null>(null);
+  const [product, setProduct] = useState<ProductDetail | null>(null);
   const [quote, setQuote] = useState<RentalQuote | null>(null);
   const [availability, setAvailability] = useState<number | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     let cancelled = false;
-    apiGet<Resource<Product>>(`/api/v1/products/${slug}`).then((res) => {
+    apiGet<Resource<ProductDetail>>(`/api/v1/products/${slug}`).then((res) => {
       if (!cancelled) setProduct(res.data);
     });
     return () => {
@@ -68,8 +89,15 @@ export default function RentalDetail({ slug, locale }: RentalDetailProps) {
     }
   };
 
+  const photo = product?.images.find((image) => image.is_primary) ?? product?.images[0];
+
   return (
     <div className="flex flex-col gap-6">
+      <FabricPlane
+        textureUrl={photo ? storageUrl(photo.path) : null}
+        posterUrl={FABRIC_POSTER}
+        label={product ? translate(product.name, locale) : t('detailTitle')}
+      />
       <p className="text-zinc-700 dark:text-zinc-300">
         {product ? translate(product.short_description, locale) : ''}
       </p>
