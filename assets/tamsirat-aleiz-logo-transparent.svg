@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 150" width="1500" height="1500">
+  <title>Tamsirat Aleiz</title>
+
+  <g fill="#FFFFFF">
+    <!-- Frame: outer arch (left end terminal + right side down to the lower bar) -->
+    <path d="M34.45 71 V46.83 A40.235 40.235 0 0 1 114.92 46.83 V106" fill="none" stroke="#FFFFFF" stroke-width="2.22"/>
+    <rect x="32.12" y="69.6" width="4.32" height="3.5" rx="0.7"/>
+
+    <!-- Frame: inner arch, closed by the upper bottom bar -->
+    <path d="M37.95 101 V47.76 A36.58 36.58 0 0 1 111.13 47.76 V101" fill="none" stroke="#FFFFFF" stroke-width="2.1"/>
+    <rect x="36.9" y="100.26" width="75.28" height="2.37"/>
+
+    <!-- Frame: lower bottom bar -->
+    <rect x="36.66" y="104.95" width="79.34" height="2.18"/>
+
+    <!-- Alif: long stem with top serif and foot -->
+    <path d="M31.7 74.02 H36.35 V124.9 L34.35 127.35 L30.45 128.55 L30.05 127.7 L32.6 125.95 V75.6 H31.7 Z"/>
+
+    <!-- Baseline -->
+    <rect x="57.11" y="73.26" width="50.71" height="1.49"/>
+
+    <!-- Loop with rounded corner (left) -->
+    <path fill-rule="evenodd" d="M53.41 74.75 V52.25 A6.08 6.08 0 0 0 41.25 52.25 V69.25 A5.5 5.5 0 0 0 46.75 74.75 Z
+             M45.61 73.26 V49.52 A1.755 1.755 0 0 1 49.12 49.52 V73.26 Z"/>
+
+    <!-- Long stem descending to the frame -->
+    <path d="M56.1 46.3 H60.52 Q61.32 46.3 61.32 47.1 V98.2 L59 100.6 H57.13 V47.8 H56.1 Z"/>
+
+    <!-- Short stem -->
+    <path d="M63.69 46.36 H68.27 Q69.07 46.36 69.07 47.16 V74.75 H64.89 V47.8 H63.69 Z"/>
+
+    <!-- Twin stems joined at the top -->
+    <path d="M71.24 47.05 L72.58 46.7 H81.42 A3 3 0 0 1 84.42 49.7 V74.75 H80.16 V47.93 H76.84 V74.75 H72.58 V47.8 H71.24 Z"/>
+
+    <!-- Loop (right) -->
+    <path fill-rule="evenodd" d="M87.94 74.75 V52.25 A6.005 6.005 0 0 1 99.95 52.25 V74.75 Z
+             M92.2 73.26 V49.52 A1.8 1.8 0 0 1 95.8 49.52 V73.26 Z"/>
+
+    <!-- Lower loop hanging from the baseline -->
+    <path fill-rule="evenodd" d="M90.06 98.2 V79.9 A5.895 5.895 0 0 1 101.85 79.9 V88.36 H97.65 V77.3 A1.755 1.755 0 0 0 94.14 77.3 V100.6 H92.25 Z"/>
+
+    <!-- Right stem -->
+    <path d="M102.32 46.38 H107.02 Q107.82 46.38 107.82 47.18 V74.15 Q107.82 74.75 107.22 74.75 H103.46 V47.8 H102.32 Z"/>
+
+    <!-- Dots -->
+    <circle cx="44.7" cy="41.2" r="2.15"/>
+    <circle cx="49.98" cy="41.2" r="2.15"/>
+    <circle cx="105.7" cy="35.75" r="2.15"/>
+    <circle cx="105.7" cy="41.15" r="2.15"/>
+    <circle cx="66.96" cy="79.88" r="2.15"/>
+    <circle cx="66.96" cy="85.25" r="2.15"/>
+  </g>
+
+  <!-- TAMSIRAT ALEIZ -->
+  <g fill="none" stroke="#FFFFFF" stroke-width="0.72" stroke-linecap="square" stroke-linejoin="miter">
+    <!-- T --><path d="M37.65 110.95 H41.3 M39.47 110.95 V116.95"/>
+    <!-- A --><path d="M43.55 116.95 V112.15 L44.75 110.95 H47.95 V116.95 M43.55 114.15 H47.95"/>
+    <!-- M --><path d="M50.5 116.95 V110.95 L52.5 113.35 L54.5 110.95 V116.95"/>
+    <!-- S --><path d="M60.4 110.95 H57.5 Q56.6 110.95 56.6 111.85 V113.15 Q56.6 113.95 57.4 113.95 H59.5 Q60.4 113.95 60.4 114.85 V116.05 Q60.4 116.95 59.5 116.95 H56.6"/>
+    <!-- I --><path d="M62.95 110.95 V116.95"/>
+    <!-- R --><path d="M65.5 116.95 V110.95 H68.4 Q69.3 110.95 69.3 111.85 V113.25 Q69.3 114.15 68.4 114.15 H65.5 M67.1 114.15 L69.3 116.95"/>
+    <!-- A --><path d="M71.5 116.95 V112.15 L72.7 110.95 H75.9 V116.95 M71.5 114.15 H75.9"/>
+    <!-- T --><path d="M78.6 110.95 H82.15 M80.37 110.95 V116.95"/>
+    <!-- A --><path d="M89.5 116.95 V112.15 L90.7 110.95 H93.6 V116.95 M89.5 114.15 H93.6"/>
+    <!-- L --><path d="M96.1 110.95 V116.95 H100.9"/>
+    <!-- E --><path d="M106.1 110.95 H102.5 V116.95 H106.1 M102.5 114.15 H105.6"/>
+    <!-- I --><path d="M108.5 110.95 V116.95"/>
+    <!-- Z --><path d="M110.4 110.95 H115 L110.4 116.95 H115"/>
+  </g>
+</svg>
